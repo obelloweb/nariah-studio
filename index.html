@@ -245,7 +245,7 @@ button{font-family:inherit;color:inherit}
 .eyebrow .idx{display:inline-block;font-variant-numeric:tabular-nums;color:#B8957A;margin-right:14px;padding-right:14px;border-right:1px solid #E6DFD5;letter-spacing:.08em}
 
 /* hero: one orchestrated entrance, 100 to 150ms steps */
-.header{animation:fadeDown .7s var(--ease-out) both}
+.header{animation:fadeDown .7s var(--ease-out) backwards}
 .hero .eyebrow{animation:fadeUp .7s var(--ease-out) .1s both}
 .hero h1 .ln{display:block;overflow:hidden;padding-bottom:.06em;white-space:nowrap}
 .hero h1 .ln > *{display:block;animation:lineUp 1s var(--ease-out) both}
@@ -382,6 +382,12 @@ html,body{overflow-x:clip}
   .hero-ctas{order:1;margin-bottom:24px}
   .hero p.lead{order:2;margin-bottom:0}
 }
+/* header: the whole top strip is frosted, so text never scrolls sharp behind or around the pill */
+.header::before{content:'';position:absolute;left:0;right:0;top:0;bottom:-18px;z-index:-1;pointer-events:none;
+  background:linear-gradient(to bottom,rgba(250,248,245,.72),rgba(250,248,245,.45) 70%,rgba(250,248,245,0));
+  backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);
+  -webkit-mask-image:linear-gradient(to bottom,#000 70%,transparent);mask-image:linear-gradient(to bottom,#000 70%,transparent)}
+.header-pill{position:relative}
 /* reduced motion: fewer and gentler, not zero */
 @media (prefers-reduced-motion: reduce){
   .header,.hero .eyebrow,.hero h1 .ln > *,.hero p.lead,.hero-ctas,.hero-chip,.hero-photo{animation-name:fade !important}

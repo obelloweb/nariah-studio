@@ -1,0 +1,1423 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Nariah Studio · Vitrine</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Prata&amp;family=Lora:ital,wght@0,400..600;1,400..600&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&amp;display=swap" rel="stylesheet">
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#FAF8F5;color:#181615;font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#4A332D}a:hover{color:#36231E}
+img{display:block}
+.hero p.lead,.sec-head p,.about-body p,.pull p,.lovers-card p,.info .desc,.guide p,.soldout{text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto;hyphenate-limit-chars:6 3 3;text-wrap:pretty;word-spacing:-.01em}
+button{font-family:inherit;color:inherit}
+.serif{font-family:'Lora',Georgia,serif}
+.wrap{width:100%;max-width:1360px;margin:0 auto;padding-left:32px;padding-right:32px}
+.eyebrow{font-size:12px;letter-spacing:.24em;text-transform:uppercase;font-weight:500;color:#4A332D}
+.section{scroll-margin-top:110px;padding-top:112px;padding-bottom:112px}
+.divider{display:flex;align-items:center;gap:28px}
+.divider span{flex:1;height:1px;background:linear-gradient(90deg,rgba(230,223,213,0),#E6DFD5 30%,#E6DFD5 70%,rgba(230,223,213,0))}
+.divider img{height:22px;width:auto;opacity:.5}
+.ease{transition-timing-function:cubic-bezier(.16,1,.3,1)}
+
+/* pills */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:54px;padding:0 30px;border-radius:999px;font-size:14px;font-weight:500;letter-spacing:.05em;text-decoration:none;border:1px solid transparent;cursor:pointer;transition:background .4s cubic-bezier(.16,1,.3,1),color .4s cubic-bezier(.16,1,.3,1),border-color .4s cubic-bezier(.16,1,.3,1),transform .4s cubic-bezier(.16,1,.3,1)}
+.btn svg{transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.btn:hover svg{transform:translateX(4px)}
+.btn--down:hover svg{transform:translateY(3px)}
+.btn--primary{background:#4A332D;color:#FAF8F5}
+.btn--primary:hover{background:#36231E;color:#FAF8F5}
+.btn--ghost{background:transparent;color:#181615;border-color:rgba(24,22,21,.22)}
+.btn--ghost:hover{background:#181615;color:#FAF8F5;border-color:#181615}
+.btn--block{width:100%}
+.pill{display:inline-flex;align-items:center;height:30px;padding:0 14px;border-radius:999px;background:#F3E9D2;color:#4A332D;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:500}
+
+/* header */
+.header{position:sticky;top:0;z-index:40;padding:14px 20px 0}
+.header-pill{max-width:1320px;margin:0 auto;height:66px;border-radius:999px;background:rgba(250,248,245,.52);backdrop-filter:blur(22px) saturate(170%);-webkit-backdrop-filter:blur(22px) saturate(170%);border:1px solid rgba(255,255,255,.55);box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 10px 30px -18px rgba(74,51,45,.35);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;padding:0 10px 0 24px}
+.brand{display:inline-flex;align-items:center;gap:12px;text-decoration:none;color:#181615}
+.brand:hover{color:#181615}
+.mono{height:36px;width:auto;flex:none}
+.word{display:flex;flex-direction:column;line-height:1}
+.word b{font-family:'Prata',Georgia,serif;font-weight:400;font-size:18px;letter-spacing:.26em}
+.word small{font-size:9px;letter-spacing:.42em;margin-top:4px;color:#4A332D}
+.nav{display:flex;gap:6px;justify-content:center}
+.nav a{font-size:13px;letter-spacing:.06em;color:#181615;text-decoration:none;padding:10px 16px;border-radius:999px;transition:background .4s cubic-bezier(.16,1,.3,1)}
+.nav a:hover{background:rgba(243,233,210,.8);color:#181615}
+.head-actions{display:flex;justify-content:flex-end;gap:6px}
+.hpill{display:inline-flex;align-items:center;gap:8px;height:46px;padding:0 18px;border-radius:999px;font-size:13px;color:#181615;text-decoration:none;transition:background .4s cubic-bezier(.16,1,.3,1),color .4s cubic-bezier(.16,1,.3,1)}
+.hpill:hover{background:rgba(243,233,210,.8);color:#181615}
+.hpill--dark{background:#4A332D;color:#FAF8F5}
+.hpill--dark:hover{background:#36231E;color:#FAF8F5}
+.icon-btn{width:46px;height:46px;border-radius:999px;border:0;background:transparent;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:#181615;text-decoration:none;transition:background .4s cubic-bezier(.16,1,.3,1)}
+.icon-btn:hover{background:rgba(243,233,210,.8);color:#181615}
+.icon-btn--glass{background:rgba(255,255,255,.75);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.only-mobile{display:none}
+
+/* hero */
+.hero{min-height:88svh;display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:64px;align-items:center;padding-top:40px;padding-bottom:72px}
+.hero h1{font-family:'Lora',Georgia,serif;font-weight:400;font-size:clamp(40px,4.5vw,72px);line-height:1.04;letter-spacing:-.015em;margin:28px 0 32px}
+.hero h1 em{font-style:italic;font-weight:400;color:#4A332D;display:block}
+.hero p.lead{font-size:18px;line-height:1.75;color:#4f4744;max-width:440px;margin:0 0 44px}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+.hero-media{position:relative;height:min(80svh,820px);min-height:520px}
+.hero-photo{position:absolute;inset:0;overflow:hidden;border-radius:320px 320px 32px 32px;background:#EEE8E0}
+.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:54% 70%;transform:scale(1.18);transform-origin:54% 64%}
+.hero-chip{position:absolute;left:24px;bottom:24px;display:inline-flex;align-items:center;gap:14px;padding:10px 10px 10px 20px;border-radius:999px;border:0;background:rgba(255,255,255,.75);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);cursor:pointer;font-size:13px;color:#181615;text-align:left}
+.hero-chip b{font-family:'Lora',Georgia,serif;font-weight:500;font-size:16px;display:block}
+.hero-chip small{display:block;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#4A332D;margin-bottom:2px}
+.hero-chip span.go{width:40px;height:40px;border-radius:999px;background:#4A332D;color:#FAF8F5;display:inline-flex;align-items:center;justify-content:center;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.hero-chip:hover span.go{transform:translateX(3px)}
+
+/* marquee */
+.marquee{overflow:hidden;padding:26px 0;background:#F3E9D2}
+.marquee-track{display:flex;width:max-content;animation:marquee 60s linear infinite}
+.marquee-track span{font-family:'Lora',Georgia,serif;font-weight:400;font-size:24px;letter-spacing:.01em;white-space:nowrap;padding:0 36px;color:#181615}
+.marquee-track em{color:#4A332D}
+.marquee-track i{font-style:normal;color:#B8957A;font-size:12px;display:flex;align-items:center}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.marquee-track{animation:none}}
+
+/* section heads */
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;margin-bottom:52px}
+.sec-head h2{font-family:'Lora',Georgia,serif;font-weight:400;font-size:46px;line-height:1.12;margin:18px 0 0;max-width:620px}
+.sec-head h2 em{color:#4A332D}
+.sec-head p{max-width:380px;margin:0;font-size:16px;line-height:1.75;color:#5a514d}
+
+/* product cards: no boxes */
+.pcard{display:flex;flex-direction:column;gap:18px;background:none;border:0;padding:0;text-align:left;cursor:pointer;width:100%}
+.pcard-media{position:relative;aspect-ratio:3/4;overflow:hidden;border-radius:16px;background:#EFE9E1;transform:translateZ(0)}
+.pcard-zoom{position:absolute;inset:0;transition:transform .7s cubic-bezier(.16,1,.3,1)}
+.pcard:hover .pcard-zoom{transform:scale(1.05)}
+.pcard-media img{position:absolute;max-width:none}
+.pcard-media img.fill,.stage img.fill{left:-8%;top:-8%;width:116%;height:116%;object-fit:cover;filter:blur(28px) saturate(.9);transition:none}
+.pcard-media .pill{position:absolute;top:14px;left:14px}
+.pcard-info{display:flex;flex-direction:column;gap:12px;padding:0 4px}
+.pcard-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.pcard-name{font-family:'Lora',Georgia,serif;font-size:19px;line-height:1.25}
+.pcard-price{font-size:14px;letter-spacing:.02em;color:#4f4744;white-space:nowrap}
+.dots{display:flex;gap:9px;align-items:center}
+.dot{width:12px;height:12px;border-radius:99px;box-shadow:inset 0 0 0 1px rgba(24,22,21,.14);position:relative;flex:none}
+.dot--off::after{content:'';position:absolute;left:-2px;right:-2px;top:50%;height:1px;background:#181615;transform:rotate(-45deg)}
+
+/* highlights: asymmetric */
+.highlights{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:40px;align-items:start}
+.hl-big .pcard-name{font-size:30px}
+.hl-big .pcard-price{font-size:16px}
+.hl-big .pcard-media{border-radius:24px}
+.hl-side{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px 24px}
+.hl-side > *:nth-child(even){margin-top:72px}
+.hl-note{grid-column:1 / -1;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding-top:8px;font-size:15px;color:#5a514d}
+
+/* catalog */
+.filters{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x proximity;padding:4px 2px 8px;margin-bottom:56px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.filters::-webkit-scrollbar{display:none}
+.chip{flex:none;scroll-snap-align:start;height:46px;padding:0 22px;border-radius:999px;border:1px solid rgba(230,223,213,.9);background:transparent;font-size:13px;letter-spacing:.04em;cursor:pointer;display:inline-flex;align-items:center;gap:8px;color:#181615;transition:background .4s cubic-bezier(.16,1,.3,1),color .4s cubic-bezier(.16,1,.3,1),border-color .4s cubic-bezier(.16,1,.3,1)}
+.chip:hover{background:#F3E9D2;border-color:#F3E9D2}
+.chip sup{font-size:10px;color:#8a817c;top:0}
+.chip--on{background:#4A332D;border-color:#4A332D;color:#FAF8F5}
+.chip--on:hover{background:#36231E;border-color:#36231E}
+.chip--on sup{color:#E6DFD5}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:60px 28px}
+.catalog-foot{display:flex;justify-content:center;align-items:center;gap:16px;margin-top:72px;font-size:14px;color:#5a514d;flex-wrap:wrap}
+
+/* about */
+.about{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:120px;align-items:start}
+.about-photo{position:sticky;top:120px}
+.about-frame{position:relative;padding:14px}
+.about-frame::before{content:'';position:absolute;inset:0;border-radius:36px;box-shadow:inset 0 0 0 1px rgba(74,51,45,.18);pointer-events:none}
+.about-img{aspect-ratio:4/5;overflow:hidden;border-radius:24px;background:#EFE9E1}
+.about-img img{width:100%;height:100%;object-fit:cover;object-position:14% 50%}
+.about-caption{display:flex;justify-content:space-between;gap:16px;margin-top:20px;padding:0 14px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#6b615c}
+.about h2{font-family:'Lora',Georgia,serif;font-weight:400;font-size:48px;line-height:1.14;letter-spacing:-.01em;margin:22px 0 56px}
+.about-body p{font-size:17px;line-height:1.95;color:#2e2826;margin:0 0 30px;max-width:600px}
+.pull{background:#F3E9D2;padding:44px 48px;margin:56px 0;border-radius:16px}
+.pull p{font-family:'Lora',Georgia,serif;font-style:italic;font-size:23px;line-height:1.55;color:#181615;margin:0;max-width:none}
+.sign{margin-top:56px}
+.sign .serif{font-size:26px;font-style:italic}
+.sign small{display:block;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#4A332D;margin-top:8px}
+
+/* lovers banner */
+.lovers-card{background:#F3E9D2;border-radius:32px;padding:68px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:72px;align-items:center}
+.lovers-card h2{font-family:'Lora',Georgia,serif;font-weight:400;font-size:72px;line-height:1.02;letter-spacing:-.015em;margin:20px 0 28px}
+.lovers-card h2 em{font-style:italic;color:#4A332D}
+.lovers-card p{font-size:17px;line-height:1.75;color:#3d3633;max-width:500px;margin:0 0 36px}
+.perks{list-style:none;padding:0;margin:0 0 48px;display:flex;flex-direction:column;gap:16px;max-width:500px}
+.perks li{display:flex;gap:16px;align-items:center;font-size:15px;color:#2e2826}
+.perks span.ic{width:40px;height:40px;border-radius:999px;background:rgba(250,248,245,.75);display:inline-flex;align-items:center;justify-content:center;color:#4A332D;flex:none}
+.lovers-photo{aspect-ratio:4/5;overflow:hidden;border-radius:24px}
+.lovers-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 100%;transform:translateX(-5.6%) scale(1.12);transform-origin:50% 85%}
+
+/* footer */
+.footer{padding-top:92px;padding-bottom:44px}
+.footer-in{display:flex;flex-direction:column;align-items:center;text-align:center}
+.footer-logo{height:84px;width:auto}
+.footer-tag{font-family:'Lora',Georgia,serif;font-weight:400;font-style:italic;font-size:22px;color:#4A332D;margin:24px 0 40px}
+.footer-links{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.footer-links .btn{min-height:62px;padding:0 34px;font-size:15px}
+.btn--ig{background:#181615;color:#FAF8F5}
+.btn--ig:hover{background:#000;color:#FAF8F5}
+.btn--vip{background:#F3E9D2;color:#4A332D}
+.btn--vip:hover{background:#EADBB8;color:#36231E}
+.footer-nav{display:flex;gap:8px 28px;flex-wrap:wrap;justify-content:center;margin-top:56px}
+.footer-nav a{font-size:13px;letter-spacing:.06em;color:#4f4744;text-decoration:none;padding:8px 0}
+.footer-nav a:hover{color:#4A332D;text-decoration:underline;text-underline-offset:5px}
+.footer-base{margin-top:72px;font-size:12px;color:#8a817c;letter-spacing:.04em}
+
+/* overlays */
+.overlay{position:fixed;inset:0;background:rgba(24,22,21,.36);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);z-index:80;animation:fade .4s ease}
+.drawer{position:fixed;top:16px;right:16px;bottom:16px;width:min(1100px,calc(100% - 32px));background:#FAF8F5;z-index:90;overflow-y:auto;border-radius:28px;animation:slideIn .5s var(--ease-drawer);box-shadow:0 30px 80px rgba(24,22,21,.18)}
+.drawer-top{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;padding:16px 20px 16px 32px;background:rgba(250,248,245,.8);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.grab{display:none}
+.crumb{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#6b615c}
+.pdp{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);gap:56px;padding:8px 40px 56px}
+.gal{display:grid;grid-template-columns:68px minmax(0,1fr);gap:16px;align-items:start}
+.thumbs{display:flex;flex-direction:column;gap:10px}
+.thumb{width:68px;aspect-ratio:2/3;overflow:hidden;border:0;padding:0;background:#EFE9E1;cursor:pointer;border-radius:12px;opacity:.55;transition:opacity .4s ease,box-shadow .4s ease}
+.thumb:hover{opacity:1}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.thumb--on{opacity:1;box-shadow:0 0 0 2px #FAF8F5,0 0 0 3px #4A332D}
+.stage{position:relative;aspect-ratio:2/3;overflow:hidden;background:#EFE9E1;border-radius:24px;transform:translateZ(0)}
+.stage img{position:absolute;max-width:none;transition:left .9s cubic-bezier(.16,1,.3,1),top .9s cubic-bezier(.16,1,.3,1),width .9s cubic-bezier(.16,1,.3,1),height .9s cubic-bezier(.16,1,.3,1)}
+.glass{background:rgba(255,255,255,.75);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.stage-toggle{position:absolute;left:16px;bottom:16px;display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 18px;border-radius:999px;border:0;font-size:12px;letter-spacing:.08em;cursor:pointer;color:#181615;transition:background .4s ease}
+.stage-toggle:hover{background:rgba(255,255,255,.95)}
+.stage-nav{position:absolute;right:16px;bottom:16px;display:flex;gap:8px}
+.stage-nav button{width:44px;height:44px;border-radius:999px;border:0;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:#181615}
+.stage-nav button:hover{background:rgba(255,255,255,.95)}
+.stage-note{position:absolute;top:16px;left:16px;right:16px;font-size:11px;letter-spacing:.04em;padding:10px 16px;border-radius:999px;text-align:center}
+.info{display:flex;flex-direction:column;gap:32px;padding-top:12px}
+.info h2{font-family:'Lora',Georgia,serif;font-weight:400;font-size:44px;line-height:1.08;margin:14px 0 14px}
+.info .price{font-size:19px;font-weight:500}
+.info .desc{font-size:16px;line-height:1.8;color:#3d3633;margin:0}
+.opt-label{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:13px;letter-spacing:.04em;margin-bottom:14px;color:#4f4744}
+.opt-label b{font-weight:500;text-transform:uppercase;letter-spacing:.16em;font-size:11px;color:#181615}
+.swatches{display:flex;gap:10px;flex-wrap:wrap}
+.swatch{width:34px;height:34px;border-radius:99px;box-shadow:inset 0 0 0 1px rgba(24,22,21,.16);position:relative;transition:box-shadow .3s ease;display:block}
+.swatch-wrap{width:46px;height:46px;display:inline-flex;align-items:center;justify-content:center;border:0;background:none;padding:0;cursor:pointer;border-radius:99px}
+.swatch--on{box-shadow:inset 0 0 0 1px rgba(24,22,21,.16),0 0 0 3px #FAF8F5,0 0 0 4px #4A332D}
+.swatch--off::after{content:'';position:absolute;left:-3px;right:-3px;top:50%;height:1px;background:#181615;transform:rotate(-45deg)}
+.sizes{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.size{height:50px;border:1px solid rgba(217,208,196,.9);background:transparent;border-radius:999px;font-size:14px;letter-spacing:.04em;cursor:pointer;transition:all .35s cubic-bezier(.16,1,.3,1)}
+.size:hover{border-color:#4A332D}
+.size--on{background:#4A332D;color:#FAF8F5;border-color:#4A332D}
+.size--off{color:#A39A92;cursor:not-allowed;background:linear-gradient(to top right,transparent calc(50% - .6px),#CFC5B9 50%,transparent calc(50% + .6px)),#F3EEE7;border-color:transparent}
+.size--off:hover{border-color:transparent}
+.link-btn{background:none;border:0;padding:6px 0;font-size:13px;text-decoration:underline;text-underline-offset:5px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;color:#181615;min-height:36px}
+.link-btn:hover{color:#4A332D}
+.guide{border-radius:16px;padding:22px 24px;background:#F5EFE3;animation:fade .4s ease}
+.guide table{width:100%;border-collapse:collapse;font-size:14px}
+.guide th{font-weight:500;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#4A332D;text-align:left;padding:0 8px 12px 0}
+.guide td{padding:10px 8px 10px 0;border-top:1px solid rgba(74,51,45,.08)}
+.guide p{font-size:12px;color:#6b615c;margin:14px 0 0;line-height:1.6}
+.alert{font-size:13px;color:#8a4a3e;margin:12px 0 0}
+.soldout{background:#F3E9D2;padding:18px 22px;border-radius:16px;font-size:14px;line-height:1.65}
+.buy-note{font-size:12px;color:#6b615c;text-align:center;margin:14px 0 0}
+.details{display:flex;flex-direction:column;gap:12px}
+.details div{display:flex;gap:14px;align-items:center;font-size:14px;color:#4f4744}
+.details span.ic{width:36px;height:36px;border-radius:999px;background:#F3E9D2;display:inline-flex;align-items:center;justify-content:center;color:#4A332D;flex:none}
+
+.menu{position:fixed;top:12px;left:12px;bottom:12px;width:min(86vw,380px);background:#FAF8F5;z-index:90;display:flex;flex-direction:column;border-radius:28px;animation:slideLeft .5s cubic-bezier(.16,1,.3,1);box-shadow:0 30px 80px rgba(24,22,21,.18)}
+.menu-top{display:flex;justify-content:space-between;align-items:center;padding:16px 16px 16px 24px}
+.menu-links{margin-top:auto;padding:24px 24px 8px;display:flex;flex-direction:column;gap:4px}
+.menu-links a{font-family:'Lora',Georgia,serif;font-size:28px;line-height:1.1;color:#181615;text-decoration:none;padding:14px 0;display:flex;justify-content:space-between;align-items:center}
+.menu-links a:hover{color:#4A332D}
+.menu-cta{padding:16px 20px 24px;display:flex;flex-direction:column;gap:10px}
+
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes slideIn{from{transform:translateX(48px);opacity:0}to{transform:none;opacity:1}}
+@keyframes slideUp{from{transform:translateY(56px);opacity:0}to{transform:none;opacity:1}}
+@keyframes slideLeft{from{transform:translateX(-40px);opacity:0}to{transform:none;opacity:1}}
+
+
+/* ===== V2: art direction + motion ===== */
+:root{--ease-out:cubic-bezier(0.23,1,0.32,1);--ease-io:cubic-bezier(0.77,0,0.175,1);--ease-drawer:cubic-bezier(0.32,0.72,0,1)}
+::selection{background:#4A332D;color:#FAF8F5}
+:focus-visible{outline:2px solid #4A332D;outline-offset:3px;border-radius:6px}
+.pcard-price,.info .price,.chip sup{font-variant-numeric:tabular-nums}
+.sec-head h2,.about h2,.lovers-card h2{letter-spacing:-.02em}
+.about-body p{max-width:65ch}
+.eyebrow .idx{display:inline-block;font-variant-numeric:tabular-nums;color:#B8957A;margin-right:14px;padding-right:14px;border-right:1px solid #E6DFD5;letter-spacing:.08em}
+
+/* hero: one orchestrated entrance, 100 to 150ms steps */
+.header{animation:fadeDown .7s var(--ease-out) both}
+.hero .eyebrow{animation:fadeUp .7s var(--ease-out) .1s both}
+.hero h1 .ln{display:block;overflow:hidden;padding-bottom:.06em;white-space:nowrap}
+.hero h1 .ln > *{display:block;animation:lineUp 1s var(--ease-out) both}
+.hero h1 .ln:nth-child(1) > *{animation-delay:.2s}
+.hero h1 .ln:nth-child(2) > *{animation-delay:.32s}
+.hero p.lead{animation:fadeUp .8s var(--ease-out) .5s both}
+.hero-ctas{animation:fadeUp .8s var(--ease-out) .62s both}
+.hero-photo{animation:arch 1.4s var(--ease-out) .05s both}
+.hero-par{position:absolute;inset:0}
+.hero-photo img{animation:settle 1.8s var(--ease-out) .05s both}
+.hero-chip{animation:fadeUp .8s var(--ease-out) .9s both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
+@keyframes lineUp{from{transform:translateY(105%)}to{transform:none}}
+@keyframes arch{from{clip-path:inset(100% 0 0 0 round 320px 320px 32px 32px)}to{clip-path:inset(0 0 0 0 round 320px 320px 32px 32px)}}
+@keyframes settle{from{transform:scale(1.36)}to{transform:scale(1.18)}}
+
+/* press feedback */
+.btn,.chip,.hpill,.icon-btn,.size,.swatch-wrap,.thumb,.hero-chip,.stage-toggle,.stage-nav button,.link-btn{transition-property:background,color,border-color,box-shadow,opacity,transform;transition-duration:.4s,.4s,.4s,.4s,.4s,.16s;transition-timing-function:var(--ease-out)}
+.btn:active,.chip:active,.hpill:active,.icon-btn:active,.size:not(:disabled):active,.swatch-wrap:active,.thumb:active,.hero-chip:active,.stage-toggle:active,.stage-nav button:active{transform:scale(.97)}
+.pcard .pcard-media{transition:transform .16s var(--ease-out)}
+.pcard:active .pcard-media{transform:scale(.985)}
+
+/* product cards: second photo + quiet arrow, only where a real pointer exists */
+.pcard-media .alt{position:absolute;inset:0;opacity:0;filter:blur(2px);transition:opacity .5s ease,filter .5s ease}
+.pcard-media::after{content:'\2192';position:absolute;right:14px;bottom:14px;width:42px;height:42px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:16px;color:#181615;background:rgba(255,255,255,.75);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);opacity:0;transform:translateY(6px) scale(.94);transition:opacity .3s var(--ease-out),transform .3s var(--ease-out)}
+@media (hover:hover) and (pointer:fine){
+  .pcard:hover .pcard-media .alt{opacity:1;filter:blur(0)}
+  .pcard:hover .pcard-media::after{opacity:1;transform:none}
+  .pcard:hover .pcard-name{color:#4A332D}
+}
+.pcard-name{transition:color .3s ease}
+.pcard-zoom{transition:transform .7s var(--ease-out)}
+
+/* editorial footer signature */
+.footer{padding-bottom:0;overflow:hidden}
+.giant{font-family:'Prata',Georgia,serif;font-weight:400;font-size:17.5vw;line-height:.8;letter-spacing:.04em;text-align:center;color:#F0E4CA;margin:72px 0 0;padding-bottom:2.4vw;user-select:none;white-space:nowrap}
+
+/* scroll-driven touches (progressive: browsers without support simply show the final state) */
+@supports (animation-timeline: view()){
+  .header-pill{animation:solidify linear both;animation-timeline:scroll(root);animation-range:0 160px}
+  @keyframes solidify{to{background:rgba(250,248,245,.68);border-color:rgba(230,223,213,.9)}}
+  .hero-par{animation:drift linear both;animation-timeline:view();animation-range:exit 0% exit 100%}
+  @keyframes drift{to{transform:translateY(9%)}}
+  .about-img,.lovers-photo,.hl-big .pcard-media,.hl-side .pcard-media{animation:imgReveal linear both;animation-timeline:view();animation-range:entry 0% entry 70%}
+  @keyframes imgReveal{from{clip-path:inset(14% 0 0 0 round 16px);opacity:.4}to{clip-path:inset(0 0 0 0 round 16px);opacity:1}}
+  .footer{view-timeline-name:--foot}
+  .giant{animation:rise linear both;animation-timeline:--foot;animation-range:entry 35% entry 100%}
+  @keyframes rise{from{transform:translateY(40%);opacity:.3}to{transform:none;opacity:1}}
+}
+
+
+/* ===== V2.1 ===== */
+/* size help: the one highlighted ask in the catalog */
+.size-cta{display:inline-flex;align-items:center;gap:18px;padding:10px 12px 10px 10px;border-radius:999px;background:#F3E9D2;color:#181615;text-decoration:none;border:1px solid #E8D9B8;box-shadow:0 18px 40px -26px rgba(74,51,45,.55);transition:background .4s var(--ease-out),box-shadow .4s var(--ease-out),transform .16s var(--ease-out)}
+.size-cta .ico{width:52px;height:52px;border-radius:999px;background:#4A332D;color:#FAF8F5;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.size-cta .txt{display:flex;flex-direction:column;text-align:left;line-height:1.25}
+.size-cta small{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#4A332D;margin-bottom:4px}
+.size-cta b{font-family:'Lora',Georgia,serif;font-weight:500;font-size:18px}
+.size-cta .go{width:44px;height:44px;border-radius:999px;background:#FAF8F5;display:inline-flex;align-items:center;justify-content:center;flex:none;margin-left:6px;transition:transform .4s var(--ease-out),background .4s var(--ease-out),color .4s var(--ease-out)}
+.size-cta:active{transform:scale(.97)}
+@media (hover:hover) and (pointer:fine){
+  .size-cta:hover{background:#EFE1C3;color:#181615;box-shadow:0 22px 48px -24px rgba(74,51,45,.6)}
+  .size-cta:hover .go{transform:translateX(4px);background:#4A332D;color:#FAF8F5}
+}
+
+/* footer signature: letters lift in a wave and take the brand color */
+.giant span{display:inline-block;transition:transform .9s var(--ease-out),color .9s var(--ease-out);transition-delay:calc(var(--i) * 45ms)}
+@media (hover:hover) and (pointer:fine){
+  .giant{cursor:default}
+  .footer:hover .giant span{color:#E4D0A8}
+  .footer .giant:hover span{transform:translateY(-8%);color:#4A332D}
+  .footer .giant span:hover{transform:translateY(-15%)}
+}
+
+/* text reveals: each block rises out of a soft blur as it enters the screen */
+@supports (animation-timeline: view()){
+  .sec-head .eyebrow,.sec-head h2,.sec-head p,.about-body .eyebrow,.about-body h2,.about-body > p,.pull,.lovers-card .eyebrow,.lovers-card h2,.lovers-card p,.perks li,.footer-tag,.footer-nav,.catalog-foot,.about-caption{animation:textIn linear both;animation-timeline:view();animation-range:entry 10% cover 28%}
+  .sec-head h2,.about-body h2,.lovers-card h2{animation-name:titleIn;animation-range:entry 5% cover 30%}
+  @keyframes textIn{from{opacity:0;transform:translateY(18px);filter:blur(5px)}to{opacity:1;transform:none;filter:blur(0)}}
+  @keyframes titleIn{from{opacity:0;transform:translateY(.45em);filter:blur(8px);letter-spacing:.01em}to{opacity:1;transform:none;filter:blur(0)}}
+}
+
+
+/* ===== V2.2 ===== */
+/* hero headline sized to its own column, so "Women" never reaches the photo */
+.hero > :first-child{container-type:inline-size}
+.hero h1{font-size:min(72px,10.6cqi) !important}
+/* header: clear frosted glass */
+.header-pill{background:rgba(250,248,245,.4);backdrop-filter:blur(28px) saturate(180%);-webkit-backdrop-filter:blur(28px) saturate(180%)}
+@supports (animation-timeline: view()){ @keyframes solidify{to{background:rgba(250,248,245,.58);border-color:rgba(230,223,213,.9)}} }
+/* headlines kept whole */
+#catalogo-title em,#colecao-title em{white-space:nowrap}
+/* size help in the secondary typeface */
+.size-cta b{font-family:'DM Sans',system-ui,sans-serif;font-weight:500;font-size:16px;letter-spacing:.01em}
+/* compact mobile menu */
+.menu{bottom:auto;left:auto;right:12px;transform-origin:top right;animation:menuIn .35s var(--ease-out)}
+@keyframes menuIn{from{opacity:0;transform:translateY(-6px) scale(.97)}to{opacity:1;transform:none}}
+.menu-links{margin-top:0;padding:4px 24px 8px;gap:0}
+.menu-links a{font-size:22px;padding:13px 0;border-bottom:1px solid #EFE8DD}
+.menu-links a:last-child{border-bottom:0}
+.menu-cta{flex-direction:row;padding:8px 16px 16px;gap:8px}
+.menu-cta .btn{flex:1;min-height:50px;padding:0 16px;gap:8px}
+
+.hero h1 b{font-weight:600}
+.hero h1{font-size:min(72px,10.1cqi) !important}
+.hero p.lead{hyphens:manual;-webkit-hyphens:manual}
+@media (min-width:961px){
+  .nav a{font-size:14.5px}
+  .hpill{font-size:14.5px}
+  .hpill svg{width:20px;height:20px}
+}
+.word small{font-weight:700}
+.footer-base{margin-top:48px}
+.giant{margin-top:104px}
+.hero p.lead,.sec-head p,.about-body p,.pull p,.lovers-card p,.info .desc,.guide p,.soldout{hyphens:manual !important;-webkit-hyphens:manual !important}
+@media (max-width:600px){
+  .pull{padding:26px 20px}
+  .pull p{font-size:17px;line-height:1.6;letter-spacing:-.005em;word-spacing:-.04em}
+}
+/* QA: background never scrolls behind the menu or the product panel */
+html:has(.drawer),html:has(.menu){overflow:hidden}
+.filters{scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-behavior:smooth}
+.filters::-webkit-scrollbar{display:none}
+html,body{overflow-x:clip}
+/* QA: comfortable touch targets */
+.link-btn{min-height:44px}
+.brand{min-height:44px}
+.footer-nav a{display:inline-flex;align-items:center;min-height:44px}
+@media (max-width:600px){
+  /* first screen on phones: photo, slogan and button together */
+  .hero-media{aspect-ratio:auto;height:min(46svh,420px)}
+  .hero > :first-child{display:flex;flex-direction:column}
+  .hero-ctas{order:1;margin-bottom:24px}
+  .hero p.lead{order:2;margin-bottom:0}
+}
+/* reduced motion: fewer and gentler, not zero */
+@media (prefers-reduced-motion: reduce){
+  .header,.hero .eyebrow,.hero h1 .ln > *,.hero p.lead,.hero-ctas,.hero-chip,.hero-photo{animation-name:fade !important}
+  .hero-photo img,.hero-par,.header-pill,.about-img,.lovers-photo,.hl-big .pcard-media,.hl-side .pcard-media,.giant{animation:none !important}
+  .pcard-zoom,.pcard .pcard-media,.stage img{transition:none !important}
+  .sec-head .eyebrow,.sec-head h2,.sec-head p,.about-body .eyebrow,.about-body h2,.about-body > p,.pull,.lovers-card .eyebrow,.lovers-card h2,.lovers-card p,.perks li,.footer-tag,.footer-nav,.catalog-foot,.about-caption{animation-name:fade !important}
+  .giant span{transition:color .3s ease !important;transform:none !important}
+  .pcard:hover .pcard-zoom{transform:none}
+  html{scroll-behavior:auto}
+}
+@media (prefers-reduced-transparency: reduce){
+  .glass,.hero-chip,.pcard-media::after{backdrop-filter:none;-webkit-backdrop-filter:none;background:#FAF8F5}
+}
+
+@media (max-width:1100px){
+  .hero h1{font-size:clamp(40px,4.5vw,64px)}
+  .about{gap:72px}
+  .lovers-card{padding:56px;gap:48px}
+  .lovers-card h2{font-size:60px}
+  .pdp{gap:36px;padding:8px 24px 48px}
+}
+@media (max-width:960px){
+  .nav,.hpill{display:none}
+  .only-mobile{display:inline-flex}
+  .header{padding:10px 12px 0}
+  .header-pill{height:60px;padding:0 6px 0 16px;gap:8px;grid-template-columns:auto 1fr}
+  .head-actions{gap:4px}
+  .section{padding-top:80px;padding-bottom:80px}
+  .hero{grid-template-columns:minmax(0,1fr);gap:28px;min-height:0;padding-top:20px;padding-bottom:48px}
+  .hero-media{order:-1;height:auto;min-height:0;aspect-ratio:4/5}
+  .hero-photo{border-radius:220px 220px 28px 28px}
+  .highlights{grid-template-columns:minmax(0,1fr);gap:40px}
+  .hl-side{gap:48px 16px}
+  .hl-side > *:nth-child(even){margin-top:28px}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:40px 16px}
+  .grid > :last-child:nth-child(odd){grid-column:1 / -1;justify-self:center;width:calc(50% - 8px)}
+  .about{grid-template-columns:minmax(0,1fr);gap:36px}
+  .about-photo{position:static;max-width:460px}
+  .lovers-card{grid-template-columns:minmax(0,1fr)}
+  .lovers-photo{order:-1;aspect-ratio:4/5}
+  .lovers-photo img{object-position:50% 100%;transform:scale(1.12);transform-origin:57% 62%}
+  .drawer{top:24px;left:0;right:0;bottom:0;width:100%;border-radius:28px 28px 0 0;animation:slideUp .5s var(--ease-drawer)}
+  .grab{display:block;position:absolute;left:50%;top:6px;width:40px;height:4px;border-radius:9px;background:#D9D0C4;transform:translateX(-50%)}
+  .drawer-top{padding:16px 12px 12px 24px}
+  .pdp{grid-template-columns:minmax(0,1fr)}
+  .gal{grid-template-columns:minmax(0,1fr)}
+  .thumbs{flex-direction:row;order:2;overflow-x:auto;padding:4px}
+  .thumb{width:60px;flex:none}
+}
+@media (max-width:600px){
+  .wrap{padding-left:20px;padding-right:20px}
+  .section{padding-top:60px;padding-bottom:60px}
+  .footer{padding-top:64px}
+  .catalog-foot{margin-top:44px}
+  .hl-side{gap:32px 12px}
+  .hero h1{font-size:min(42px,10vw);margin:20px 0 22px}
+  .hero p.lead{font-size:16px;margin-bottom:32px}
+  .hero-ctas .btn{flex:1 1 100%}
+  .lovers-card{gap:28px}
+  .hero-chip{left:14px;bottom:14px;padding:8px 8px 8px 16px}
+  .marquee{padding:22px 0}
+  .marquee-track span{font-size:18px;padding:0 22px}
+  .sec-head{margin-bottom:30px;gap:16px}
+  #colecao-title{font-size:min(34px,7.4vw)}
+  .sec-head h2{font-size:34px}
+  .hl-big .pcard-name{font-size:24px}
+  .pcard-name{font-size:16px}
+  .pcard-price{font-size:13px}
+  .pcard-row{flex-direction:column;gap:4px}
+  .pcard-media{border-radius:14px}
+  .pcard-media .pill{top:10px;left:10px;height:24px;padding:0 10px;font-size:9px}
+  .grid{gap:32px 12px}
+  .grid > :last-child:nth-child(odd){width:calc(50% - 6px)}
+  .filters{margin-bottom:28px}
+  .about h2{font-size:34px;margin-bottom:26px}
+  .about-body p{margin-bottom:22px}
+  .pull{margin:36px 0}
+  .about-body p{font-size:16px}
+  .pull{padding:30px 26px}
+  .pull p{font-size:19px}
+  .lovers-card{padding:28px 22px 36px;border-radius:28px}
+  .lovers-card h2{font-size:46px}
+  .footer-tag{font-size:19px;margin:18px 0 28px}
+  .footer-nav{flex-wrap:nowrap;gap:0 12px;margin-top:36px}
+  .footer-nav a{font-size:11.5px;letter-spacing:.02em;white-space:nowrap}
+  .footer-base{margin-top:40px}
+  .giant{margin-top:48px}
+  .size-cta{width:100%;gap:14px}
+  .size-cta b{font-size:16px}
+  .size-cta .ico{width:46px;height:46px}
+  .footer-links .btn{flex:1 1 100%}
+  .info h2{font-size:36px}
+  .pdp{padding:4px 16px 40px}
+  .sizes{gap:6px}
+}
+</style>
+</helmet>
+
+<div style="min-height: 100vh; background: #FAF8F5">
+
+  <header class="header">
+    <div class="header-pill">
+      <div style="display: flex; align-items: center; gap: 4px">
+        <a class="brand" href="#topo" aria-label="Nariah Studio, início">
+          <img class="mono" src="/_blob/9f47bab444d967709d3109f26146a313" alt="">
+          <span class="word"><b>NARIAH</b><small>STUDIO</small></span>
+        </a>
+      </div>
+      <nav class="nav" aria-label="Navegação principal">
+        <a href="#colecao">Coleção</a>
+        <a href="#catalogo">Catálogo</a>
+        <a href="#sobre">Sobre a Nariah</a>
+        <a href="#lovers">Nariah Lovers</a>
+      </nav>
+      <div class="head-actions">
+        <a class="hpill" href="https://www.instagram.com/nariahstudio" target="_blank" rel="noopener noreferrer">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><rect x="2.6" y="2.6" width="18.8" height="18.8" rx="5.4"></rect><circle cx="12" cy="12" r="4.6"></circle><circle cx="17.6" cy="6.4" r="1.25" fill="currentColor" stroke="none"></circle></svg>
+          Nosso Instagram
+        </a>
+        <a class="hpill hpill--dark" href="https://wa.me/5521968653459" target="_blank" rel="noopener noreferrer">
+          <svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8a9.2 9.2 0 0 0-7.9 13.9L2.8 21.2l4.6-1.2A9.2 9.2 0 1 0 12 2.8z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"></path><path transform="translate(6.9 6.9) scale(.44)" fill="currentColor" d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"></path></svg>
+          Fale conosco
+        </a>
+        <a class="icon-btn only-mobile" href="https://www.instagram.com/nariahstudio" target="_blank" rel="noopener noreferrer" aria-label="Nosso Instagram @nariahstudio">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><rect x="2.6" y="2.6" width="18.8" height="18.8" rx="5.4"></rect><circle cx="12" cy="12" r="4.6"></circle><circle cx="17.6" cy="6.4" r="1.25" fill="currentColor" stroke="none"></circle></svg>
+        </a>
+        <a class="icon-btn only-mobile" href="https://wa.me/5521968653459" target="_blank" rel="noopener noreferrer" aria-label="Falar no WhatsApp" style="background: #4A332D; color: #FAF8F5">
+          <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8a9.2 9.2 0 0 0-7.9 13.9L2.8 21.2l4.6-1.2A9.2 9.2 0 1 0 12 2.8z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"></path><path transform="translate(6.9 6.9) scale(.44)" fill="currentColor" d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"></path></svg>
+        </a>
+
+          <button class="icon-btn only-mobile" type="button" aria-label="Abrir menu" onClick="{{ openMenu }}">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 8h16M4 16h10"></path></svg>
+          </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="topo">
+
+    <section class="wrap hero" aria-labelledby="hero-title">
+      <div>
+        <div class="eyebrow">Moda fitness feminina · Rio de Janeiro</div>
+        <h1 id="hero-title"><span class="ln"><span>Elevated <b>Power</b></span></span><span class="ln"><em>for Modern <b>Women</b></em></span></h1>
+        <p class="lead">Do primeiro agachamento ao café depois do treino, uma peça só. Firme quando você se move, macia quando você desacelera e bonita o dia inteiro, dentro e fora da academia.</p>
+        <div class="hero-ctas">
+          <a class="btn btn--primary btn--down" href="#catalogo">
+            Conhecer a coleção
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"></path></svg>
+          </a>
+        </div>
+      </div>
+      <div class="hero-media">
+        <div class="hero-photo">
+          <div class="hero-par"><img src="/_blob/0033e2c18a92fca17eb9c316ee5d0a74" alt="Modelo sentada em uma cadeira de madeira vestindo o macaquinho Icon na cor Coral"></div>
+        </div>
+        <button class="hero-chip" type="button" onClick="{{ openIcon }}">
+          <span><small>Na foto</small><b>Macaquinho Icon</b></span>
+          <span class="go"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+        </button>
+      </div>
+    </section>
+
+    <div class="wrap" aria-hidden="true"><div class="divider"><span></span><img src="/_blob/9f47bab444d967709d3109f26146a313" alt=""><span></span></div></div>
+
+    <section id="colecao" class="wrap section" aria-labelledby="colecao-title">
+      <div class="sec-head">
+        <div>
+          <div class="eyebrow"><span class="idx">01</span>Destaques da coleção</div>
+          <h2 id="colecao-title">Feita para o treino.<em style="display: block">Pensada para depois dele.</em></h2>
+        </div>
+        <p>Cada peça nasceu para um momento do seu dia: o treino que pede firmeza, a corrida que pede liberdade e o depois, quando você só quer continuar se sentindo bem vestida. Os tons conversam entre si, então tudo combina com tudo.</p>
+      </div>
+
+      <div class="highlights">
+        <div class="hl-big">
+          <button class="pcard" type="button" onClick="{{ hlGrande.open }}" aria-label="{{ hlGrande.aria }}">
+            <div class="pcard-media">
+              <div class="pcard-zoom">
+                <img class="fill" src="{{ hlGrande.capa }}" alt="" aria-hidden="true">
+                <img src="{{ hlGrande.capa }}" alt="{{ hlGrande.alt }}" style="left: {{ hlGrande.l }}; top: {{ hlGrande.t }}; width: {{ hlGrande.w }}; height: {{ hlGrande.h }}">
+                <div class="alt" aria-hidden="true"><img class="fill" src="{{ hlGrande.capa2 }}" alt=""><img src="{{ hlGrande.capa2 }}" alt="" style="left: {{ hlGrande.l2 }}; top: {{ hlGrande.t2 }}; width: {{ hlGrande.w2 }}; height: {{ hlGrande.h2 }}"></div>
+              </div>
+              <span class="pill">{{ hlGrande.categoria }}</span>
+            </div>
+            <div class="pcard-info">
+              <div class="pcard-row"><span class="pcard-name">{{ hlGrande.nome }}</span><span class="pcard-price">{{ hlGrande.precoFmt }}</span></div>
+              <div class="dots">
+                <sc-for list="{{ hlGrande.dots }}" as="d" hint-placeholder-count="3">
+                  <span class="{{ d.cls }}" style="background: {{ d.hex }}" title="{{ d.title }}"></span>
+                </sc-for>
+              </div>
+            </div>
+          </button>
+        </div>
+        <div class="hl-side">
+          <sc-for list="{{ hlCuradas }}" as="c" hint-placeholder-count="4">
+            <button class="pcard" type="button" onClick="{{ c.open }}" aria-label="{{ c.aria }}">
+              <div class="pcard-media">
+                <div class="pcard-zoom">
+                  <img class="fill" src="{{ c.capa }}" alt="" aria-hidden="true">
+                  <img src="{{ c.capa }}" alt="{{ c.alt }}" style="left: {{ c.l }}; top: {{ c.t }}; width: {{ c.w }}; height: {{ c.h }}">
+                <div class="alt" aria-hidden="true"><img class="fill" src="{{ c.capa2 }}" alt=""><img src="{{ c.capa2 }}" alt="" style="left: {{ c.l2 }}; top: {{ c.t2 }}; width: {{ c.w2 }}; height: {{ c.h2 }}"></div>
+                </div>
+                <span class="pill">{{ c.categoria }}</span>
+              </div>
+              <div class="pcard-info">
+                <div class="pcard-row"><span class="pcard-name">{{ c.nome }}</span><span class="pcard-price">{{ c.precoFmt }}</span></div>
+                <div class="dots">
+                  <sc-for list="{{ c.dots }}" as="d" hint-placeholder-count="3">
+                    <span class="{{ d.cls }}" style="background: {{ d.hex }}" title="{{ d.title }}"></span>
+                  </sc-for>
+                </div>
+              </div>
+            </button>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap" aria-hidden="true"><div class="divider"><span></span><img src="/_blob/9f47bab444d967709d3109f26146a313" alt=""><span></span></div></div>
+
+    <section id="catalogo" class="wrap section" aria-labelledby="catalogo-title">
+      <div class="sec-head">
+        <div>
+          <div class="eyebrow"><span class="idx">02</span>Catálogo</div>
+          <h2 id="catalogo-title">A peça que faltava <em>no seu treino.</em></h2>
+        </div>
+        <p>Toque em qualquer peça para ver de perto e escolher cor e tamanho. Seu pedido já vai pronto para o WhatsApp, e quem responde é a nossa equipe, não um robô.</p>
+      </div>
+
+      <div class="filters" role="toolbar" aria-label="Filtrar por categoria">
+        <sc-for list="{{ filtros }}" as="f" hint-placeholder-count="7">
+          <button class="{{ f.cls }}" type="button" aria-pressed="{{ f.sel }}" onClick="{{ f.pick }}">{{ f.label }}<sup>{{ f.qtd }}</sup></button>
+        </sc-for>
+      </div>
+
+      <div class="grid">
+        <sc-for list="{{ catalogo }}" as="c" hint-placeholder-count="9">
+          <button class="pcard" type="button" onClick="{{ c.open }}" aria-label="{{ c.aria }}">
+            <div class="pcard-media">
+              <div class="pcard-zoom">
+                <img class="fill" src="{{ c.capa }}" alt="" aria-hidden="true">
+                <img src="{{ c.capa }}" alt="{{ c.alt }}" style="left: {{ c.l }}; top: {{ c.t }}; width: {{ c.w }}; height: {{ c.h }}">
+                <div class="alt" aria-hidden="true"><img class="fill" src="{{ c.capa2 }}" alt=""><img src="{{ c.capa2 }}" alt="" style="left: {{ c.l2 }}; top: {{ c.t2 }}; width: {{ c.w2 }}; height: {{ c.h2 }}"></div>
+              </div>
+            </div>
+            <div class="pcard-info">
+              <div class="pcard-row"><span class="pcard-name">{{ c.nome }}</span><span class="pcard-price">{{ c.precoFmt }}</span></div>
+              <div class="dots">
+                <sc-for list="{{ c.dots }}" as="d" hint-placeholder-count="3">
+                  <span class="{{ d.cls }}" style="background: {{ d.hex }}" title="{{ d.title }}"></span>
+                </sc-for>
+              </div>
+            </div>
+          </button>
+        </sc-for>
+      </div>
+
+      <div class="catalog-foot">
+        <a class="size-cta" href="https://wa.me/5521968653459?text=Ol%C3%A1%2C%20fiquei%20em%20d%C3%BAvida%20entre%20dois%20tamanhos.%20Pode%20me%20ajudar%3F" target="_blank" rel="noopener noreferrer">
+          <span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 15.5 15.5 3l5.5 5.5L8.5 21z"></path><path d="M7 12l2 2M10 9l2 2M13 6l2 2"></path></svg></span>
+          <span class="txt"><small>Ajuda com tamanhos</small><b>Em dúvida entre dois tamanhos? A gente ajuda</b></span>
+          <span class="go"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+        </a>
+      </div>
+    </section>
+
+    <div class="wrap" aria-hidden="true"><div class="divider"><span></span><img src="/_blob/9f47bab444d967709d3109f26146a313" alt=""><span></span></div></div>
+
+    <section id="sobre" class="wrap section" aria-labelledby="sobre-title">
+      <div class="about">
+        <div class="about-photo">
+          <div class="about-frame">
+            <div class="about-img">
+              <img src="/_blob/ef39ef9fd69926cf61f4a8a94f55aa64" alt="Nathalia Lagoia, fundadora da Nariah Studio, sentada no chão do estúdio vestindo o Macacão Reto na cor Cacao">
+            </div>
+          </div>
+          <div class="about-caption"><span>Nathalia Lagoia</span><span>Rio de Janeiro</span></div>
+        </div>
+        <div class="about-body">
+          <div class="eyebrow"><span class="idx">03</span>Sobre a Nariah</div>
+          <h2 id="sobre-title">A Nariah nasceu de uma transformação que começou em mim.</h2>
+          <p>Sou Nathalia Lagoia, fundadora da Nariah Studio, paraense de Belém, mãe do Leon e do Noah e hoje moradora do Rio de Janeiro. Durante 12 anos, minha vida profissional foi no mar, onde construí minha trajetória como oficial da Marinha Mercante e cheguei ao posto de imediata.</p>
+          <p>Com a maternidade e as mudanças da vida, também fui descobrindo novas versões de mim. Em uma dessas fases, transformei meus hábitos, emagreci 30 quilos e encontrei na musculação e na corrida um espaço de cuidado, disciplina e superação. Nesse processo, recuperei a confiança e descobri o prazer de me sentir forte.</p>
+          <p>A Nariah nasceu dessa vivência e de uma vontade muito pessoal de vestir peças que acompanhassem meu movimento, valorizassem meu corpo e combinassem com meu estilo. Roupas que eu amasse usar no treino e quisesse continuar vestindo depois dele.</p>
+          <p>Hoje, essa intenção orienta cada escolha da marca. Busco unir conforto, cortes que valorizam e uma estética elegante em peças que façam parte da vida de mulheres com diferentes rotinas e histórias.</p>
+          <p>Uma das minhas maiores alegrias é ver a Nariah em vocês. Nos treinos, nas corridas, nos encontros e nas pequenas conquistas do dia a dia. Ver uma mulher vestir uma peça e se sentir bonita e confiante dá sentido ao que estou construindo.</p>
+          <blockquote class="pull" style="margin-left: 0; margin-right: 0">
+            <p>“Elevated Power for Modern Women” traduz aquilo em que acredito. Cada mulher carrega sua própria potência, e a roupa também pode ajudá-la a expressar essa força.</p>
+          </blockquote>
+          <p>A Nariah é a forma que encontrei de compartilhar um pouco dessa transformação.</p>
+          <div class="sign">
+            <div class="serif">Nathalia Lagoia</div>
+            <small>Fundadora da Nariah Studio</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap" aria-hidden="true"><div class="divider"><span></span><img src="/_blob/9f47bab444d967709d3109f26146a313" alt=""><span></span></div></div>
+
+    <section id="lovers" class="wrap section" style="padding-top: 40px" aria-labelledby="lovers-title">
+      <div class="lovers-card">
+        <div>
+          <div class="eyebrow"><span class="idx">04</span>Grupo VIP no WhatsApp</div>
+          <h2 id="lovers-title">Nariah <em>Lovers</em></h2>
+          <p>Para mulheres que treinam, correm e não abrem mão de se sentir bem vestidas depois. No grupo você vê as novidades primeiro e fica sabendo das reposições antes que a sua cor favorita esgote.</p>
+          <ul class="perks">
+            <li>
+              <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z"></path></svg></span>
+              Acesso antecipado aos lançamentos
+            </li>
+            <li>
+              <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 0 1 13.7-5.7L20 8.5M20 4v4.5h-4.5M20 12a8 8 0 0 1-13.7 5.7L4 15.5M4 20v-4.5h4.5"></path></svg></span>
+              Aviso de reposição de estoque das suas peças favoritas
+            </li>
+            <li>
+              <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 19v-1a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v1M9.5 10a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM21 19v-1a4 4 0 0 0-3-3.9M15.5 3.1a3.5 3.5 0 0 1 0 6.8"></path></svg></span>
+              Bastidores da marca e encontros da comunidade
+            </li>
+          </ul>
+          <a class="btn btn--primary" href="https://chat.whatsapp.com/L9t05hl5f0CJKkFgsIHCdQ" target="_blank" rel="noopener noreferrer">
+            Quero entrar no grupo
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+          </a>
+          <p style="font-size: 13px; color: #6b615c; margin: 16px 0 0">Grupo gratuito no WhatsApp. Você sai quando quiser.</p>
+        </div>
+        <div class="lovers-photo">
+          <img src="/_blob/48d90f3cf7544c88e0d7d2de27622461" alt="Modelo sorrindo, sentada em uma poltrona, vestindo o Macacão Reto na cor Coral">
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="wrap" aria-hidden="true"><div class="divider"><span></span><img src="/_blob/9f47bab444d967709d3109f26146a313" alt=""><span></span></div></div>
+
+  <footer class="footer">
+    <div class="wrap footer-in">
+      <img class="footer-logo" src="/_blob/9f47bab444d967709d3109f26146a313" alt="Nariah Studio">
+      <p class="footer-tag">Elevated Power for Modern Women</p>
+      <div class="footer-links">
+        <a class="btn btn--primary" href="https://wa.me/5521968653459" target="_blank" rel="noopener noreferrer">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8a9.2 9.2 0 0 0-7.9 13.9L2.8 21.2l4.6-1.2A9.2 9.2 0 1 0 12 2.8z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"></path><path transform="translate(6.9 6.9) scale(.44)" fill="currentColor" d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"></path></svg>
+          WhatsApp (21) 96865-3459
+        </a>
+        <a class="btn btn--ig" href="https://www.instagram.com/nariahstudio" target="_blank" rel="noopener noreferrer">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><rect x="2.6" y="2.6" width="18.8" height="18.8" rx="5.4"></rect><circle cx="12" cy="12" r="4.6"></circle><circle cx="17.6" cy="6.4" r="1.25" fill="currentColor" stroke="none"></circle></svg>
+          Instagram @nariahstudio
+        </a>
+        <a class="btn btn--vip" href="https://chat.whatsapp.com/L9t05hl5f0CJKkFgsIHCdQ" target="_blank" rel="noopener noreferrer">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"></path></svg>
+          Grupo VIP Nariah Lovers
+        </a>
+      </div>
+      <nav class="footer-nav" aria-label="Rodapé">
+        <a href="#colecao">Coleção</a>
+        <a href="#catalogo">Catálogo</a>
+        <a href="#sobre">Sobre a Nariah</a>
+        <a href="#lovers">Nariah Lovers</a>
+      </nav>
+      <div class="footer-base">© 2026 Nariah Studio. Rio de Janeiro, Brasil.</div>
+    </div>
+    <div class="giant" aria-hidden="true"><span style="--i: 0">N</span><span style="--i: 1">A</span><span style="--i: 2">R</span><span style="--i: 3">I</span><span style="--i: 4">A</span><span style="--i: 5">H</span></div>
+  </footer>
+
+  <sc-if value="{{ menuAberto }}" hint-placeholder-val="{{ false }}">
+    <div class="overlay" onClick="{{ closeMenu }}"></div>
+    <nav class="menu" aria-label="Menu">
+      <div class="menu-top">
+        <span class="brand"><img class="mono" src="/_blob/9f47bab444d967709d3109f26146a313" alt=""><span class="word"><b style="font-size: 16px">NARIAH</b><small>STUDIO</small></span></span>
+        <button class="icon-btn" type="button" aria-label="Fechar menu" onClick="{{ closeMenu }}" style="background: #F3E9D2">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+        </button>
+      </div>
+      <div class="menu-links">
+        <a href="#colecao" onClick="{{ closeMenu }}">Coleção <span style="font-size: 16px">→</span></a>
+        <a href="#catalogo" onClick="{{ closeMenu }}">Catálogo <span style="font-size: 16px">→</span></a>
+        <a href="#sobre" onClick="{{ closeMenu }}">Sobre a Nariah <span style="font-size: 16px">→</span></a>
+        <a href="#lovers" onClick="{{ closeMenu }}">Nariah Lovers <span style="font-size: 16px">→</span></a>
+      </div>
+      <div class="menu-cta">
+        <a class="btn btn--primary" href="https://wa.me/5521968653459" target="_blank" rel="noopener noreferrer"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8a9.2 9.2 0 0 0-7.9 13.9L2.8 21.2l4.6-1.2A9.2 9.2 0 1 0 12 2.8z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"></path><path transform="translate(6.9 6.9) scale(.44)" fill="currentColor" d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"></path></svg>WhatsApp</a>
+        <a class="btn btn--ghost" href="https://www.instagram.com/nariahstudio" target="_blank" rel="noopener noreferrer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><rect x="2.6" y="2.6" width="18.8" height="18.8" rx="5.4"></rect><circle cx="12" cy="12" r="4.6"></circle><circle cx="17.6" cy="6.4" r="1.25" fill="currentColor" stroke="none"></circle></svg>Instagram</a>
+      </div>
+    </nav>
+  </sc-if>
+
+  <sc-if value="{{ aberto }}" hint-placeholder-val="{{ false }}">
+    <div class="overlay" onClick="{{ m.close }}"></div>
+    <section class="drawer" role="dialog" aria-modal="true" aria-label="{{ m.nome }}">
+      <div class="drawer-top">
+        <span class="grab" aria-hidden="true"></span>
+        <span class="crumb">Catálogo · {{ m.categoria }}</span>
+        <button class="icon-btn" type="button" aria-label="Fechar detalhes da peça" onClick="{{ m.close }}" style="background: #F3E9D2">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+        </button>
+      </div>
+      <div class="pdp">
+        <div class="gal">
+          <div class="thumbs">
+            <sc-for list="{{ m.thumbs }}" as="t" hint-placeholder-count="4">
+              <button class="{{ t.cls }}" type="button" aria-label="{{ t.aria }}" onClick="{{ t.pick }}"><img src="{{ t.src }}" alt=""></button>
+            </sc-for>
+          </div>
+          <div class="stage">
+            <img class="fill" src="{{ m.foto }}" alt="" aria-hidden="true">
+            <img src="{{ m.foto }}" alt="{{ m.fotoAlt }}" style="left: {{ m.l }}; top: {{ m.t }}; width: {{ m.w }}; height: {{ m.h }}">
+            <sc-if value="{{ m.ilustrativa }}" hint-placeholder-val="{{ false }}">
+              <span class="stage-note glass">{{ m.ilustrativaTxt }}</span>
+            </sc-if>
+            <sc-if value="{{ m.podeAlternar }}" hint-placeholder-val="{{ true }}">
+              <button class="stage-toggle glass" type="button" aria-pressed="{{ m.full }}" onClick="{{ m.toggleFull }}">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"></path></svg>
+                {{ m.toggleLabel }}
+              </button>
+            </sc-if>
+            <div class="stage-nav">
+              <button class="glass" type="button" aria-label="Foto anterior" onClick="{{ m.prev }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg></button>
+              <button class="glass" type="button" aria-label="Próxima foto" onClick="{{ m.next }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="info">
+          <div>
+            <span class="pill">{{ m.categoria }}</span>
+            <h2>{{ m.nome }}</h2>
+            <div class="price">{{ m.precoFmt }}</div>
+          </div>
+          <p class="desc">{{ m.descricao }}</p>
+
+          <div>
+            <div class="opt-label"><span><b>Cor</b> · {{ m.corNome }}</span><span>{{ m.corStatus }}</span></div>
+            <div class="swatches">
+              <sc-for list="{{ m.cores }}" as="s" hint-placeholder-count="3">
+                <button class="swatch-wrap" type="button" aria-label="{{ s.aria }}" aria-pressed="{{ s.sel }}" onClick="{{ s.pick }}">
+                  <span class="{{ s.cls }}" style="background: {{ s.hex }}"></span>
+                </button>
+              </sc-for>
+            </div>
+          </div>
+
+          <div>
+            <div class="opt-label"><span><b>Tamanho</b> · {{ m.tamTxt }}</span>
+              <button class="link-btn" type="button" aria-expanded="{{ m.guiaAberto }}" onClick="{{ m.toggleGuia }}">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 15.5L15.5 3 21 8.5 8.5 21z"></path><path d="M7 12l2 2M10 9l2 2M13 6l2 2"></path></svg>
+                Guia de medidas
+              </button>
+            </div>
+            <div class="sizes">
+              <sc-for list="{{ m.tamanhos }}" as="z" hint-placeholder-count="5">
+                <button class="{{ z.cls }}" type="button" disabled="{{ z.off }}" aria-label="{{ z.aria }}" aria-pressed="{{ z.sel }}" onClick="{{ z.pick }}">{{ z.t }}</button>
+              </sc-for>
+            </div>
+            <sc-if value="{{ m.avisoTam }}" hint-placeholder-val="{{ false }}">
+              <p class="alert" role="alert">Falta só escolher o tamanho.</p>
+            </sc-if>
+            <sc-if value="{{ m.guiaAberto }}" hint-placeholder-val="{{ false }}">
+              <div class="guide" style="margin-top: 16px">
+                <table>
+                  <thead><tr><th>Tamanho</th><th>Busto</th><th>Cintura</th><th>Quadril</th></tr></thead>
+                  <tbody>
+                    <sc-for list="{{ guia }}" as="g" hint-placeholder-count="5">
+                      <tr><td style="font-weight: 500">{{ g.tamanho }}</td><td>{{ g.busto }}</td><td>{{ g.cintura }}</td><td>{{ g.quadril }}</td></tr>
+                    </sc-for>
+                  </tbody>
+                </table>
+                <p>Medidas do corpo em centímetros. Ficou entre dois tamanhos? Mande uma mensagem no WhatsApp que a gente ajuda você a escolher.</p>
+              </div>
+            </sc-if>
+          </div>
+
+          <sc-if value="{{ m.corEsgotada }}" hint-placeholder-val="{{ false }}">
+            <div class="soldout">Esta cor acabou por enquanto. Quem está no <a href="https://chat.whatsapp.com/L9t05hl5f0CJKkFgsIHCdQ" target="_blank" rel="noopener noreferrer">Nariah Lovers</a> fica sabendo primeiro quando ela voltar.</div>
+          </sc-if>
+
+          <div>
+            <sc-if value="{{ m.prontoParaComprar }}" hint-placeholder-val="{{ false }}">
+              <a class="btn btn--primary btn--block" href="{{ m.waHref }}" target="_blank" rel="noopener noreferrer">
+                <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8a9.2 9.2 0 0 0-7.9 13.9L2.8 21.2l4.6-1.2A9.2 9.2 0 1 0 12 2.8z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"></path><path transform="translate(6.9 6.9) scale(.44)" fill="currentColor" d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"></path></svg>
+                Comprar pelo WhatsApp
+              </a>
+            </sc-if>
+            <sc-if value="{{ m.naoPronto }}" hint-placeholder-val="{{ true }}">
+              <button class="btn btn--primary btn--block" type="button" onClick="{{ m.pedirTamanho }}" style="opacity: .92">
+                <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8a9.2 9.2 0 0 0-7.9 13.9L2.8 21.2l4.6-1.2A9.2 9.2 0 1 0 12 2.8z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"></path><path transform="translate(6.9 6.9) scale(.44)" fill="currentColor" d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"></path></svg>
+                Comprar pelo WhatsApp
+              </button>
+            </sc-if>
+            <p class="buy-note">{{ m.resumo }}</p>
+          </div>
+
+          <div class="details">
+            <div><span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M5 8l7-5 7 5"></path></svg></span>Do treino ao pós-treino com o mesmo caimento</div>
+            <div><span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8a9.2 9.2 0 0 0-7.9 13.9L2.8 21.2l4.6-1.2A9.2 9.2 0 1 0 12 2.8z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"></path><path transform="translate(6.9 6.9) scale(.44)" fill="currentColor" d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"></path></svg></span>Ficou em dúvida no tamanho? A gente ajuda antes de você comprar</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":7600}}'>
+// ─────────────────────────────────────────────────────────────
+// Dados da vitrine. Estrutura relacional pronta para o banco:
+// LINKS · CORES (catálogo de cores) · ENQUADRAMENTOS
+// PRODUTOS -> enquadramento -> cores[{ corId, fotos[], estoque{tamanho: boolean} }]
+// ─────────────────────────────────────────────────────────────
+var LINKS = {
+  whatsapp: 'https://wa.me/5521968653459',
+  whatsappLabel: '(21) 96865-3459',
+  instagram: 'https://www.instagram.com/nariahstudio',
+  instagramLabel: '@nariahstudio',
+  grupoVip: 'https://chat.whatsapp.com/L9t05hl5f0CJKkFgsIHCdQ'
+};
+
+var CORES = {
+  cacao:    { nome: 'Cacao',     hex: '#4A332D' },
+  onyx:     { nome: 'Onyx',      hex: '#181615' },
+  manteiga: { nome: 'Manteiga',  hex: '#F3E9D2' },
+  coral:    { nome: 'Coral',     hex: '#E05A47' },
+  azulBebe: { nome: 'Azul bebê', hex: '#B8D4E3' },
+  oliva:    { nome: 'Oliva',     hex: '#55624B' },
+  uva:      { nome: 'Uva',       hex: '#5A334B' }
+};
+
+// Enquadramento do produto -> qual região calibrada de cada foto usar.
+var ENQUADRAMENTOS = { superior: 'sup', inferior: 'inf', inteiro: 'inteiro' };
+
+// Calibração foto a foto (frações da imagem, 0 a 1): [centroX, topo, base] da
+// região da peça. sup = peça de cima, inf = peça de baixo (no short, só o short),
+// inteiro = corpo da cabeça aos pés. a = proporção largura/altura da foto.
+// Fotos sem calibração ou de detalhe são exibidas inteiras.
+var QUADROS = {
+  // Calça com Bolso (Uva)
+  'f4d3a41537e0bdaacccf479f4046116c': { sup: [0.47, .14, .48], inf: [0.48, .38, .95], inteiro: [0.47, .10, .95] },
+  'f766567129214d455796dcc5e2f65824': { sup: [0.45, .15, .50], inf: [0.51, .40, .95], inteiro: [0.48, .11, .95] },
+  'a062ec6a9436e369154d953efac93108': { sup: [0.50, .13, .47], inf: [0.53, .38, .95], inteiro: [0.51, .07, .96] },
+  // Calça Flare / Cropped Manga Longa (mesmo ensaio)
+  'c436a5468b3fdcf738cb1493bcc05ae7': { sup: [0.50, .21, .56], inf: [0.51, .49, .92], inteiro: [0.51, .18, .93] },
+  'caf250d1bfa26ae31527434feeae4beb': { sup: [0.50, .21, .56], inf: [0.51, .49, .92], inteiro: [0.51, .18, .93] },
+  'cef9a94cfce863f2e48ba568d908c118': { sup: [0.46, .14, .52], inf: [0.46, .45, .94], inteiro: [0.46, .11, .94] },
+  'e3bda0153fff9cd3244bbacff10f5533': { sup: [0.46, .14, .52], inf: [0.46, .45, .94], inteiro: [0.46, .11, .94] },
+  '68066e2d4f194a4d94ce93f5cc0d491a': { sup: [0.39, .17, .47], inf: [0.47, .40, .97], inteiro: [0.42, .14, .97] },
+  '7047b8c5eed21ff894a19a9885813f93': { sup: [0.39, .17, .47], inf: [0.47, .40, .97], inteiro: [0.42, .14, .97] },
+  '86663aa0b9fab5fabda103a75fc50a1d': { sup: [0.46, .12, .62], inf: [0.39, .52, 1], inteiro: [0.43, .03, 1] },
+  '0f15f4900ea4cff35730e3965337a781': { sup: [0.46, .12, .62], inf: [0.39, .52, 1], inteiro: [0.43, .03, 1] },
+  'a0275f26eaf56fe363997aeb9078b058': { sup: [0.52, .11, .46], inf: [0.56, .39, .89], inteiro: [0.54, .08, .89] },
+  'cf57c7ca44e1aea80dd1c44553dd1a55': { sup: [0.52, .11, .46], inf: [0.56, .39, .89], inteiro: [0.54, .08, .89] },
+  'a9daa301a6a7607a5483778c906b1b96': { sup: [0.40, .12, .60], inf: [0.45, .45, 1], inteiro: [0.42, .03, 1] },
+  '3f8972bff41c132b49189606b1245a96': { sup: [0.40, .12, .60], inf: [0.45, .45, 1], inteiro: [0.42, .03, 1] },
+  '3b561d2cb3f773d773589034a63b4315': { sup: [0.47, .16, .46], inf: [0.48, .38, .91], inteiro: [0.47, .13, .91] },
+  '7dfc581b39ca2bab9e42462471d9fcc8': { sup: [0.47, .16, .46], inf: [0.48, .38, .91], inteiro: [0.47, .13, .91] },
+  '4745144b97c384d69943ac237ef580de': { sup: [0.47, .14, .47], inf: [0.53, .40, .95], inteiro: [0.50, .11, .95] },
+  'f4b194a58509e4b73cafda67c551fa5c': { sup: [0.54, .16, .48], inf: [0.55, .41, .92], inteiro: [0.55, .13, .92] },
+  'c34f8194be831fa919a76a3246a00e4e': { sup: [0.53, .16, .47], inf: [0.52, .40, .98], inteiro: [0.53, .13, .98] },
+  // Short Basic / Top Basic / Top Regulável (mesmo ensaio)
+  '6d5cc7dca8e08eff831c55a765bd5ab6': { a: .746, sup: [0.49, .16, .46], inf: [0.52, .34, .66], inteiro: [0.50, .08, .91] },
+  '73571d1c928a22db9bb596ff76495a29': { a: .746, sup: [0.49, .16, .46], inf: [0.52, .34, .66], inteiro: [0.50, .08, .91] },
+  'e8900b887b901086bee16bd41fc4620c': { a: .746, sup: [0.54, .16, .47], inf: [0.53, .36, .66], inteiro: [0.53, .08, .91] },
+  '6bcce201d2c3f34488b78d6ae912f4cd': { a: .746, sup: [0.54, .16, .47], inf: [0.53, .36, .66], inteiro: [0.53, .08, .91] },
+  '92ac8915653e1282e986c9f9a8d5fd1d': { a: .746, sup: [0.49, .16, .47], inf: [0.50, .36, .66], inteiro: [0.50, .08, .91] },
+  'be5b11742ea97677ec433867ffd57563': { a: .746, sup: [0.49, .16, .47], inf: [0.50, .36, .66], inteiro: [0.50, .08, .91] },
+  'a8caef4dc6c66baa9bb4bc8c2cfb5c78': { a: .746, sup: [0.51, .18, .50], inf: [0.51, .40, .70], inteiro: [0.51, .08, .95] },
+  '87b27740d1b226f04ac05d20cdbec57b': { a: .746, sup: [0.51, .18, .50], inf: [0.51, .40, .70], inteiro: [0.51, .08, .95] },
+  'c9b09c4beded203060d348982f44156e': { sup: [0.45, .22, .62], inf: [0.46, .58, .95], inteiro: [0.46, .19, 1] },
+  '08271b788c8e9bb4a4168d61025efeec': { sup: [0.46, .22, .60], inf: [0.45, .42, .96], inteiro: [0.45, .18, .95] },
+  '32cf19cc1215a710ffca44c00da8d3cd': { sup: [0.49, .28, .52], inf: [0.51, .44, .70], inteiro: [0.48, .24, .89] },
+  '1fb0838f522b045fdfcdf332d504da0a': { sup: [0.47, .20, .50], inf: [0.52, .42, .70], inteiro: [0.49, .16, .95] },
+  'db682321c5ed307809e54c7b316809f6': { sup: [0.47, .20, .50], inf: [0.52, .42, .70], inteiro: [0.49, .16, .95] },
+  '59a0237a824589b5316e4073fc08006d': { sup: [0.53, .33, .66], inf: [0.57, .56, .95], inteiro: [0.55, .21, 1] },
+  '55d676eb6b208d61049b46c25521a26e': { sup: [0.53, .33, .66], inf: [0.57, .56, .95], inteiro: [0.55, .21, 1] },
+  '085f9d7a3870ff756235f36dc534370c': { sup: [0.46, .22, .50], inf: [0.50, .42, .68], inteiro: [0.47, .18, .90] },
+  '1033de36acb58bab0f96f36a3ad70e3d': { sup: [0.46, .22, .50], inf: [0.50, .42, .68], inteiro: [0.47, .18, .90] },
+  // Macacão Reto
+  'a736573cb04c8da313a740cdb658c867': { inteiro: [0.39, .21, .95] },
+  '3e92b68feafea33054feb19cbdddb39d': { inteiro: [0.50, .14, .91] },
+  'b0de1cfb1ff5753d74a1ec4829859301': { inteiro: [0.47, .14, .91] },
+  '8e622722380f08da5b56883bc1e0c8b2': { inteiro: [0.45, .16, 1] },
+  '3ae3138303112d44b696c03f9b7d4e8c': { inteiro: [0.45, .10, .94] },
+  'db3cf95ca38deb9698c4a90e1bc1bc12': { inteiro: [0.56, .09, .91] },
+  '78aa0b964535437dbf0d771c5e7c11cc': { inteiro: [0.50, .05, .92] },
+  '4bebf94cc62331730e9b2c890d70819d': { inteiro: [0.49, .12, .90] },
+  'd8cb64420a0504c0b0d21b83c91814e0': { inteiro: [0.43, .16, .92] },
+  '46ed8e6b6f47edd680a051b08f7930fc': { inteiro: [0.52, .10, 1] },
+  '24811f6249d6f6c8569222a2cbfc161b': { inteiro: [0.54, .12, .90] },
+  '091f14d3c7f1202e99d93baffe726bf3': { inteiro: [0.42, .16, .93] },
+  // Icon
+  '0033e2c18a92fca17eb9c316ee5d0a74': { inteiro: [.52, .30, .94] },
+  '5023c866cb4c30db80173c2b6a9770a2': { inteiro: [0.46, .17, .96] },
+  'dbdaffc36872c0b5f260ca13b2df7e42': { inteiro: [0.53, .17, .92] },
+  'be8c412ccecd136fd52e1793d8d6b6b8': { inteiro: [0.43, .15, 1] },
+  'f94a619a566a6793b57346b7897ad7be': { inteiro: [0.51, .16, .92] },
+  'f4c1212059bf789d61cc6571e39654a9': { inteiro: [0.47, .15, .92] },
+  '987f389d95fb754322e092686db4ca95': { inteiro: [0.52, .17, .93] },
+  // Tube
+  'b789db2680c74cdf99a8eb4c72ea7fe1': { inteiro: [0.53, .16, .96] },
+  'e834c72b596765f7754017136e7d7452': { inteiro: [0.45, .24, 1] },
+  '5d73faaa7df108f464a4da0da98ff08a': { inteiro: [0.48, .16, .92] },
+  'dda4649c83c6aa08b80dc237310e771b': { inteiro: [0.50, .15, .91] }
+};
+
+var TAMANHOS = ['PP', 'P', 'M', 'G', 'GG'];
+
+var CATEGORIAS = ['Todos', 'Macaquinhos', 'Macacões', 'Leggings', 'Flares', 'Shorts', 'Tops'];
+
+// Medidas do corpo (cm), baseadas em tabelas de referência do mercado
+// brasileiro de moda fitness feminina (faixas contínuas de 6 cm).
+var GUIA_MEDIDAS = [
+  { tamanho: 'PP', busto: '76 a 82',  cintura: '58 a 64', quadril: '84 a 90' },
+  { tamanho: 'P',  busto: '82 a 88',  cintura: '64 a 70', quadril: '90 a 96' },
+  { tamanho: 'M',  busto: '88 a 94',  cintura: '70 a 76', quadril: '96 a 102' },
+  { tamanho: 'G',  busto: '94 a 100', cintura: '76 a 82', quadril: '102 a 108' },
+  { tamanho: 'GG', busto: '100 a 106', cintura: '82 a 88', quadril: '108 a 114' }
+];
+
+function estoque(esgotados) {
+  var e = { PP: true, P: true, M: true, G: true, GG: true };
+  (esgotados || []).forEach(function (t) { e[t] = false; });
+  return e;
+}
+function foto(src, legenda, detalhe) { return { src: src, legenda: legenda, detalhe: !!detalhe }; }
+
+// Fotos da Calça com Bolso (look Uva)
+var FOTOS_CONJUNTO_UVA = [
+  foto('/_blob/f4d3a41537e0bdaacccf479f4046116c', 'Frente'),
+  foto('/_blob/f766567129214d455796dcc5e2f65824', 'Look completo'),
+  foto('/_blob/a062ec6a9436e369154d953efac93108', 'Costas'),
+  foto('/_blob/695e7aa2cc58d0500f671d37f10c6a86', 'Detalhe do bolso', true)
+];
+
+var PRODUTOS = [
+  {
+    id: 'icon', nome: 'Icon', categoria: 'Macaquinhos', preco: 179, enquadramento: 'inteiro',
+    descricao: 'Tecido de compressão suave que modela sem apertar, alças finas e costas abertas que deixam o movimento leve. Do agachamento ao café depois do treino, ele segue com você com o mesmo caimento impecável.',
+    cores: [
+      { corId: 'onyx', estoque: estoque(), fotos: [
+        foto('/_blob/f94a619a566a6793b57346b7897ad7be', 'Frente'),
+        foto('/_blob/987f389d95fb754322e092686db4ca95', 'Lado'),
+        foto('/_blob/dbdaffc36872c0b5f260ca13b2df7e42', 'Costas'),
+        foto('/_blob/a4c968eb45428fb2fdf657e587a0eba5', 'Detalhe do monograma', true)
+      ] },
+      { corId: 'coral', estoque: estoque(['GG']), fotos: [
+        foto('/_blob/be8c412ccecd136fd52e1793d8d6b6b8', 'Frente'),
+        foto('/_blob/f4c1212059bf789d61cc6571e39654a9', 'Lado'),
+        foto('/_blob/5023c866cb4c30db80173c2b6a9770a2', 'Costas'),
+        foto('/_blob/0033e2c18a92fca17eb9c316ee5d0a74', 'Editorial'),
+        foto('/_blob/02bd5e7500af2ad7ac25124ebf3651f8', 'Detalhe do monograma', true)
+      ] },
+      { corId: 'cacao', estoque: estoque(['PP']), fotos: [] }
+    ]
+  },
+  {
+    id: 'macaquinho-tube', nome: 'Tube', categoria: 'Macaquinhos', preco: 140, enquadramento: 'inteiro',
+    destaqueCatalogo: false,
+    capaDestaque: '/_blob/e834c72b596765f7754017136e7d7452',
+    descricao: 'Macaquinho tomara que caia de linhas limpas, com decote reto que valoriza ombros e colo e short na medida certa para não subir. Firme no treino, elegante fora dele: com uma camisa aberta por cima, vira look de rua.',
+    cores: [
+      { corId: 'onyx', estoque: estoque(), fotos: [
+        foto('/_blob/5d73faaa7df108f464a4da0da98ff08a', 'Frente'),
+        foto('/_blob/dda4649c83c6aa08b80dc237310e771b', 'Lado'),
+        foto('/_blob/b789db2680c74cdf99a8eb4c72ea7fe1', 'Costas'),
+        foto('/_blob/e834c72b596765f7754017136e7d7452', 'Editorial')
+      ] }
+    ]
+  },
+  {
+    id: 'macacao-reto', nome: 'Macacão Reto', categoria: 'Macacões', preco: 240, enquadramento: 'inteiro',
+    descricao: 'Uma peça só, inteira de presença. Perna longa, decote reto e costas abertas que abraçam o corpo com firmeza confortável e valorizam a silhueta. Dispensa combinações: basta um tênis para treinar ou uma jaqueta para seguir o dia.',
+    cores: [
+      { corId: 'cacao', estoque: estoque(), fotos: [
+        foto('/_blob/db3cf95ca38deb9698c4a90e1bc1bc12', 'Frente'),
+        foto('/_blob/46ed8e6b6f47edd680a051b08f7930fc', 'Lado'),
+        foto('/_blob/3e92b68feafea33054feb19cbdddb39d', 'Costas'),
+        foto('/_blob/3129096828e8d94e73df653867e471d1', 'Perfil', true)
+      ] },
+      { corId: 'azulBebe', estoque: estoque(), fotos: [
+        foto('/_blob/3ae3138303112d44b696c03f9b7d4e8c', 'Frente'),
+        foto('/_blob/d8cb64420a0504c0b0d21b83c91814e0', 'Lado'),
+        foto('/_blob/a736573cb04c8da313a740cdb658c867', 'Costas'),
+        foto('/_blob/1835a6ef92261c49ee0ce2c1037956dd', 'Detalhe do monograma', true)
+      ] },
+      { corId: 'oliva', estoque: estoque(), fotos: [
+        foto('/_blob/4bebf94cc62331730e9b2c890d70819d', 'Frente'),
+        foto('/_blob/091f14d3c7f1202e99d93baffe726bf3', 'Em movimento'),
+        foto('/_blob/8e622722380f08da5b56883bc1e0c8b2', 'Costas'),
+        foto('/_blob/37cd7643ed2ffb45fcbd7735e6e14cbf', 'Detalhe do monograma', true)
+      ] },
+      { corId: 'onyx', estoque: estoque(['PP', 'P', 'M', 'G', 'GG']), fotos: [] },
+      { corId: 'coral', estoque: estoque(['PP']), fotos: [
+        foto('/_blob/24811f6249d6f6c8569222a2cbfc161b', 'Frente'),
+        foto('/_blob/78aa0b964535437dbf0d771c5e7c11cc', 'Editorial'),
+        foto('/_blob/b0de1cfb1ff5753d74a1ec4829859301', 'Costas')
+      ] }
+    ]
+  },
+  {
+    id: 'calca-flare', nome: 'Calça Flare', categoria: 'Flares', preco: 139, enquadramento: 'inferior',
+    descricao: 'Cintura alta que acomoda sem apertar e perna que se abre suavemente a partir do joelho. Alonga a silhueta, acompanha o alongamento e o pilates e vai direto para a rua com a elegância de uma calça de alfaiataria.',
+    cores: [
+      { corId: 'manteiga', estoque: estoque(), fotos: [
+        foto('/_blob/c436a5468b3fdcf738cb1493bcc05ae7', 'Frente'),
+        foto('/_blob/cef9a94cfce863f2e48ba568d908c118', 'Lado'),
+        foto('/_blob/68066e2d4f194a4d94ce93f5cc0d491a', 'Costas')
+      ] },
+      { corId: 'onyx', estoque: estoque(), fotos: [
+        foto('/_blob/a0275f26eaf56fe363997aeb9078b058', 'Frente'),
+        foto('/_blob/a9daa301a6a7607a5483778c906b1b96', 'Frente, detalhe do cós'),
+        foto('/_blob/3b561d2cb3f773d773589034a63b4315', 'Costas'),
+        foto('/_blob/73a963bbe3ccffd77c7b3ae9b24aba89', 'Detalhe do monograma', true)
+      ] },
+      { corId: 'cacao', estoque: estoque(), fotos: [
+        foto('/_blob/4745144b97c384d69943ac237ef580de', 'Frente'),
+        foto('/_blob/f4b194a58509e4b73cafda67c551fa5c', 'Lado'),
+        foto('/_blob/c34f8194be831fa919a76a3246a00e4e', 'Costas'),
+        foto('/_blob/e12d13f6e0ce9daec4ef8dd9c652fe69', 'Detalhe do monograma', true)
+      ] }
+    ]
+  },
+  {
+    id: 'calca-com-bolso', nome: 'Calça com Bolso', categoria: 'Leggings', preco: 139, enquadramento: 'inferior',
+    descricao: 'A legging de todos os dias, agora com bolso lateral que guarda o celular com segurança durante a corrida. Cós alto e firme, toque macio e um caimento que acompanha você do aquecimento ao último quilômetro.',
+    cores: [
+      { corId: 'uva', estoque: estoque(), fotos: FOTOS_CONJUNTO_UVA }
+    ]
+  },
+  {
+    id: 'short-basic', nome: 'Short Basic', categoria: 'Shorts', preco: 99, enquadramento: 'inferior',
+    descricao: 'Comprimento na medida certa para não subir, cós alto que modela e tecido que respira. O short essencial para o dia de perna, para a corrida e para os dias de calor no Rio.',
+    cores: [
+      { corId: 'cacao', estoque: estoque(['G']), fotos: [
+        foto('/_blob/6d5cc7dca8e08eff831c55a765bd5ab6', 'Frente'),
+        foto('/_blob/e8900b887b901086bee16bd41fc4620c', 'Lado'),
+        foto('/_blob/92ac8915653e1282e986c9f9a8d5fd1d', 'Lado'),
+        foto('/_blob/a8caef4dc6c66baa9bb4bc8c2cfb5c78', 'Costas')
+      ] },
+      { corId: 'coral', estoque: estoque(), fotos: [
+        foto('/_blob/c9b09c4beded203060d348982f44156e', 'Frente'),
+        foto('/_blob/08271b788c8e9bb4a4168d61025efeec', 'Editorial'),
+        foto('/_blob/32cf19cc1215a710ffca44c00da8d3cd', 'Costas'),
+        foto('/_blob/e1f753a2285ab7ce42777cd28b9b2ee2', 'Detalhe do monograma', true)
+      ] },
+      { corId: 'onyx', estoque: estoque(), fotos: [
+        foto('/_blob/1fb0838f522b045fdfcdf332d504da0a', 'Frente'),
+        foto('/_blob/59a0237a824589b5316e4073fc08006d', 'Frente, detalhe do cós'),
+        foto('/_blob/085f9d7a3870ff756235f36dc534370c', 'Costas'),
+        foto('/_blob/b54cc285069064a3b6e1a23bbcf06dcf', 'Detalhe do monograma', true)
+      ] }
+    ]
+  },
+  {
+    id: 'cropped-manga-longa', nome: 'Cropped Manga Longa', categoria: 'Tops', preco: 109, enquadramento: 'superior',
+    descricao: 'Manga longa ajustada, decote envelope e comprimento cropped que valoriza a cintura. Sustenta com conforto no treino e vira peça de styling com a Calça Flare, com jeans ou com alfaiataria.',
+    cores: [
+      { corId: 'manteiga', estoque: estoque(), fotos: [
+        foto('/_blob/caf250d1bfa26ae31527434feeae4beb', 'Frente'),
+        foto('/_blob/0f15f4900ea4cff35730e3965337a781', 'Editorial'),
+        foto('/_blob/e3bda0153fff9cd3244bbacff10f5533', 'Lado'),
+        foto('/_blob/7047b8c5eed21ff894a19a9885813f93', 'Costas')
+      ] },
+      { corId: 'onyx', estoque: estoque(), fotos: [
+        foto('/_blob/cf57c7ca44e1aea80dd1c44553dd1a55', 'Frente'),
+        foto('/_blob/3f8972bff41c132b49189606b1245a96', 'Editorial'),
+        foto('/_blob/7dfc581b39ca2bab9e42462471d9fcc8', 'Costas'),
+        foto('/_blob/8b93a88bcb92c8097bf51fe514654a5f', 'Detalhe das costas', true)
+      ] }
+    ]
+  },
+  {
+    id: 'top-basic', nome: 'Top Basic', categoria: 'Tops', preco: 89, enquadramento: 'superior',
+    descricao: 'Decote reto e alças largas que dão firmeza sem marcar. O básico de sustentação confortável que combina com todas as peças da coleção e funciona sozinho ou por baixo de uma camisa aberta.',
+    cores: [
+      { corId: 'onyx', estoque: estoque(), fotos: [
+        foto('/_blob/db682321c5ed307809e54c7b316809f6', 'Frente'),
+        foto('/_blob/55d676eb6b208d61049b46c25521a26e', 'Editorial'),
+        foto('/_blob/1033de36acb58bab0f96f36a3ad70e3d', 'Costas'),
+        foto('/_blob/afd3cfc408be60f6accc88f67a633115', 'Detalhe do monograma', true)
+      ] }
+    ]
+  },
+  {
+    id: 'top-regulavel', nome: 'Top Regulável', categoria: 'Tops', preco: 89, enquadramento: 'superior',
+    descricao: 'Alças finas reguláveis para ajustar o top ao seu corpo e ao seu treino. Costas delicadas, caimento preciso e um toque feminino que combina com shorts, leggings e flares da coleção.',
+    cores: [
+      { corId: 'coral', estoque: estoque(['P', 'M']), fotos: [] },
+      { corId: 'cacao', estoque: estoque(), fotos: [
+        foto('/_blob/73571d1c928a22db9bb596ff76495a29', 'Frente'),
+        foto('/_blob/6bcce201d2c3f34488b78d6ae912f4cd', 'Lado'),
+        foto('/_blob/be5b11742ea97677ec433867ffd57563', 'Lado'),
+        foto('/_blob/87b27740d1b226f04ac05d20cdbec57b', 'Costas')
+      ] }
+    ]
+  }
+];
+
+var PECAS_INTEIRAS = ['icon', 'macaquinho-tube', 'macacao-reto'];
+// Destaques da coleção: uma peça grande + peças curadas ao lado
+var DESTAQUE_GRANDE = 'icon';
+var DESTAQUES_CURADOS = ['macaquinho-tube', 'macacao-reto', 'calca-flare', 'calca-com-bolso'];
+var CONJUNTO_UVA = ['calca-com-bolso'];
+
+// ─── utilidades ───
+function brl(v) { return 'R$ ' + v.toFixed(2).replace('.', ','); }
+function corEsgotada(c) { return TAMANHOS.every(function (t) { return !c.estoque[t]; }); }
+function corParcial(c) { return !corEsgotada(c) && TAMANHOS.some(function (t) { return !c.estoque[t]; }); }
+function varianteComFotos(p, idx) {
+  var v = p.cores[idx];
+  if (v.fotos.length) return { v: v, ilustrativa: false };
+  for (var i = 0; i < p.cores.length; i++) { if (p.cores[i].fotos.length) return { v: p.cores[i], ilustrativa: true }; }
+  return { v: v, ilustrativa: true };
+}
+function capaDe(p) {
+  var v = varianteComFotos(p, 0).v;
+  for (var i = 0; i < v.fotos.length; i++) { if (!v.fotos[i].detalhe) return v.fotos[i]; }
+  return v.fotos[0];
+}
+// Região da foto a mostrar: focada na peça (conforme o enquadramento do produto)
+// ou o look completo (foto inteira, centralizada no corpo).
+function regiao(f, p, focado) {
+  var q = QUADROS[String(f.src).replace('/_blob/', '')];
+  var a = (q && q.a) || 2 / 3;
+  if (!q || f.detalhe) return { cx: .5, y0: 0, y1: 1, a: a };
+  var corpo = q.inteiro || [.5, 0, 1];
+  if (!focado) return { cx: corpo[0], y0: 0, y1: 1, a: a };
+  var k = ENQUADRAMENTOS[p.enquadramento];
+  var r = q[k] || corpo;
+  if (k === 'inteiro') return { cx: r[0], y0: Math.max(0, r[1] - .03), y1: Math.min(1, r[2] + .03), a: a };
+  return { cx: r[0], y0: r[1], y1: r[2], a: a };
+}
+// Converte a região numa posição absoluta da imagem dentro de um container de
+// proporção ca (largura/altura), sem nunca deixar sobras vazias.
+function moldura(rg, ca) {
+  var Hd = Math.min(2.7, 1 / (rg.y1 - rg.y0));
+  Hd = Math.max(Hd, 1, ca / rg.a);
+  var Wd = Hd * rg.a;
+  var top = Math.min(0, Math.max(1 - Hd, .5 - ((rg.y0 + rg.y1) / 2) * Hd));
+  // Horizontal: the subject always sits in the exact center. If that leaves room
+  // on one side, a blurred copy of the same photo fills it (see .fill in the CSS).
+  var left = ca / 2 - rg.cx * Wd;
+  return {
+    l: (left / ca * 100).toFixed(2) + '%',
+    t: (top * 100).toFixed(2) + '%',
+    w: (Wd / ca * 100).toFixed(2) + '%',
+    h: (Hd * 100).toFixed(2) + '%'
+  };
+}
+
+class Component extends DCLogic {
+  s() {
+    var st = this.state || {};
+    return {
+      filtro: st.filtro || 'Todos',
+      aberto: st.aberto || null,
+      corIdx: st.corIdx || 0,
+      tam: st.tam || null,
+      fotoIdx: st.fotoIdx || 0,
+      full: !!st.full,
+      guia: !!st.guia,
+      avisoTam: !!st.avisoTam,
+      menu: !!st.menu
+    };
+  }
+
+  abrir(id) {
+    var p = PRODUTOS.find(function (x) { return x.id === id; });
+    var idx = 0;
+    for (var i = 0; i < p.cores.length; i++) { if (!corEsgotada(p.cores[i]) && p.cores[i].fotos.length) { idx = i; break; } }
+    this.setState({ aberto: id, corIdx: idx, tam: null, fotoIdx: 0, full: false, guia: false, avisoTam: false, menu: false });
+  }
+
+  card(p, emDestaque) {
+    var self = this;
+    var capa = capaDe(p);
+    if (emDestaque && p.capaDestaque) capa = { src: p.capaDestaque, detalhe: false };
+    var e = moldura(regiao(capa, p, true), 3 / 4);
+    // segunda foto (aparece ao passar o mouse): próxima foto que não seja detalhe
+    var vv = varianteComFotos(p, 0).v.fotos.filter(function (f) { return !f.detalhe && f.src !== capa.src; });
+    var capa2 = vv[0] || capa;
+    var e2 = moldura(regiao(capa2, p, true), 3 / 4);
+    var esgotadas = p.cores.filter(corEsgotada);
+    var parciais = p.cores.filter(corParcial);
+    var nota = '';
+    if (esgotadas.length) nota = 'Cor ' + CORES[esgotadas[0].corId].nome + ' esgotada';
+    else if (parciais.length) nota = 'Alguns tamanhos esgotados';
+    return {
+      id: p.id,
+      nome: p.nome,
+      categoria: p.categoria,
+      descricao: p.descricao,
+      featured: !!emDestaque,
+      normal: !emDestaque,
+      precoFmt: brl(p.preco),
+      capa: capa.src,
+      alt: p.nome + ', foto da peça',
+      aria: 'Ver detalhes de ' + p.nome + ', ' + brl(p.preco),
+      l: e.l, t: e.t, w: e.w, h: e.h,
+      capa2: capa2.src, l2: e2.l, t2: e2.t, w2: e2.w, h2: e2.h,
+      estoqueNota: nota, temEstoqueNota: !!nota,
+      dots: p.cores.map(function (c) {
+        var cor = CORES[c.corId];
+        var off = corEsgotada(c);
+        return { hex: cor.hex, title: cor.nome + (off ? ' (esgotada)' : ''), cls: off ? 'dot dot--off' : 'dot' };
+      }),
+      open: function () { self.abrir(p.id); }
+    };
+  }
+
+  modal(s) {
+    var self = this;
+    var p = PRODUTOS.find(function (x) { return x.id === s.aberto; });
+    if (!p) return null;
+    var v = p.cores[s.corIdx] || p.cores[0];
+    var cor = CORES[v.corId];
+    var galeria = varianteComFotos(p, s.corIdx);
+    var fotos = galeria.v.fotos;
+    var fi = Math.min(s.fotoIdx, fotos.length - 1);
+    var f = fotos[fi];
+    var podeAlternar = p.enquadramento !== 'inteiro' && !f.detalhe;
+    var e = moldura(regiao(f, p, podeAlternar ? !s.full : true), 2 / 3);
+    var esg = corEsgotada(v);
+    var tamOk = s.tam && v.estoque[s.tam];
+    var msg = 'Olá! Gostaria de comprar a peça ' + p.nome + ', na cor ' + cor.nome + ', tamanho ' + (s.tam || '') + '.';
+    var close = function () { self.setState({ aberto: null }); };
+    return {
+      nome: p.nome,
+      categoria: p.categoria,
+      precoFmt: brl(p.preco),
+      parcela: brl(p.preco / 3),
+      descricao: p.descricao,
+      foto: f.src,
+      fotoAlt: p.nome + ' na cor ' + CORES[galeria.v.corId].nome + ', ' + f.legenda,
+      l: e.l, t: e.t, w: e.w, h: e.h,
+      full: s.full,
+      podeAlternar: podeAlternar,
+      toggleLabel: s.full ? 'Focar na peça' : 'Ver look completo',
+      toggleFull: function () { self.setState({ full: !s.full }); },
+      ilustrativa: galeria.ilustrativa,
+      ilustrativaTxt: 'Foto ilustrativa na cor ' + CORES[galeria.v.corId].nome + '. Fotos em ' + cor.nome + ' em breve.',
+      thumbs: fotos.map(function (ft, i) {
+        return {
+          src: ft.src,
+          aria: 'Ver foto: ' + ft.legenda,
+          cls: i === fi ? 'thumb thumb--on' : 'thumb',
+          pick: function () { self.setState({ fotoIdx: i }); }
+        };
+      }),
+      prev: function () { self.setState({ fotoIdx: (fi - 1 + fotos.length) % fotos.length }); },
+      next: function () { self.setState({ fotoIdx: (fi + 1) % fotos.length }); },
+      corNome: cor.nome,
+      corStatus: esg ? 'Esgotada' : (corParcial(v) ? 'Últimos tamanhos' : 'Disponível'),
+      corEsgotada: esg,
+      cores: p.cores.map(function (c, i) {
+        var cc = CORES[c.corId];
+        var off = corEsgotada(c);
+        return {
+          hex: cc.hex,
+          sel: i === s.corIdx,
+          aria: 'Cor ' + cc.nome + (off ? ', esgotada' : ''),
+          cls: 'swatch' + (i === s.corIdx ? ' swatch--on' : '') + (off ? ' swatch--off' : ''),
+          pick: function () {
+            // se o tamanho escolhido esgotou nesta cor, vai para o primeiro disponível
+            var t = s.tam ? (c.estoque[s.tam] ? s.tam : (TAMANHOS.filter(function (x) { return c.estoque[x]; })[0] || null)) : null;
+            self.setState({ corIdx: i, tam: t, fotoIdx: 0, avisoTam: false });
+          }
+        };
+      }),
+      tamTxt: tamOk ? s.tam : (esg ? 'indisponível nesta cor' : 'selecione'),
+      tamanhos: TAMANHOS.map(function (t) {
+        var disp = !!v.estoque[t];
+        var sel = s.tam === t && disp;
+        return {
+          t: t,
+          off: !disp,
+          sel: sel,
+          aria: 'Tamanho ' + t + (disp ? '' : ', esgotado'),
+          cls: !disp ? 'size size--off' : (sel ? 'size size--on' : 'size'),
+          pick: function () { if (disp) self.setState({ tam: t, avisoTam: false }); }
+        };
+      }),
+      avisoTam: s.avisoTam && !tamOk,
+      guiaAberto: s.guia,
+      toggleGuia: function () { self.setState({ guia: !s.guia }); },
+      prontoParaComprar: !!tamOk,
+      naoPronto: !tamOk,
+      pedirTamanho: function () { self.setState({ avisoTam: true }); },
+      waHref: LINKS.whatsapp + '?text=' + encodeURIComponent(msg),
+      resumo: tamOk ? (p.nome + ' na cor ' + cor.nome + ', tamanho ' + s.tam + '. A mensagem já vai pronta.') : 'Escolha cor e tamanho. A mensagem para o WhatsApp já vai pronta.',
+      close: close
+    };
+  }
+
+  renderVals() {
+    var self = this;
+    var s = this.s();
+    var lista = s.filtro === 'Todos' ? PRODUTOS : PRODUTOS.filter(function (p) { return p.categoria === s.filtro; });
+    // Em "Todos", a peça com destaqueCatalogo abre a grade ocupando a linha inteira (desktop)
+    var todos = s.filtro === 'Todos';
+    var ordenada = todos
+      ? lista.filter(function (p) { return p.destaqueCatalogo; }).concat(lista.filter(function (p) { return !p.destaqueCatalogo; }))
+      : lista;
+    var catalogo = ordenada.map(function (p) { return self.card(p, todos && !!p.destaqueCatalogo); });
+    var filtros = CATEGORIAS.map(function (c) {
+      var qtd = c === 'Todos' ? PRODUTOS.length : PRODUTOS.filter(function (p) { return p.categoria === c; }).length;
+      return {
+        label: c, qtd: qtd, sel: s.filtro === c,
+        cls: s.filtro === c ? 'chip chip--on' : 'chip',
+        pick: function () { self.setState({ filtro: c }); }
+      };
+    });
+    var m = s.aberto ? this.modal(s) : null;
+    return {
+      filtros: filtros,
+      catalogo: catalogo,
+      contagem: catalogo.length + (catalogo.length === 1 ? ' peça' : ' peças') + (s.filtro === 'Todos' ? ' na coleção' : ' em ' + s.filtro),
+      procuradas: PECAS_INTEIRAS.map(function (id) { return self.card(PRODUTOS.find(function (p) { return p.id === id; })); }),
+      lancamentos: CONJUNTO_UVA.map(function (id) {
+        var p = PRODUTOS.find(function (x) { return x.id === id; });
+        return { nome: p.nome, precoFmt: brl(p.preco), open: function () { self.abrir(id); } };
+      }),
+      hlGrande: self.card(PRODUTOS.find(function (p) { return p.id === DESTAQUE_GRANDE; })),
+      hlCuradas: DESTAQUES_CURADOS.map(function (id) { return self.card(PRODUTOS.find(function (p) { return p.id === id; })); }),
+      openIcon: function () { self.abrir('icon'); },
+      menuAberto: s.menu,
+      openMenu: function () { self.setState({ menu: true }); },
+      closeMenu: function () { self.setState({ menu: false }); },
+      aberto: !!m,
+      m: m || {},
+      guia: GUIA_MEDIDAS
+    };
+  }
+}
+</script>
+</body>
+</html>

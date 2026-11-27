@@ -2226,6 +2226,21 @@ document.addEventListener('keydown', function (e) {
     }, 760);
   };
 })();
+// In-page links (header, menu, footer): scroll after the menu has closed and the page is unlocked,
+// and also when the address already ends with the same #section.
+document.addEventListener('click', function (e) {
+  var a = e.target.closest && e.target.closest('a[href^="#"]');
+  if (!a || e.defaultPrevented && !a.closest('.menu')) return;
+  var id = a.getAttribute('href'); if (id.length < 2) return;
+  var target = document.querySelector(id); if (!target) return;
+  e.preventDefault();
+  var tries = 0;
+  (function go() {
+    if (document.querySelector('.menu') && tries++ < 20) { setTimeout(go, 30); return; } // wait for the menu to leave
+    target.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+    if (history.replaceState) history.replaceState(null, '', id);
+  })();
+});
 </script>
 </body>
 </html>

@@ -534,6 +534,45 @@ html.rv :is(.sec-head h2,.lovers-card h2):not([data-in]) em{opacity:0;transform:
 html:has(.overlay) .header::before{backdrop-filter:none;-webkit-backdrop-filter:none;background:linear-gradient(to bottom,rgba(250,248,245,.9),rgba(250,248,245,.6) 70%,rgba(250,248,245,0))}
 html:has(.overlay) .header-pill{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(250,248,245,.94)}
 .stage{contain:paint;isolation:isolate}
+/* ===== V3.4: the piece fits one window on desktop =====
+   The drawer is exactly the window: the photo takes the height available (2:3), the details take the
+   rest of the width, spacing is tighter. Only the details column scrolls, and only if something is
+   opened that needs room (the size guide on a short screen); the page never scrolls. */
+@media (min-width:901px){
+  .drawer{display:flex;flex-direction:column;overflow:hidden}
+  .drawer-top{flex:none;padding-top:12px;padding-bottom:10px}
+  .pdp{flex:1;min-height:0;grid-template-columns:auto minmax(0,1fr);gap:44px;padding:0 40px 24px;align-items:stretch}
+  .gal{height:100%;min-height:0;grid-template-columns:68px auto;align-items:start}
+  .thumbs{max-height:100%;overflow-y:auto;scrollbar-width:none}
+  .thumbs::-webkit-scrollbar{display:none}
+  .stage{height:auto;width:min(44vw, calc((100vh - 124px) * 2 / 3));aspect-ratio:2/3}
+  .info{min-height:0;overflow-y:auto;overscroll-behavior:contain;gap:20px;padding:4px 6px 4px 0;scrollbar-width:thin}
+  .info h2{font-size:38px;margin:10px 0 8px}
+  .info .desc{font-size:15px;line-height:1.7}
+  .opt-label{margin-bottom:10px;min-height:30px}
+  .size{height:46px}
+  .sizes{min-height:46px}
+  .drawer{width:min(1240px,calc(100% - 32px))}
+  .info{gap:14px}
+  .info .pill{height:26px}
+  .info h2{font-size:36px;margin:8px 0 6px}
+  .details{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .details div{font-size:13px;gap:10px;line-height:1.35}
+  .details span.ic{width:32px;height:32px}
+  .info div:has(> .btn--soldout){display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:10px;align-items:center}
+  .info div:has(> .btn--soldout) .btn{margin:0}
+  .info div:has(> .btn--soldout) .buy-note{grid-column:1 / -1;margin-top:0}
+  .info .soldout{padding:12px 18px;font-size:13.5px;line-height:1.55}
+}
+@media (min-width:901px) and (max-width:1100px){
+  .stage{width:min(36vw, calc((100vh - 124px) * 2 / 3))}
+  .pdp{gap:32px}
+}
+@media (min-width:901px) and (max-height:780px){
+  .info .details{display:none}
+  .info .desc{line-height:1.6}
+  .info h2{font-size:32px}
+}
 /* reduced motion: fewer and gentler, not zero */
 @media (prefers-reduced-motion: reduce){
   .header,.hero .eyebrow,.hero h1 .ln > *,.hero p.lead,.hero-ctas,.hero-chip,.hero-photo{animation-name:fade !important}

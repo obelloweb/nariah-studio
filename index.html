@@ -455,6 +455,32 @@ html:has(.bag){overflow:hidden}
   .header-pill .head-actions .icon-btn{width:40px;height:40px}
 }
 
+
+/* ===== V2.7 ===== */
+html{scrollbar-gutter:stable}
+/* header: clear air between links and actions */
+@media (min-width:1101px){ .header-pill{gap:48px;padding-left:28px} .nav{gap:10px} .head-actions{gap:10px} }
+/* zoom on the product photo */
+.stage{user-select:none;-webkit-user-select:none;cursor:zoom-in;-webkit-tap-highlight-color:transparent}
+html[data-zoom] .stage{cursor:zoom-out}
+.stage img.main{transform-origin:var(--zx,50%) var(--zy,50%);transition:left .9s var(--ease-out),top .9s var(--ease-out),width .9s var(--ease-out),height .9s var(--ease-out),transform .45s var(--ease-out),opacity .35s ease}
+html[data-zoom] .stage img.main{transform:scale(2.1);transition:transform .45s var(--ease-out),transform-origin .12s linear}
+@media (pointer:coarse){ html[data-zoom] .stage img.main{transform:scale(1.9)} .stage{touch-action:pan-y} html[data-zoom] .stage{touch-action:none} }
+html[data-zoom] .stage .stage-toggle,html[data-zoom] .stage .stage-hint{opacity:0;pointer-events:none}
+.stage-hint{position:absolute;right:14px;top:14px;z-index:3;padding:7px 12px;border-radius:999px;font-size:11px;letter-spacing:.06em;color:#4A332D;pointer-events:none;transition:opacity .3s ease}
+.stage-hint .h-touch{display:none}
+@media (pointer:coarse){ .stage-hint .h-touch{display:inline} .stage-hint .h-desk{display:none} }
+.preload{position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none}
+.preload img{width:1px;height:1px}
+/* stable text while switching colors */
+.info h2{min-height:1.08em}
+.opt-label{min-height:36px}
+.sizes{min-height:52px}
+/* photos of the new pieces: same studio finish as the rest */
+img:not(.fill)[src*="-cacau.jpg"][src*="macaquinho-icon"],img:not(.fill)[src*="top-regulavel--"][src*="-coral"],img:not(.fill)[src*="blusa-frente-unica"],img:not(.fill)[src*="top-costas-abertas"],img:not(.fill)[src*="conjunto-navy"]{filter:contrast(1.04) brightness(1.02) saturate(1.03);image-rendering:-webkit-optimize-contrast}
+/* founder photo */
+.about-img img{object-position:38% 0}
+
 /* reduced motion: fewer and gentler, not zero */
 @media (prefers-reduced-motion: reduce){
   .header,.hero .eyebrow,.hero h1 .ln > *,.hero p.lead,.hero-ctas,.hero-chip,.hero-photo{animation-name:fade !important}
@@ -736,7 +762,7 @@ html:has(.bag){overflow:hidden}
         <div class="about-photo">
           <div class="about-frame">
             <div class="about-img">
-              <img src="fotos/sobre--nathalia-lagoia-hd.jpg" alt="Nathalia Lagoia, fundadora da Nariah Studio, sentada no chão do estúdio vestindo o Macacão Reto na cor Cacao">
+              <img src="fotos/sobre--nathalia-2.jpg" alt="Nathalia Lagoia, fundadora da Nariah Studio, sentada no chão do estúdio vestindo um macacão na cor Cacao">
             </div>
           </div>
           <div class="about-caption"><span>Nathalia Lagoia</span><span>Rio de Janeiro</span></div>
@@ -869,7 +895,9 @@ html:has(.bag){overflow:hidden}
           </div>
           <div class="stage">
             <img class="fill" src="{{ m.foto }}" alt="" aria-hidden="true">
-            <img src="{{ m.foto }}" alt="{{ m.fotoAlt }}" style="left: {{ m.l }}; top: {{ m.t }}; width: {{ m.w }}; height: {{ m.h }}">
+            <img class="main" src="{{ m.foto }}" alt="{{ m.fotoAlt }}" style="left: {{ m.l }}; top: {{ m.t }}; width: {{ m.w }}; height: {{ m.h }}">
+            <span class="stage-hint glass" aria-hidden="true"><span class="h-desk">2x clique para zoom</span><span class="h-touch">Toque para zoom</span></span>
+            <div class="preload" aria-hidden="true"><template data-for="{{ m.preload }}" data-as="pl"><img src="{{ pl.src }}" alt=""></template></div>
             <template data-if="{{ m.ilustrativa }}">
               <span class="stage-note glass">{{ m.ilustrativaTxt }}</span>
             </template>
@@ -1029,7 +1057,7 @@ html:has(.bag){overflow:hidden}
 class DCLogic { constructor() { this.props = {}; this.state = {}; } }
 </script>
 <script>
-var FILE2ID = {"fotos/calca-com-bolso--bolso-uva.jpg": "695e7aa2cc58d0500f671d37f10c6a86", "fotos/calca-com-bolso--costas-uva.jpg": "a062ec6a9436e369154d953efac93108", "fotos/calca-com-bolso--frente-uva.jpg": "f4d3a41537e0bdaacccf479f4046116c", "fotos/calca-com-bolso--romulosilvafotografias0530.jpg": "f766567129214d455796dcc5e2f65824", "fotos/calca-flare--costas-cacau.jpg": "c34f8194be831fa919a76a3246a00e4e", "fotos/calca-flare--costas-manteiga.jpg": "68066e2d4f194a4d94ce93f5cc0d491a", "fotos/calca-flare--costas-onyx.jpg": "3b561d2cb3f773d773589034a63b4315", "fotos/calca-flare--frente-2-onyx.jpg": "a9daa301a6a7607a5483778c906b1b96", "fotos/calca-flare--frente-cacau.jpg": "4745144b97c384d69943ac237ef580de", "fotos/calca-flare--frente-manteiga.jpg": "c436a5468b3fdcf738cb1493bcc05ae7", "fotos/calca-flare--frente-onyx.jpg": "a0275f26eaf56fe363997aeb9078b058", "fotos/calca-flare--lado-2-manteiga.jpg": "cef9a94cfce863f2e48ba568d908c118", "fotos/calca-flare--lado-cacau.jpg": "f4b194a58509e4b73cafda67c551fa5c", "fotos/calca-flare--lado-manteiga.jpg": "86663aa0b9fab5fabda103a75fc50a1d", "fotos/calca-flare--monograma-n-cacau.jpg": "e12d13f6e0ce9daec4ef8dd9c652fe69", "fotos/calca-flare--monograma-n-onyx.jpg": "73a963bbe3ccffd77c7b3ae9b24aba89", "fotos/cropped-manga-longa--costas-manteiga.jpg": "7047b8c5eed21ff894a19a9885813f93", "fotos/cropped-manga-longa--costas-onyx.jpg": "7dfc581b39ca2bab9e42462471d9fcc8", "fotos/cropped-manga-longa--frente-2-onyx.jpg": "3f8972bff41c132b49189606b1245a96", "fotos/cropped-manga-longa--frente-manteiga.jpg": "caf250d1bfa26ae31527434feeae4beb", "fotos/cropped-manga-longa--frente-onyx.jpg": "cf57c7ca44e1aea80dd1c44553dd1a55", "fotos/cropped-manga-longa--lado-2-manteiga.jpg": "e3bda0153fff9cd3244bbacff10f5533", "fotos/cropped-manga-longa--lado-manteiga.jpg": "0f15f4900ea4cff35730e3965337a781", "fotos/cropped-manga-longa--marca-onyx.jpg": "8b93a88bcb92c8097bf51fe514654a5f", "fotos/macacao-ret--costas-azul-bebe.jpg": "a736573cb04c8da313a740cdb658c867", "fotos/macacao-ret--costas-cacau.jpg": "3e92b68feafea33054feb19cbdddb39d", "fotos/macacao-ret--costas-coral.jpg": "b0de1cfb1ff5753d74a1ec4829859301", "fotos/macacao-ret--costas-oliva.jpg": "8e622722380f08da5b56883bc1e0c8b2", "fotos/macacao-ret--frente-azul-bebe.jpg": "3ae3138303112d44b696c03f9b7d4e8c", "fotos/macacao-ret--frente-cacau.jpg": "db3cf95ca38deb9698c4a90e1bc1bc12", "fotos/macacao-ret--frente-coral.jpg": "78aa0b964535437dbf0d771c5e7c11cc", "fotos/macacao-ret--frente-oliva.jpg": "4bebf94cc62331730e9b2c890d70819d", "fotos/macacao-ret--lado-azul-bebe.jpg": "d8cb64420a0504c0b0d21b83c91814e0", "fotos/macacao-ret--lado-cacau.jpg": "46ed8e6b6f47edd680a051b08f7930fc", "fotos/macacao-ret--lado-coral.jpg": "24811f6249d6f6c8569222a2cbfc161b", "fotos/macacao-ret--lado-oliva.jpg": "091f14d3c7f1202e99d93baffe726bf3", "fotos/macacao-ret--monograma-n-azul-bebe.jpg": "1835a6ef92261c49ee0ce2c1037956dd", "fotos/macacao-ret--monograma-n-cacau.jpg": "3129096828e8d94e73df653867e471d1", "fotos/macacao-ret--monograma-n-coral.jpg": "3bbab163f861cc28cca07d7c64a44175", "fotos/macacao-ret--monograma-n-oliva.jpg": "37cd7643ed2ffb45fcbd7735e6e14cbf", "fotos/macaquinho-icon--cadeira-coral.jpg": "0033e2c18a92fca17eb9c316ee5d0a74", "fotos/macaquinho-icon--costas-coral.jpg": "5023c866cb4c30db80173c2b6a9770a2", "fotos/macaquinho-icon--costas-onyx.jpg": "dbdaffc36872c0b5f260ca13b2df7e42", "fotos/macaquinho-icon--frente-coral.jpg": "be8c412ccecd136fd52e1793d8d6b6b8", "fotos/macaquinho-icon--frente-onyx.jpg": "f94a619a566a6793b57346b7897ad7be", "fotos/macaquinho-icon--lado-coral.jpg": "f4c1212059bf789d61cc6571e39654a9", "fotos/macaquinho-icon--lado-onyx.jpg": "987f389d95fb754322e092686db4ca95", "fotos/macaquinho-icon--monograma-n-coral.jpg": "02bd5e7500af2ad7ac25124ebf3651f8", "fotos/macaquinho-icon--monograma-n-onyx.jpg": "a4c968eb45428fb2fdf657e587a0eba5", "fotos/macaquinho-tube--costas-onyx.jpg": "b789db2680c74cdf99a8eb4c72ea7fe1", "fotos/macaquinho-tube--frente-2-onyx.jpg": "e834c72b596765f7754017136e7d7452", "fotos/macaquinho-tube--frente-onys.jpg": "5d73faaa7df108f464a4da0da98ff08a", "fotos/macaquinho-tube--lado-onyx.jpg": "dda4649c83c6aa08b80dc237310e771b", "fotos/nariah-lovers--nariah-lovers-frente.jpg": "48d90f3cf7544c88e0d7d2de27622461", "fotos/short-basic--costas-cacau.jpg": "a8caef4dc6c66baa9bb4bc8c2cfb5c78", "fotos/short-basic--costas-coral.jpg": "32cf19cc1215a710ffca44c00da8d3cd", "fotos/short-basic--costas-onyx.jpg": "085f9d7a3870ff756235f36dc534370c", "fotos/short-basic--frente-2-onyx.jpg": "1fb0838f522b045fdfcdf332d504da0a", "fotos/short-basic--frente-cacau.jpg": "6d5cc7dca8e08eff831c55a765bd5ab6", "fotos/short-basic--frente-coral.jpg": "c9b09c4beded203060d348982f44156e", "fotos/short-basic--frente-onyx.jpg": "59a0237a824589b5316e4073fc08006d", "fotos/short-basic--lado-2-cacau.jpg": "92ac8915653e1282e986c9f9a8d5fd1d", "fotos/short-basic--lado-cacau.jpg": "e8900b887b901086bee16bd41fc4620c", "fotos/short-basic--lado-coral.jpg": "08271b788c8e9bb4a4168d61025efeec", "fotos/short-basic--monograma-n-coral.jpg": "e1f753a2285ab7ce42777cd28b9b2ee2", "fotos/short-basic--monograma-n-onyx.jpg": "b54cc285069064a3b6e1a23bbcf06dcf", "fotos/top-basic--costas-onyx.jpg": "1033de36acb58bab0f96f36a3ad70e3d", "fotos/top-basic--frente-onyx.jpg": "55d676eb6b208d61049b46c25521a26e", "fotos/top-basic--lado-onyx.jpg": "db682321c5ed307809e54c7b316809f6", "fotos/top-basic--monograma-n-onyx.jpg": "afd3cfc408be60f6accc88f67a633115", "fotos/top-regulavel--costas-cacau.jpg": "87b27740d1b226f04ac05d20cdbec57b", "fotos/top-regulavel--frente-cacau.jpg": "73571d1c928a22db9bb596ff76495a29", "fotos/top-regulavel--lado-2-cacau.jpg": "be5b11742ea97677ec433867ffd57563", "fotos/top-regulavel--lado-cacau.jpg": "6bcce201d2c3f34488b78d6ae912f4cd", "fotos/sobre--nathalia-lagoia-hd.jpg": "ef39ef9fd69926cf61f4a8a94f55aa64", "fotos/logo--monograma-n-transparente.png": "9f47bab444d967709d3109f26146a313", "fotos/macaquinho-icon--frente-cacau.jpg": "181ae73b397c2e06293e3c68bd2d779a", "fotos/macaquinho-icon--lado-cacau.jpg": "88c5df3987c534c89d7b88b375e524c7", "fotos/macaquinho-icon--lado-2-cacau.jpg": "7dbc059610a86f6eb9c5244b9ce67b4a", "fotos/macaquinho-icon--costas-cacau.jpg": "91b8be20f8d8ab8118e226c2bc36921b", "fotos/top-regulavel--frente-coral.jpg": "c3b90d6293097ad7bafa6a59db642cda", "fotos/top-regulavel--lado-coral.jpg": "50338239844770652f22becc931c8b9f", "fotos/top-regulavel--monograma-n-coral.jpg": "5398461533a2dafd164df05c9316dcf7", "fotos/top-costas-abertas--frente-coral.jpg": "b4a553e05468d36d338ca16e842acf8a", "fotos/top-costas-abertas--lado-coral.jpg": "e242280e431dee7ab85f54b18fea7be2", "fotos/top-costas-abertas--costas-coral.jpg": "051459a2d9268b8316a445a8cc4beedc", "fotos/top-costas-abertas--monograma-n-coral.jpg": "885ccee7947cbcd47f465bf86ef22ba8", "fotos/blusa-frente-unica--lado-onyx.jpg": "2e9a2bccefbdbdcb6928161198807bc1", "fotos/blusa-frente-unica--lado-2-onyx.jpg": "e48c571678355f4d6e116043ec145061", "fotos/conjunto-navy--frente.jpg": "0ee61b0780ebd3c3971993c47f04031e", "fotos/conjunto-navy--lado.jpg": "31bc0ac7a86b4c73f94e9c80c5ae1bbf", "fotos/conjunto-navy--costas.jpg": "db5972fb8ffccc731580b2d0a552cbac"};
+var FILE2ID = {"fotos/calca-com-bolso--bolso-uva.jpg": "695e7aa2cc58d0500f671d37f10c6a86", "fotos/calca-com-bolso--costas-uva.jpg": "a062ec6a9436e369154d953efac93108", "fotos/calca-com-bolso--frente-uva.jpg": "f4d3a41537e0bdaacccf479f4046116c", "fotos/calca-com-bolso--romulosilvafotografias0530.jpg": "f766567129214d455796dcc5e2f65824", "fotos/calca-flare--costas-cacau.jpg": "c34f8194be831fa919a76a3246a00e4e", "fotos/calca-flare--costas-manteiga.jpg": "68066e2d4f194a4d94ce93f5cc0d491a", "fotos/calca-flare--costas-onyx.jpg": "3b561d2cb3f773d773589034a63b4315", "fotos/calca-flare--frente-2-onyx.jpg": "a9daa301a6a7607a5483778c906b1b96", "fotos/calca-flare--frente-cacau.jpg": "4745144b97c384d69943ac237ef580de", "fotos/calca-flare--frente-manteiga.jpg": "c436a5468b3fdcf738cb1493bcc05ae7", "fotos/calca-flare--frente-onyx.jpg": "a0275f26eaf56fe363997aeb9078b058", "fotos/calca-flare--lado-2-manteiga.jpg": "cef9a94cfce863f2e48ba568d908c118", "fotos/calca-flare--lado-cacau.jpg": "f4b194a58509e4b73cafda67c551fa5c", "fotos/calca-flare--lado-manteiga.jpg": "86663aa0b9fab5fabda103a75fc50a1d", "fotos/calca-flare--monograma-n-cacau.jpg": "e12d13f6e0ce9daec4ef8dd9c652fe69", "fotos/calca-flare--monograma-n-onyx.jpg": "73a963bbe3ccffd77c7b3ae9b24aba89", "fotos/cropped-manga-longa--costas-manteiga.jpg": "7047b8c5eed21ff894a19a9885813f93", "fotos/cropped-manga-longa--costas-onyx.jpg": "7dfc581b39ca2bab9e42462471d9fcc8", "fotos/cropped-manga-longa--frente-2-onyx.jpg": "3f8972bff41c132b49189606b1245a96", "fotos/cropped-manga-longa--frente-manteiga.jpg": "caf250d1bfa26ae31527434feeae4beb", "fotos/cropped-manga-longa--frente-onyx.jpg": "cf57c7ca44e1aea80dd1c44553dd1a55", "fotos/cropped-manga-longa--lado-2-manteiga.jpg": "e3bda0153fff9cd3244bbacff10f5533", "fotos/cropped-manga-longa--lado-manteiga.jpg": "0f15f4900ea4cff35730e3965337a781", "fotos/cropped-manga-longa--marca-onyx.jpg": "8b93a88bcb92c8097bf51fe514654a5f", "fotos/macacao-ret--costas-azul-bebe.jpg": "a736573cb04c8da313a740cdb658c867", "fotos/macacao-ret--costas-cacau.jpg": "3e92b68feafea33054feb19cbdddb39d", "fotos/macacao-ret--costas-coral.jpg": "b0de1cfb1ff5753d74a1ec4829859301", "fotos/macacao-ret--costas-oliva.jpg": "8e622722380f08da5b56883bc1e0c8b2", "fotos/macacao-ret--frente-azul-bebe.jpg": "3ae3138303112d44b696c03f9b7d4e8c", "fotos/macacao-ret--frente-cacau.jpg": "db3cf95ca38deb9698c4a90e1bc1bc12", "fotos/macacao-ret--frente-coral.jpg": "78aa0b964535437dbf0d771c5e7c11cc", "fotos/macacao-ret--frente-oliva.jpg": "4bebf94cc62331730e9b2c890d70819d", "fotos/macacao-ret--lado-azul-bebe.jpg": "d8cb64420a0504c0b0d21b83c91814e0", "fotos/macacao-ret--lado-cacau.jpg": "46ed8e6b6f47edd680a051b08f7930fc", "fotos/macacao-ret--lado-coral.jpg": "24811f6249d6f6c8569222a2cbfc161b", "fotos/macacao-ret--lado-oliva.jpg": "091f14d3c7f1202e99d93baffe726bf3", "fotos/macacao-ret--monograma-n-azul-bebe.jpg": "1835a6ef92261c49ee0ce2c1037956dd", "fotos/macacao-ret--monograma-n-cacau.jpg": "3129096828e8d94e73df653867e471d1", "fotos/macacao-ret--monograma-n-coral.jpg": "3bbab163f861cc28cca07d7c64a44175", "fotos/macacao-ret--monograma-n-oliva.jpg": "37cd7643ed2ffb45fcbd7735e6e14cbf", "fotos/macaquinho-icon--cadeira-coral.jpg": "0033e2c18a92fca17eb9c316ee5d0a74", "fotos/macaquinho-icon--costas-coral.jpg": "5023c866cb4c30db80173c2b6a9770a2", "fotos/macaquinho-icon--costas-onyx.jpg": "dbdaffc36872c0b5f260ca13b2df7e42", "fotos/macaquinho-icon--frente-coral.jpg": "be8c412ccecd136fd52e1793d8d6b6b8", "fotos/macaquinho-icon--frente-onyx.jpg": "f94a619a566a6793b57346b7897ad7be", "fotos/macaquinho-icon--lado-coral.jpg": "f4c1212059bf789d61cc6571e39654a9", "fotos/macaquinho-icon--lado-onyx.jpg": "987f389d95fb754322e092686db4ca95", "fotos/macaquinho-icon--monograma-n-coral.jpg": "02bd5e7500af2ad7ac25124ebf3651f8", "fotos/macaquinho-icon--monograma-n-onyx.jpg": "a4c968eb45428fb2fdf657e587a0eba5", "fotos/macaquinho-tube--costas-onyx.jpg": "b789db2680c74cdf99a8eb4c72ea7fe1", "fotos/macaquinho-tube--frente-2-onyx.jpg": "e834c72b596765f7754017136e7d7452", "fotos/macaquinho-tube--frente-onys.jpg": "5d73faaa7df108f464a4da0da98ff08a", "fotos/macaquinho-tube--lado-onyx.jpg": "dda4649c83c6aa08b80dc237310e771b", "fotos/nariah-lovers--nariah-lovers-frente.jpg": "48d90f3cf7544c88e0d7d2de27622461", "fotos/short-basic--costas-cacau.jpg": "a8caef4dc6c66baa9bb4bc8c2cfb5c78", "fotos/short-basic--costas-coral.jpg": "32cf19cc1215a710ffca44c00da8d3cd", "fotos/short-basic--costas-onyx.jpg": "085f9d7a3870ff756235f36dc534370c", "fotos/short-basic--frente-2-onyx.jpg": "1fb0838f522b045fdfcdf332d504da0a", "fotos/short-basic--frente-cacau.jpg": "6d5cc7dca8e08eff831c55a765bd5ab6", "fotos/short-basic--frente-coral.jpg": "c9b09c4beded203060d348982f44156e", "fotos/short-basic--frente-onyx.jpg": "59a0237a824589b5316e4073fc08006d", "fotos/short-basic--lado-2-cacau.jpg": "92ac8915653e1282e986c9f9a8d5fd1d", "fotos/short-basic--lado-cacau.jpg": "e8900b887b901086bee16bd41fc4620c", "fotos/short-basic--lado-coral.jpg": "08271b788c8e9bb4a4168d61025efeec", "fotos/short-basic--monograma-n-coral.jpg": "e1f753a2285ab7ce42777cd28b9b2ee2", "fotos/short-basic--monograma-n-onyx.jpg": "b54cc285069064a3b6e1a23bbcf06dcf", "fotos/top-basic--costas-onyx.jpg": "1033de36acb58bab0f96f36a3ad70e3d", "fotos/top-basic--frente-onyx.jpg": "55d676eb6b208d61049b46c25521a26e", "fotos/top-basic--lado-onyx.jpg": "db682321c5ed307809e54c7b316809f6", "fotos/top-basic--monograma-n-onyx.jpg": "afd3cfc408be60f6accc88f67a633115", "fotos/top-regulavel--costas-cacau.jpg": "87b27740d1b226f04ac05d20cdbec57b", "fotos/top-regulavel--frente-cacau.jpg": "73571d1c928a22db9bb596ff76495a29", "fotos/top-regulavel--lado-2-cacau.jpg": "be5b11742ea97677ec433867ffd57563", "fotos/top-regulavel--lado-cacau.jpg": "6bcce201d2c3f34488b78d6ae912f4cd", "fotos/sobre--nathalia-2.jpg": "ef39ef9fd69926cf61f4a8a94f55aa64", "fotos/logo--monograma-n-transparente.png": "9f47bab444d967709d3109f26146a313", "fotos/macaquinho-icon--frente-cacau.jpg": "181ae73b397c2e06293e3c68bd2d779a", "fotos/macaquinho-icon--lado-cacau.jpg": "88c5df3987c534c89d7b88b375e524c7", "fotos/macaquinho-icon--lado-2-cacau.jpg": "7dbc059610a86f6eb9c5244b9ce67b4a", "fotos/macaquinho-icon--costas-cacau.jpg": "91b8be20f8d8ab8118e226c2bc36921b", "fotos/top-regulavel--frente-coral.jpg": "c3b90d6293097ad7bafa6a59db642cda", "fotos/top-regulavel--lado-coral.jpg": "50338239844770652f22becc931c8b9f", "fotos/top-regulavel--monograma-n-coral.jpg": "5398461533a2dafd164df05c9316dcf7", "fotos/top-costas-abertas--frente-coral.jpg": "b4a553e05468d36d338ca16e842acf8a", "fotos/top-costas-abertas--lado-coral.jpg": "e242280e431dee7ab85f54b18fea7be2", "fotos/top-costas-abertas--costas-coral.jpg": "051459a2d9268b8316a445a8cc4beedc", "fotos/top-costas-abertas--monograma-n-coral.jpg": "885ccee7947cbcd47f465bf86ef22ba8", "fotos/blusa-frente-unica--lado-onyx.jpg": "2e9a2bccefbdbdcb6928161198807bc1", "fotos/blusa-frente-unica--lado-2-onyx.jpg": "e48c571678355f4d6e116043ec145061", "fotos/conjunto-navy--frente.jpg": "0ee61b0780ebd3c3971993c47f04031e", "fotos/conjunto-navy--lado.jpg": "31bc0ac7a86b4c73f94e9c80c5ae1bbf", "fotos/conjunto-navy--costas.jpg": "db5972fb8ffccc731580b2d0a552cbac"};
 
 // ─────────────────────────────────────────────────────────────
 // Dados da vitrine. Estrutura relacional pronta para o banco:
@@ -1325,7 +1353,7 @@ var PRODUTOS = [
     ]
   },
   {
-    id: 'top-basic', nome: 'Top Basic', categoria: 'Tops', preco: 89, enquadramento: 'superior',
+    id: 'top-basic', nome: 'Top Basic', categoria: 'Tops', preco: 89, enquadramento: 'superior', recorteCard: [1.42, 50, 28],
     descricao: 'Decote reto e alças largas que dão firmeza sem marcar. O básico de sustentação confortável que combina com todas as peças da coleção e funciona sozinho ou por baixo de uma camisa aberta.',
     cores: [
       { corId: 'onyx', estoque: estoque(), fotos: [
@@ -1337,7 +1365,7 @@ var PRODUTOS = [
     ]
   },
   {
-    id: 'top-regulavel', nome: 'Top Regulável', categoria: 'Tops', preco: 89, enquadramento: 'superior',
+    id: 'top-regulavel', nome: 'Top Regulável', categoria: 'Tops', preco: 89, enquadramento: 'superior', recorteCard: [1.42, 50, 28],
     descricao: 'Alças finas reguláveis para ajustar o top ao seu corpo e ao seu treino. Costas delicadas, caimento preciso e um toque feminino que combina com shorts, leggings e flares da coleção.',
     cores: [
       { corId: 'coral', estoque: estoque(['P', 'M']), fotos: [
@@ -1364,7 +1392,7 @@ var PRODUTOS = [
     ]
   },
   {
-    id: 'top-costas-abertas', nome: 'Top Costas Abertas', categoria: 'Tops', preco: 89, enquadramento: 'superior', novo: true,
+    id: 'top-costas-abertas', nome: 'Top Costas Abertas', categoria: 'Tops', preco: 89, enquadramento: 'superior', novo: true, hoverLegenda: 'Costas',
     descricao: 'Frente limpa e costas abertas com alças finas que desenham as costas. Sustenta com conforto, deixa o movimento livre e forma um conjunto perfeito com os shorts da coleção.',
     cores: [
       { corId: 'coral', estoque: estoque(), fotos: [
@@ -1376,14 +1404,14 @@ var PRODUTOS = [
     ]
   },
   {
-    id: 'top-ombro', nome: 'Top Ombro', categoria: 'Tops', preco: 89, enquadramento: 'superior',
+    id: 'top-ombro', nome: 'Top Ombro', categoria: 'Tops', preco: 89, enquadramento: 'superior', recorteCard: [1.4, 50, 27],
     descricao: 'Top assimétrico de um ombro só, com acabamento em viés contrastante que desenha o colo e as costas. Forma conjunto com a Calça Cós Cruzado.',
     cores: [
       { corId: 'navy', estoque: estoque(TAMANHOS), fotos: FOTOS_CONJUNTO_NAVY }
     ]
   },
   {
-    id: 'calca-cos-cruzado', nome: 'Calça Cós Cruzado', categoria: 'Leggings', preco: 139, enquadramento: 'inferior',
+    id: 'calca-cos-cruzado', nome: 'Calça Cós Cruzado', categoria: 'Leggings', preco: 139, enquadramento: 'inferior', recorteCard: [1.42, 50, 66],
     descricao: 'Legging de cós alto cruzado na frente, que abraça a cintura e valoriza a silhueta. Forma conjunto com o Top Ombro.',
     cores: [
       { corId: 'navy', estoque: estoque(TAMANHOS), fotos: FOTOS_CONJUNTO_NAVY }
@@ -1448,6 +1476,20 @@ function moldura(rg, ca) {
     w: (Wd / ca * 100).toFixed(2) + '%',
     h: (Hd * 100).toFixed(2) + '%'
   };
+}
+
+// Recorte manual do card (scale + transform-origin em %), sobre a foto em cover 3:4.
+function recorteManual(f, r, p) {
+  var q = QUADROS[FILE2ID[f.src]];
+  var a = (q && q.a) || 2 / 3, ca = 3 / 4;
+  var w0 = 100, h0 = 100 * ca / a;
+  if (h0 < 100) { h0 = 100; w0 = 100 * a / ca; }
+  var reg = q && (q[ENQUADRAMENTOS[p.enquadramento]] || q.inteiro);
+  var l0 = (100 - w0) / 2, t0 = (100 - h0) / 2, k = r[0], ox = reg ? reg[0] * 100 : r[1], oy = r[2]; // horizontal: centered on her body
+  var w = w0 * k, h = h0 * k;
+  var l = Math.min(0, Math.max(100 - w, reg ? 50 - reg[0] * w : ox - (ox - l0) * k));
+  var t = Math.min(0, Math.max(100 - h, oy - (oy - t0) * k));
+  return { l: l.toFixed(2) + '%', t: t.toFixed(2) + '%', w: w.toFixed(2) + '%', h: h.toFixed(2) + '%' };
 }
 
 class Component extends DCLogic {
@@ -1559,10 +1601,10 @@ class Component extends DCLogic {
     var self = this;
     var capa = capaDe(p);
     if (emDestaque && p.capaDestaque) capa = { src: p.capaDestaque, detalhe: false };
-    var e = moldura(regiao(capa, p, true), 3 / 4);
+    var e = (p.recorteCard && !emDestaque) ? recorteManual(capa, p.recorteCard, p) : moldura(regiao(capa, p, true), 3 / 4);
     // segunda foto (aparece ao passar o mouse): próxima foto que não seja detalhe
     var vv = varianteComFotos(p, 0).v.fotos.filter(function (f) { return !f.detalhe && f.src !== capa.src; });
-    var capa2 = vv[0] || capa;
+    var capa2 = (p.hoverLegenda && vv.find(function (f) { return f.legenda === p.hoverLegenda; })) || vv[0] || capa;
     var e2 = moldura(regiao(capa2, p, true), 3 / 4);
     var esgotadas = p.cores.filter(corEsgotada);
     var parciais = p.cores.filter(corParcial);
@@ -1683,7 +1725,8 @@ class Component extends DCLogic {
       reposicaoHref: LINKS.whatsapp + '?text=' + encodeURIComponent('Olá! Vi a peça ' + p.nome + ' na cor ' + cor.nome + ' no site e gostaria de saber quando terá reposição.'),
       waHref: LINKS.whatsapp + '?text=' + encodeURIComponent(msg),
       resumo: esg ? 'Avisamos você assim que ela voltar.' : (tamOk ? (p.nome + ' na cor ' + cor.nome + ', tamanho ' + s.tam + '.') : 'Escolha cor e tamanho para adicionar à sacola.'),
-      close: close
+      close: close,
+      preload: p.cores.reduce(function (acc, c) { return acc.concat(c.fotos.map(function (x) { return { src: x.src }; })); }, [])
     };
   }
 
@@ -1890,6 +1933,54 @@ class Component extends DCLogic {
   window.addEventListener('resize', later);
   if (document.fonts) document.fonts.ready.then(later);
   later();
+})();
+</script>
+<script>
+// Zoom on the product photo: double-click on desktop, single tap on touch. The state lives on <html>,
+// which the renderer never rewrites, so re-renders don't reset it.
+(function () {
+  var H = document.documentElement, touch = matchMedia('(pointer: coarse)').matches;
+  function stageOf(e) {
+    var st = e.target.closest && e.target.closest('.stage');
+    if (!st || e.target.closest('button, a, .thumbs')) return null; // floating buttons never trigger zoom
+    return st;
+  }
+  function aim(st, x, y) {
+    var r = st.getBoundingClientRect();
+    H.style.setProperty('--zx', Math.max(0, Math.min(100, (x - r.left) / r.width * 100)) + '%');
+    H.style.setProperty('--zy', Math.max(0, Math.min(100, (y - r.top) / r.height * 100)) + '%');
+  }
+  function toggle(st, e) {
+    if (H.hasAttribute('data-zoom')) { H.removeAttribute('data-zoom'); return; }
+    aim(st, e.clientX, e.clientY); H.setAttribute('data-zoom', '');
+  }
+  document.addEventListener('dblclick', function (e) { var st = stageOf(e); if (st && !touch) { e.preventDefault(); toggle(st, e); } });
+  document.addEventListener('click', function (e) {
+    var st = stageOf(e);
+    if (st && touch) toggle(st, e);
+    else if (e.target.closest && e.target.closest('.stage button, .thumbs, .swatches, .overlay, .drawer-top button')) H.removeAttribute('data-zoom');
+  });
+  document.addEventListener('mousemove', function (e) { if (!H.hasAttribute('data-zoom') || touch) return; var st = e.target.closest && e.target.closest('.stage'); if (st) aim(st, e.clientX, e.clientY); });
+  // touch: drag to explore, the image follows the finger the opposite way
+  var start = null;
+  document.addEventListener('touchstart', function (e) { if (H.hasAttribute('data-zoom') && stageOf(e)) start = { x: e.touches[0].clientX, y: e.touches[0].clientY, zx: parseFloat(H.style.getPropertyValue('--zx')) || 50, zy: parseFloat(H.style.getPropertyValue('--zy')) || 50, moved: false }; }, { passive: true });
+  document.addEventListener('touchmove', function (e) {
+    if (!start) return; var st = document.querySelector('.stage'); if (!st) return;
+    var r = st.getBoundingClientRect(), dx = (e.touches[0].clientX - start.x) / r.width * 100, dy = (e.touches[0].clientY - start.y) / r.height * 100;
+    if (Math.abs(dx) + Math.abs(dy) > 2) start.moved = true;
+    H.style.setProperty('--zx', Math.max(0, Math.min(100, start.zx - dx * 1.1)) + '%');
+    H.style.setProperty('--zy', Math.max(0, Math.min(100, start.zy - dy * 1.1)) + '%');
+    e.preventDefault();
+  }, { passive: false });
+  document.addEventListener('touchend', function (e) { if (start && start.moved) { e.preventDefault(); } start = null; });
+  // closing the piece (or switching photo/color) leaves zoom
+  var prev = window.__afterRender, lastSrc = '';
+  window.__afterRender = function () {
+    if (prev) prev();
+    var img = document.querySelector('.stage img.main');
+    if (!img) { H.removeAttribute('data-zoom'); lastSrc = ''; return; }
+    if (img.getAttribute('src') !== lastSrc) { H.removeAttribute('data-zoom'); lastSrc = img.getAttribute('src'); }
+  };
 })();
 </script>
 </body>

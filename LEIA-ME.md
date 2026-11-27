@@ -61,3 +61,12 @@ Princípios de design engineering e motion de Emil Kowalski (github.com/emilkowa
   - a sacola fica salva no navegador;
   - nome e observação opcionais;
   - o pedido completo vai numa única mensagem para o WhatsApp.
+
+## Ajustes de 27/11/2026 (zoom e acabamento)
+
+- **Zoom na foto da peça:** com dois cliques no computador (o zoom segue o mouse) ou um toque no celular (arraste para explorar).
+- **Sem saltos:** o layout não se mexe ao abrir ou fechar a sacola e as peças. Trocar de cor também não move nada, porque as fotos da peça já ficam carregadas.
+- **Recortes de card:** ajustados no Top Regulável, Top Basic, Top Ombro e Calça Cós Cruzado. O Top Costas Abertas mostra a foto de costas ao passar o mouse.
+- **Sobre a Nariah:** nova foto da Nathalia.
+- **Fotos novas:** reexportadas em resolução maior, com leve ajuste de contraste e brilho.
+- **Cabeçalho:** mais espaço entre os links e os ícones.

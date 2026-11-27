@@ -458,6 +458,32 @@ html:has(.bag){overflow:hidden}
   .header-pill .head-actions .icon-btn{width:40px;height:40px}
 }
 
+
+/* ===== V2.7 ===== */
+html{scrollbar-gutter:stable}
+/* header: clear air between links and actions */
+@media (min-width:1101px){ .header-pill{gap:48px;padding-left:28px} .nav{gap:10px} .head-actions{gap:10px} }
+/* zoom on the product photo */
+.stage{user-select:none;-webkit-user-select:none;cursor:zoom-in;-webkit-tap-highlight-color:transparent}
+html[data-zoom] .stage{cursor:zoom-out}
+.stage img.main{transform-origin:var(--zx,50%) var(--zy,50%);transition:left .9s var(--ease-out),top .9s var(--ease-out),width .9s var(--ease-out),height .9s var(--ease-out),transform .45s var(--ease-out),opacity .35s ease}
+html[data-zoom] .stage img.main{transform:scale(2.1);transition:transform .45s var(--ease-out),transform-origin .12s linear}
+@media (pointer:coarse){ html[data-zoom] .stage img.main{transform:scale(1.9)} .stage{touch-action:pan-y} html[data-zoom] .stage{touch-action:none} }
+html[data-zoom] .stage .stage-toggle,html[data-zoom] .stage .stage-hint{opacity:0;pointer-events:none}
+.stage-hint{position:absolute;right:14px;top:14px;z-index:3;padding:7px 12px;border-radius:999px;font-size:11px;letter-spacing:.06em;color:#4A332D;pointer-events:none;transition:opacity .3s ease}
+.stage-hint .h-touch{display:none}
+@media (pointer:coarse){ .stage-hint .h-touch{display:inline} .stage-hint .h-desk{display:none} }
+.preload{position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none}
+.preload img{width:1px;height:1px}
+/* stable text while switching colors */
+.info h2{min-height:1.08em}
+.opt-label{min-height:36px}
+.sizes{min-height:52px}
+/* photos of the new pieces: same studio finish as the rest */
+img:not(.fill)[src*="-cacau.jpg"][src*="macaquinho-icon"],img:not(.fill)[src*="top-regulavel--"][src*="-coral"],img:not(.fill)[src*="blusa-frente-unica"],img:not(.fill)[src*="top-costas-abertas"],img:not(.fill)[src*="conjunto-navy"]{filter:contrast(1.04) brightness(1.02) saturate(1.03);image-rendering:-webkit-optimize-contrast}
+/* founder photo */
+.about-img img{object-position:38% 0}
+
 /* reduced motion: fewer and gentler, not zero */
 @media (prefers-reduced-motion: reduce){
   .header,.hero .eyebrow,.hero h1 .ln > *,.hero p.lead,.hero-ctas,.hero-chip,.hero-photo{animation-name:fade !important}
@@ -736,7 +762,7 @@ html:has(.bag){overflow:hidden}
         <div class="about-photo">
           <div class="about-frame">
             <div class="about-img">
-              <img src="/_blob/ef39ef9fd69926cf61f4a8a94f55aa64" alt="Nathalia Lagoia, fundadora da Nariah Studio, sentada no chão do estúdio vestindo o Macacão Reto na cor Cacao">
+              <img src="/_blob/ef39ef9fd69926cf61f4a8a94f55aa64" alt="Nathalia Lagoia, fundadora da Nariah Studio, sentada no chão do estúdio vestindo um macacão na cor Cacao">
             </div>
           </div>
           <div class="about-caption"><span>Nathalia Lagoia</span><span>Rio de Janeiro</span></div>
@@ -869,7 +895,9 @@ html:has(.bag){overflow:hidden}
           </div>
           <div class="stage">
             <img class="fill" src="{{ m.foto }}" alt="" aria-hidden="true">
-            <img src="{{ m.foto }}" alt="{{ m.fotoAlt }}" style="left: {{ m.l }}; top: {{ m.t }}; width: {{ m.w }}; height: {{ m.h }}">
+            <img class="main" src="{{ m.foto }}" alt="{{ m.fotoAlt }}" style="left: {{ m.l }}; top: {{ m.t }}; width: {{ m.w }}; height: {{ m.h }}">
+            <span class="stage-hint glass" aria-hidden="true"><span class="h-desk">2x clique para zoom</span><span class="h-touch">Toque para zoom</span></span>
+            <div class="preload" aria-hidden="true"><sc-for list="{{ m.preload }}" as="pl" hint-placeholder-count="4"><img src="{{ pl.src }}" alt=""></sc-for></div>
             <sc-if value="{{ m.ilustrativa }}" hint-placeholder-val="{{ false }}">
               <span class="stage-note glass">{{ m.ilustrativaTxt }}</span>
             </sc-if>
@@ -1320,7 +1348,7 @@ var PRODUTOS = [
     ]
   },
   {
-    id: 'top-basic', nome: 'Top Basic', categoria: 'Tops', preco: 89, enquadramento: 'superior',
+    id: 'top-basic', nome: 'Top Basic', categoria: 'Tops', preco: 89, enquadramento: 'superior', recorteCard: [1.42, 50, 28],
     descricao: 'Decote reto e alças largas que dão firmeza sem marcar. O básico de sustentação confortável que combina com todas as peças da coleção e funciona sozinho ou por baixo de uma camisa aberta.',
     cores: [
       { corId: 'onyx', estoque: estoque(), fotos: [
@@ -1332,7 +1360,7 @@ var PRODUTOS = [
     ]
   },
   {
-    id: 'top-regulavel', nome: 'Top Regulável', categoria: 'Tops', preco: 89, enquadramento: 'superior',
+    id: 'top-regulavel', nome: 'Top Regulável', categoria: 'Tops', preco: 89, enquadramento: 'superior', recorteCard: [1.42, 50, 28],
     descricao: 'Alças finas reguláveis para ajustar o top ao seu corpo e ao seu treino. Costas delicadas, caimento preciso e um toque feminino que combina com shorts, leggings e flares da coleção.',
     cores: [
       { corId: 'coral', estoque: estoque(['P', 'M']), fotos: [
@@ -1359,7 +1387,7 @@ var PRODUTOS = [
     ]
   },
   {
-    id: 'top-costas-abertas', nome: 'Top Costas Abertas', categoria: 'Tops', preco: 89, enquadramento: 'superior', novo: true,
+    id: 'top-costas-abertas', nome: 'Top Costas Abertas', categoria: 'Tops', preco: 89, enquadramento: 'superior', novo: true, hoverLegenda: 'Costas',
     descricao: 'Frente limpa e costas abertas com alças finas que desenham as costas. Sustenta com conforto, deixa o movimento livre e forma um conjunto perfeito com os shorts da coleção.',
     cores: [
       { corId: 'coral', estoque: estoque(), fotos: [
@@ -1371,14 +1399,14 @@ var PRODUTOS = [
     ]
   },
   {
-    id: 'top-ombro', nome: 'Top Ombro', categoria: 'Tops', preco: 89, enquadramento: 'superior',
+    id: 'top-ombro', nome: 'Top Ombro', categoria: 'Tops', preco: 89, enquadramento: 'superior', recorteCard: [1.4, 50, 27],
     descricao: 'Top assimétrico de um ombro só, com acabamento em viés contrastante que desenha o colo e as costas. Forma conjunto com a Calça Cós Cruzado.',
     cores: [
       { corId: 'navy', estoque: estoque(TAMANHOS), fotos: FOTOS_CONJUNTO_NAVY }
     ]
   },
   {
-    id: 'calca-cos-cruzado', nome: 'Calça Cós Cruzado', categoria: 'Leggings', preco: 139, enquadramento: 'inferior',
+    id: 'calca-cos-cruzado', nome: 'Calça Cós Cruzado', categoria: 'Leggings', preco: 139, enquadramento: 'inferior', recorteCard: [1.42, 50, 66],
     descricao: 'Legging de cós alto cruzado na frente, que abraça a cintura e valoriza a silhueta. Forma conjunto com o Top Ombro.',
     cores: [
       { corId: 'navy', estoque: estoque(TAMANHOS), fotos: FOTOS_CONJUNTO_NAVY }
@@ -1443,6 +1471,20 @@ function moldura(rg, ca) {
     w: (Wd / ca * 100).toFixed(2) + '%',
     h: (Hd * 100).toFixed(2) + '%'
   };
+}
+
+// Recorte manual do card (scale + transform-origin em %), sobre a foto em cover 3:4.
+function recorteManual(f, r, p) {
+  var q = QUADROS[String(f.src).replace('/_blob/', '')];
+  var a = (q && q.a) || 2 / 3, ca = 3 / 4;
+  var w0 = 100, h0 = 100 * ca / a;
+  if (h0 < 100) { h0 = 100; w0 = 100 * a / ca; }
+  var reg = q && (q[ENQUADRAMENTOS[p.enquadramento]] || q.inteiro);
+  var l0 = (100 - w0) / 2, t0 = (100 - h0) / 2, k = r[0], ox = reg ? reg[0] * 100 : r[1], oy = r[2]; // horizontal: centered on her body
+  var w = w0 * k, h = h0 * k;
+  var l = Math.min(0, Math.max(100 - w, reg ? 50 - reg[0] * w : ox - (ox - l0) * k));
+  var t = Math.min(0, Math.max(100 - h, oy - (oy - t0) * k));
+  return { l: l.toFixed(2) + '%', t: t.toFixed(2) + '%', w: w.toFixed(2) + '%', h: h.toFixed(2) + '%' };
 }
 
 class Component extends DCLogic {
@@ -1554,10 +1596,10 @@ class Component extends DCLogic {
     var self = this;
     var capa = capaDe(p);
     if (emDestaque && p.capaDestaque) capa = { src: p.capaDestaque, detalhe: false };
-    var e = moldura(regiao(capa, p, true), 3 / 4);
+    var e = (p.recorteCard && !emDestaque) ? recorteManual(capa, p.recorteCard, p) : moldura(regiao(capa, p, true), 3 / 4);
     // segunda foto (aparece ao passar o mouse): próxima foto que não seja detalhe
     var vv = varianteComFotos(p, 0).v.fotos.filter(function (f) { return !f.detalhe && f.src !== capa.src; });
-    var capa2 = vv[0] || capa;
+    var capa2 = (p.hoverLegenda && vv.find(function (f) { return f.legenda === p.hoverLegenda; })) || vv[0] || capa;
     var e2 = moldura(regiao(capa2, p, true), 3 / 4);
     var esgotadas = p.cores.filter(corEsgotada);
     var parciais = p.cores.filter(corParcial);
@@ -1678,7 +1720,8 @@ class Component extends DCLogic {
       reposicaoHref: LINKS.whatsapp + '?text=' + encodeURIComponent('Olá! Vi a peça ' + p.nome + ' na cor ' + cor.nome + ' no site e gostaria de saber quando terá reposição.'),
       waHref: LINKS.whatsapp + '?text=' + encodeURIComponent(msg),
       resumo: esg ? 'Avisamos você assim que ela voltar.' : (tamOk ? (p.nome + ' na cor ' + cor.nome + ', tamanho ' + s.tam + '.') : 'Escolha cor e tamanho para adicionar à sacola.'),
-      close: close
+      close: close,
+      preload: p.cores.reduce(function (acc, c) { return acc.concat(c.fotos.map(function (x) { return { src: x.src }; })); }, [])
     };
   }
 

@@ -573,6 +573,18 @@ html:has(.overlay) .header-pill{backdrop-filter:none;-webkit-backdrop-filter:non
   .info .desc{line-height:1.6}
   .info h2{font-size:32px}
 }
+/* ===== V3.5: thumbnail ring, bag exit ===== */
+/* the selected thumbnail ring sat outside the scrolling thumb column and was clipped */
+@media (min-width:901px){ .thumbs{padding:5px} .gal{grid-template-columns:78px auto;gap:11px} }
+.thumb--on{box-shadow:0 0 0 2px #FAF8F5,0 0 0 3.5px #4A332D}
+/* the bag leaves the way it came in, a little faster (exit 300ms, enter 500ms) */
+@keyframes bagOutSide{to{transform:translateX(100%)}}
+@keyframes bagOutDown{to{transform:translateY(100%)}}
+@keyframes fadeOut{to{opacity:0}}
+html[data-bag-closing] .bag{animation:bagOutSide .3s cubic-bezier(.32,.72,0,1) forwards}
+html[data-bag-closing] .overlay--bag{animation:fadeOut .3s ease forwards}
+@media (max-width:600px){ html[data-bag-closing] .bag{animation-name:bagOutDown} }
+@media (prefers-reduced-motion: reduce){ html[data-bag-closing] .bag{animation:fadeOut .16s ease forwards} }
 /* reduced motion: fewer and gentler, not zero */
 @media (prefers-reduced-motion: reduce){
   .header,.hero .eyebrow,.hero h1 .ln > *,.hero p.lead,.hero-ctas,.hero-chip,.hero-photo{animation-name:fade !important}
@@ -1730,12 +1742,26 @@ class Component extends DCLogic {
       setObs: function (ev) { b.obs = ev.target.value; salvarSacola(b); },
       enviarHref: LINKS.whatsapp + '?text=' + encodeURIComponent(self.pedidoTexto()),
       enviar: function (ev) { ev.currentTarget.href = LINKS.whatsapp + '?text=' + encodeURIComponent(self.pedidoTexto()); },
-      fechar: function () { self.setState({ sacola: false }); },
+      fechar: function () { self.fecharSacola(); },
       explorar: function () {
-        self.setState({ sacola: false });
-        setTimeout(function () { var el = document.getElementById('catalogo'); if (el) el.scrollIntoView({ behavior: 'smooth' }); }, 80);
+        self.fecharSacola(function () {
+          setTimeout(function () { var el = document.getElementById('catalogo'); if (el) el.scrollIntoView({ behavior: 'smooth' }); }, 40);
+        });
       }
     };
+  }
+
+  // closing plays the exit animation first (state on <html>, which the renderer never rewrites)
+  fecharSacola(depois) {
+    var self = this, H = document.documentElement;
+    if (H.hasAttribute('data-bag-closing')) return;
+    var reduz = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    H.setAttribute('data-bag-closing', '');
+    setTimeout(function () {
+      H.removeAttribute('data-bag-closing');
+      self.setState({ sacola: false });
+      if (depois) depois();
+    }, reduz ? 160 : 300);
   }
 
   abrir(id, corId) {

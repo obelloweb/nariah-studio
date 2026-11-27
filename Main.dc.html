@@ -501,15 +501,31 @@ html.rv :is(.sec-head h2,.lovers-card h2):not([data-in]) em{opacity:0;transform:
   html.rv [data-rv]{transform:none !important;filter:none !important;clip-path:none !important;transition:opacity .4s ease !important}
   html.rv :is(.sec-head h2,.lovers-card h2) em{transform:none !important}
 }
-/* reading guide in Sobre a Nariah: the paragraph being read lights up, the rest waits */
-.about-body > p,.about-body .pull{position:relative;transition:color .5s ease}
-.about-body > p[data-in-read="next"]{color:#B4A9A1}
-.about-body > p[data-in-read="now"]{color:#181615}
-.about-body .pull[data-in-read="next"] p{color:#A8998F}
-.about-body .pull p{transition:color .5s ease}
-.about-body > p::before{content:'';position:absolute;left:-22px;top:.55em;bottom:.55em;width:2px;border-radius:2px;background:#4A332D;transform:scaleY(0);transform-origin:top;transition:transform .6s cubic-bezier(.23,1,.32,1)}
-.about-body > p[data-in-read="now"]::before{transform:scaleY(1)}
-@media (max-width:700px){ .about-body > p::before{left:-12px} }
+/* reading guide in Sobre a Nariah: a cacao marker sweeps through the paragraph being read
+   (the two inline layers paint across the line fragments as one strip, so the fill follows the text) */
+.about-body .rd{background-image:linear-gradient(#4A332D,#4A332D);background-repeat:no-repeat;background-size:var(--rd,0%) 100%;padding:.14em 0}
+.about-body .rd-t{background-image:linear-gradient(90deg,#FAF8F5 var(--rd,0%),#2e2826 var(--rd,0%));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+@supports not ((-webkit-background-clip:text) or (background-clip:text)){ .about-body .rd{background:none} .about-body .rd-t{color:inherit;-webkit-text-fill-color:currentColor;background:none} }
+
+
+/* ===== V3.1: final pass (performance, touch, safe area) ===== */
+/* only transform/opacity animate: the stage frame change is a FLIP transform (see reveal.js) */
+.stage img{transition:opacity .35s ease}
+.stage img.main{transition:transform .45s var(--ease-out),opacity .35s ease}
+.size{transition:background-color .35s cubic-bezier(.16,1,.3,1),border-color .35s cubic-bezier(.16,1,.3,1),color .35s cubic-bezier(.16,1,.3,1),box-shadow .35s cubic-bezier(.16,1,.3,1),opacity .35s ease}
+/* 44px touch targets without widening the header pill */
+.header .icon-btn{position:relative}
+.header .icon-btn::before{content:'';position:absolute;inset:-2px;border-radius:999px}
+.qty button{width:44px;height:44px}
+.bag-remove{min-height:44px}
+/* iOS/Android gesture bar never covers the main buttons */
+@media (max-width:900px){
+  .pdp{padding-bottom:calc(40px + env(safe-area-inset-bottom))}
+  .menu{bottom:calc(12px + env(safe-area-inset-bottom))}
+}
+.filters{scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.filters::-webkit-scrollbar{display:none}
+@media (max-width:380px){ .header-pill{padding-right:4px;padding-left:12px} }
 
 /* reduced motion: fewer and gentler, not zero */
 @media (prefers-reduced-motion: reduce){
@@ -614,7 +630,7 @@ html.rv :is(.sec-head h2,.lovers-card h2):not([data-in]) em{opacity:0;transform:
     <div class="header-pill">
       <div style="display: flex; align-items: center; gap: 4px">
         <a class="brand" href="#topo" aria-label="Nariah Studio, início">
-          <img class="mono" src="/_blob/9f47bab444d967709d3109f26146a313" alt="">
+          <img loading="lazy" decoding="async" class="mono" src="/_blob/9f47bab444d967709d3109f26146a313" alt="">
           <span class="word"><b>NARIAH</b><small>STUDIO</small></span>
         </a>
       </div>
@@ -666,7 +682,7 @@ html.rv :is(.sec-head h2,.lovers-card h2):not([data-in]) em{opacity:0;transform:
       </div>
       <div class="hero-media">
         <div class="hero-photo">
-          <div class="hero-par"><img src="/_blob/590b04b9b57e60ae1019b35449373bec" alt="Modelo sentada em um cubo branco vestindo o Macacão Reto na cor Azul Bebê"></div>
+          <div class="hero-par"><img loading="eager" fetchpriority="high" decoding="async" src="/_blob/590b04b9b57e60ae1019b35449373bec" alt="Modelo sentada em um cubo branco vestindo o Macacão Reto na cor Azul Bebê"></div>
         </div>
         <button class="hero-chip" type="button" onClick="{{ openIcon }}">
           <span><small>Na foto</small><b>Macacão Reto</b></span>
@@ -675,7 +691,7 @@ html.rv :is(.sec-head h2,.lovers-card h2):not([data-in]) em{opacity:0;transform:
       </div>
     </section>
 
-    <div class="wrap" aria-hidden="true"><div class="divider"><span></span><img src="/_blob/9f47bab444d967709d3109f26146a313" alt=""><span></span></div></div>
+    <div class="wrap" aria-hidden="true"><div class="divider"><span></span><img loading="lazy" decoding="async" src="/_blob/9f47bab444d967709d3109f26146a313" alt=""><span></span></div></div>
 
     <section id="colecao" class="wrap section" aria-labelledby="colecao-title">
       <div class="sec-head">
@@ -691,9 +707,9 @@ html.rv :is(.sec-head h2,.lovers-card h2):not([data-in]) em{opacity:0;transform:
           <button class="pcard" type="button" onClick="{{ hlGrande.open }}" aria-label="{{ hlGrande.aria }}">
             <div class="pcard-media">
               <div class="pcard-zoom">
-                <img class="fill" src="{{ hlGrande.capa }}" alt="" aria-hidden="true">
-                <img src="{{ hlGrande.capa }}" alt="{{ hlGrande.alt }}" style="left: {{ hlGrande.l }}; top: {{ hlGrande.t }}; width: {{ hlGrande.w }}; height: {{ hlGrande.h }}">
-                <div class="alt" aria-hidden="true"><img class="fill" src="{{ hlGrande.capa2 }}" alt=""><img src="{{ hlGrande.capa2 }}" alt="" style="left: {{ hlGrande.l2 }}; top: {{ hlGrande.t2 }}; width: {{ hlGrande.w2 }}; height: {{ hlGrande.h2 }}"></div>
+                <img loading="lazy" decoding="async" class="fill" src="{{ hlGrande.capa }}" alt="" aria-hidden="true">
+                <img loading="lazy" decoding="async" src="{{ hlGrande.capa }}" alt="{{ hlGrande.alt }}" style="left: {{ hlGrande.l }}; top: {{ hlGrande.t }}; width: {{ hlGrande.w }}; height: {{ hlGrande.h }}">
+                <div class="alt" aria-hidden="true"><img loading="lazy" decoding="async" class="fill" src="{{ hlGrande.capa2 }}" alt=""><img loading="lazy" decoding="async" src="{{ hlGrande.capa2 }}" alt="" style="left: {{ hlGrande.l2 }}; top: {{ hlGrande.t2 }}; width: {{ hlGrande.w2 }}; height: {{ hlGrande.h2 }}"></div>
               </div>
               <span class="pill">{{ hlGrande.categoria }}</span>
             </div>
@@ -712,9 +728,9 @@ html.rv :is(.sec-head h2,.lovers-card h2):not([data-in]) em{opacity:0;transform:
             <button class="pcard" type="button" onClick="{{ c.open }}" aria-label="{{ c.aria }}">
               <div class="pcard-media">
                 <div class="pcard-zoom">
-                  <img class="fill" src="{{ c.capa }}" alt="" aria-hidden="true">
-                  <img src="{{ c.capa }}" alt="{{ c.alt }}" style="left: {{ c.l }}; top: {{ c.t }}; width: {{ c.w }}; height: {{ c.h }}">
-                <div class="alt" aria-hidden="true"><img class="fill" src="{{ c.capa2 }}" alt=""><img src="{{ c.capa2 }}" alt="" style="left: {{ c.l2 }}; top: {{ c.t2 }}; width: {{ c.w2 }}; height: {{ c.h2 }}"></div>
+                  <img loading="lazy" decoding="async" class="fill" src="{{ c.capa }}" alt="" aria-hidden="true">
+                  <img loading="lazy" decoding="async" src="{{ c.capa }}" alt="{{ c.alt }}" style="left: {{ c.l }}; top: {{ c.t }}; width: {{ c.w }}; height: {{ c.h }}">
+                <div class="alt" aria-hidden="true"><img loading="lazy" decoding="async" class="fill" src="{{ c.capa2 }}" alt=""><img loading="lazy" decoding="async" src="{{ c.capa2 }}" alt="" style="left: {{ c.l2 }}; top: {{ c.t2 }}; width: {{ c.w2 }}; height: {{ c.h2 }}"></div>
                 </div>
                 <span class="pill">{{ c.categoria }}</span>
               </div>
@@ -732,7 +748,7 @@ html.rv :is(.sec-head h2,.lovers-card h2):not([data-in]) em{opacity:0;transform:
       </div>
     </section>
 
-    <div class="wrap" aria-hidden="true"><div class="divider"><span></span><img src="/_blob/9f47bab444d967709d3109f26146a313" alt=""><span></span></div></div>
+    <div class="wrap" aria-hidden="true"><div class="divider"><span></span><img loading="lazy" decoding="async" src="/_blob/9f47bab444d967709d3109f26146a313" alt=""><span></span></div></div>
 
     <section id="catalogo" class="wrap section" aria-labelledby="catalogo-title">
       <div class="sec-head">
@@ -755,9 +771,9 @@ html.rv :is(.sec-head h2,.lovers-card h2):not([data-in]) em{opacity:0;transform:
             <div class="pcard-media">
               <sc-if value="{{ c.temBadge }}" hint-placeholder-val="{{ false }}"><span class="{{ c.badgeCls }}">{{ c.badge }}</span></sc-if>
               <div class="pcard-zoom">
-                <img class="fill" src="{{ c.capa }}" alt="" aria-hidden="true">
-                <img src="{{ c.capa }}" alt="{{ c.alt }}" style="left: {{ c.l }}; top: {{ c.t }}; width: {{ c.w }}; height: {{ c.h }}">
-                <div class="alt" aria-hidden="true"><img class="fill" src="{{ c.capa2 }}" alt=""><img src="{{ c.capa2 }}" alt="" style="left: {{ c.l2 }}; top: {{ c.t2 }}; width: {{ c.w2 }}; height: {{ c.h2 }}"></div>
+                <img loading="lazy" decoding="async" class="fill" src="{{ c.capa }}" alt="" aria-hidden="true">
+                <img loading="lazy" decoding="async" src="{{ c.capa }}" alt="{{ c.alt }}" style="left: {{ c.l }}; top: {{ c.t }}; width: {{ c.w }}; height: {{ c.h }}">
+                <div class="alt" aria-hidden="true"><img loading="lazy" decoding="async" class="fill" src="{{ c.capa2 }}" alt=""><img loading="lazy" decoding="async" src="{{ c.capa2 }}" alt="" style="left: {{ c.l2 }}; top: {{ c.t2 }}; width: {{ c.w2 }}; height: {{ c.h2 }}"></div>
               </div>
             </div>
             <div class="pcard-info">
@@ -781,14 +797,14 @@ html.rv :is(.sec-head h2,.lovers-card h2):not([data-in]) em{opacity:0;transform:
       </div>
     </section>
 
-    <div class="wrap" aria-hidden="true"><div class="divider"><span></span><img src="/_blob/9f47bab444d967709d3109f26146a313" alt=""><span></span></div></div>
+    <div class="wrap" aria-hidden="true"><div class="divider"><span></span><img loading="lazy" decoding="async" src="/_blob/9f47bab444d967709d3109f26146a313" alt=""><span></span></div></div>
 
     <section id="sobre" class="wrap section" aria-labelledby="sobre-title">
       <div class="about">
         <div class="about-photo">
           <div class="about-frame">
             <div class="about-img">
-              <img src="/_blob/ef39ef9fd69926cf61f4a8a94f55aa64" alt="Nathalia Lagoia, fundadora da Nariah Studio, sentada no chão do estúdio vestindo um macacão na cor Cacao">
+              <img loading="lazy" decoding="async" src="/_blob/ef39ef9fd69926cf61f4a8a94f55aa64" alt="Nathalia Lagoia, fundadora da Nariah Studio, sentada no chão do estúdio vestindo um macacão na cor Cacao">
             </div>
           </div>
           <div class="about-caption"><span>Nathalia Lagoia</span><span>Rio de Janeiro</span></div>
@@ -796,15 +812,15 @@ html.rv :is(.sec-head h2,.lovers-card h2):not([data-in]) em{opacity:0;transform:
         <div class="about-body">
           <div class="eyebrow"><span class="idx">03</span>Sobre a Nariah</div>
           <h2 id="sobre-title">A Nariah nasceu de uma transformação que começou em mim.</h2>
-          <p>Sou Nathalia Lagoia, fundadora da Nariah Studio, paraense de Belém, mãe do Leon e do Noah e hoje moradora do Rio de Janeiro. Durante 12 anos, minha vida profissional foi no mar, onde construí minha trajetória como oficial da Marinha Mercante e cheguei ao posto de imediata.</p>
-          <p>Com a maternidade e as mudanças da vida, também fui descobrindo novas versões de mim. Em uma dessas fases, transformei meus hábitos, emagreci 30 quilos e encontrei na musculação e na corrida um espaço de cuidado, disciplina e superação. Nesse processo, recuperei a confiança e descobri o prazer de me sentir forte.</p>
-          <p>A Nariah nasceu dessa vivência e de uma vontade muito pessoal de vestir peças que acompanhassem meu movimento, valorizassem meu corpo e combinassem com meu estilo. Roupas que eu amasse usar no treino e quisesse continuar vestindo depois dele.</p>
-          <p>Hoje, essa intenção orienta cada escolha da marca. Busco unir conforto, cortes que valorizam e uma estética elegante em peças que façam parte da vida de mulheres com diferentes rotinas e histórias.</p>
-          <p>Uma das minhas maiores alegrias é ver a Nariah em vocês. Nos treinos, nas corridas, nos encontros e nas pequenas conquistas do dia a dia. Ver uma mulher vestir uma peça e se sentir bonita e confiante dá sentido ao que estou construindo.</p>
+          <p><span class="rd"><span class="rd-t">Sou Nathalia Lagoia, fundadora da Nariah Studio, paraense de Belém, mãe do Leon e do Noah e hoje moradora do Rio de Janeiro. Durante 12 anos, minha vida profissional foi no mar, onde construí minha trajetória como oficial da Marinha Mercante e cheguei ao posto de imediata.</span></span></p>
+          <p><span class="rd"><span class="rd-t">Com a maternidade e as mudanças da vida, também fui descobrindo novas versões de mim. Em uma dessas fases, transformei meus hábitos, emagreci 30 quilos e encontrei na musculação e na corrida um espaço de cuidado, disciplina e superação. Nesse processo, recuperei a confiança e descobri o prazer de me sentir forte.</span></span></p>
+          <p><span class="rd"><span class="rd-t">A Nariah nasceu dessa vivência e de uma vontade muito pessoal de vestir peças que acompanhassem meu movimento, valorizassem meu corpo e combinassem com meu estilo. Roupas que eu amasse usar no treino e quisesse continuar vestindo depois dele.</span></span></p>
+          <p><span class="rd"><span class="rd-t">Hoje, essa intenção orienta cada escolha da marca. Busco unir conforto, cortes que valorizam e uma estética elegante em peças que façam parte da vida de mulheres com diferentes rotinas e histórias.</span></span></p>
+          <p><span class="rd"><span class="rd-t">Uma das minhas maiores alegrias é ver a Nariah em vocês. Nos treinos, nas corridas, nos encontros e nas pequenas conquistas do dia a dia. Ver uma mulher vestir uma peça e se sentir bonita e confiante dá sentido ao que estou construindo.</span></span></p>
           <blockquote class="pull" style="margin-left: 0; margin-right: 0">
-            <p>“Elevated Power for Modern Women” traduz aquilo em que acredito. Cada mulher carrega sua própria potência, e a roupa também pode ajudá-la a expressar essa força.</p>
+            <p>“Elevated Power for Modern Women” traduz aquilo em que acredito. Cada mulher carrega sua própria potência, e a roupa também pode ajudá-la a expressar essa força.</span></span></p>
           </blockquote>
-          <p>A Nariah é a forma que encontrei de compartilhar um pouco dessa transformação.</p>
+          <p><span class="rd"><span class="rd-t">A Nariah é a forma que encontrei de compartilhar um pouco dessa transformação.</span></span></p>
           <div class="sign">
             <div class="serif">Nathalia Lagoia</div>
             <small>Fundadora da Nariah Studio</small>
@@ -813,7 +829,7 @@ html.rv :is(.sec-head h2,.lovers-card h2):not([data-in]) em{opacity:0;transform:
       </div>
     </section>
 
-    <div class="wrap" aria-hidden="true"><div class="divider"><span></span><img src="/_blob/9f47bab444d967709d3109f26146a313" alt=""><span></span></div></div>
+    <div class="wrap" aria-hidden="true"><div class="divider"><span></span><img loading="lazy" decoding="async" src="/_blob/9f47bab444d967709d3109f26146a313" alt=""><span></span></div></div>
 
     <section id="lovers" class="wrap section" style="padding-top: 40px" aria-labelledby="lovers-title">
       <div class="lovers-card">
@@ -842,18 +858,18 @@ html.rv :is(.sec-head h2,.lovers-card h2):not([data-in]) em{opacity:0;transform:
           <p style="font-size: 13px; color: #6b615c; margin: 16px 0 0">Grupo gratuito no WhatsApp. Você sai quando quiser.</p>
         </div>
         <div class="lovers-photo">
-          <img src="/_blob/48d90f3cf7544c88e0d7d2de27622461" alt="Modelo sorrindo, sentada em uma poltrona, vestindo o Macacão Reto na cor Coral">
+          <img loading="lazy" decoding="async" src="/_blob/48d90f3cf7544c88e0d7d2de27622461" alt="Modelo sorrindo, sentada em uma poltrona, vestindo o Macacão Reto na cor Coral">
         </div>
       </div>
     </section>
 
   </main>
 
-  <div class="wrap" aria-hidden="true"><div class="divider"><span></span><img src="/_blob/9f47bab444d967709d3109f26146a313" alt=""><span></span></div></div>
+  <div class="wrap" aria-hidden="true"><div class="divider"><span></span><img loading="lazy" decoding="async" src="/_blob/9f47bab444d967709d3109f26146a313" alt=""><span></span></div></div>
 
   <footer class="footer">
     <div class="wrap footer-in">
-      <img class="footer-logo" src="/_blob/9f47bab444d967709d3109f26146a313" alt="Nariah Studio">
+      <img loading="lazy" decoding="async" class="footer-logo" src="/_blob/9f47bab444d967709d3109f26146a313" alt="Nariah Studio">
       <p class="footer-tag">Elevated <b>Power</b> for Modern <b>Women</b>.</p>
       <div class="footer-links">
         <a class="btn btn--primary" href="https://wa.me/5521968653459" target="_blank" rel="noopener noreferrer">
@@ -884,7 +900,7 @@ html.rv :is(.sec-head h2,.lovers-card h2):not([data-in]) em{opacity:0;transform:
     <div class="overlay" onClick="{{ closeMenu }}"></div>
     <nav class="menu" aria-label="Menu">
       <div class="menu-top">
-        <span class="brand"><img class="mono" src="/_blob/9f47bab444d967709d3109f26146a313" alt=""><span class="word"><b style="font-size: 16px">NARIAH</b><small>STUDIO</small></span></span>
+        <span class="brand"><img loading="lazy" decoding="async" class="mono" src="/_blob/9f47bab444d967709d3109f26146a313" alt=""><span class="word"><b style="font-size: 16px">NARIAH</b><small>STUDIO</small></span></span>
         <button class="icon-btn" type="button" aria-label="Fechar menu" onClick="{{ closeMenu }}" style="background: #F3E9D2">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
         </button>
@@ -916,12 +932,12 @@ html.rv :is(.sec-head h2,.lovers-card h2):not([data-in]) em{opacity:0;transform:
         <div class="gal">
           <div class="thumbs">
             <sc-for list="{{ m.thumbs }}" as="t" hint-placeholder-count="4">
-              <button class="{{ t.cls }}" type="button" aria-label="{{ t.aria }}" onClick="{{ t.pick }}"><img src="{{ t.src }}" alt=""></button>
+              <button class="{{ t.cls }}" type="button" aria-label="{{ t.aria }}" onClick="{{ t.pick }}"><img loading="lazy" decoding="async" src="{{ t.src }}" alt=""></button>
             </sc-for>
           </div>
           <div class="stage">
-            <img class="fill" src="{{ m.foto }}" alt="" aria-hidden="true">
-            <img class="main" src="{{ m.foto }}" alt="{{ m.fotoAlt }}" style="left: {{ m.l }}; top: {{ m.t }}; width: {{ m.w }}; height: {{ m.h }}">
+            <img loading="lazy" decoding="async" class="fill" src="{{ m.foto }}" alt="" aria-hidden="true">
+            <img class="main" decoding="async" src="{{ m.foto }}" alt="{{ m.fotoAlt }}" style="left: {{ m.l }}; top: {{ m.t }}; width: {{ m.w }}; height: {{ m.h }}">
             <span class="stage-hint glass" aria-hidden="true">Clique para zoom</span>
             <div class="preload" aria-hidden="true"><sc-for list="{{ m.preload }}" as="pl" hint-placeholder-count="4"><img src="{{ pl.src }}" alt=""></sc-for></div>
             <sc-if value="{{ m.ilustrativa }}" hint-placeholder-val="{{ false }}">
@@ -1047,7 +1063,7 @@ html.rv :is(.sec-head h2,.lovers-card h2):not([data-in]) em{opacity:0;transform:
           <ul class="bag-list">
             <sc-for list="{{ sc.itens }}" as="it" hint-placeholder-count="2">
               <li class="bag-item">
-                <div class="bag-thumb"><img class="fill" src="{{ it.foto }}" alt="" aria-hidden="true"><img src="{{ it.foto }}" alt="{{ it.alt }}" style="left: {{ it.l }}; top: {{ it.t }}; width: {{ it.w }}; height: {{ it.h }}"></div>
+                <div class="bag-thumb"><img loading="lazy" decoding="async" class="fill" src="{{ it.foto }}" alt="" aria-hidden="true"><img loading="lazy" decoding="async" src="{{ it.foto }}" alt="{{ it.alt }}" style="left: {{ it.l }}; top: {{ it.t }}; width: {{ it.w }}; height: {{ it.h }}"></div>
                 <div class="bag-info">
                   <div class="bag-row"><span class="bag-name">{{ it.nome }}</span><span class="bag-price">{{ it.sub }}</span></div>
                   <div class="bag-meta"><span class="bag-color"><span class="dot" style="background: {{ it.hex }}"></span>{{ it.corNome }}</span><span class="bag-size">{{ it.tam }}</span><sc-if value="{{ it.multi }}" hint-placeholder-val="{{ false }}"><span class="bag-unit">{{ it.unit }} cada</span></sc-if></div>

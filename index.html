@@ -477,7 +477,7 @@ html[data-zoom] .stage .stage-toggle,html[data-zoom] .stage .stage-hint{opacity:
 /* photos of the new pieces: same studio finish as the rest */
 img:not(.fill)[src*="-cacau.jpg"][src*="macaquinho-icon"],img:not(.fill)[src*="top-regulavel--"][src*="-coral"],img:not(.fill)[src*="blusa-frente-unica"],img:not(.fill)[src*="top-costas-abertas"],img:not(.fill)[src*="conjunto-navy"]{filter:contrast(1.04) brightness(1.02) saturate(1.03);image-rendering:-webkit-optimize-contrast}
 /* founder photo */
-.about-img img{object-position:38% 0}
+.about-img img{object-position:38% 0;transform:scale(1.38);transform-origin:38% 82%}
 
 /* reduced motion: fewer and gentler, not zero */
 @media (prefers-reduced-motion: reduce){
@@ -1363,7 +1363,7 @@ var PRODUTOS = [
     ]
   },
   {
-    id: 'top-regulavel', nome: 'Top Regulável', categoria: 'Tops', preco: 89, enquadramento: 'superior', recorteCard: [1.6, 50, 77],
+    id: 'top-regulavel', nome: 'Top Regulável', categoria: 'Tops', preco: 89, enquadramento: 'superior', recorteCard: [1.6, 50, 77], recorteHover: [1.6, 50, 64, .38],
     descricao: 'Alças finas reguláveis para ajustar o top ao seu corpo e ao seu treino. Costas delicadas, caimento preciso e um toque feminino que combina com shorts, leggings e flares da coleção.',
     cores: [
       { corId: 'coral', estoque: estoque(['P', 'M']), fotos: [
@@ -1390,7 +1390,7 @@ var PRODUTOS = [
     ]
   },
   {
-    id: 'top-costas-abertas', nome: 'Top Costas Abertas', categoria: 'Tops', preco: 89, enquadramento: 'superior', novo: true, hoverLegenda: 'Costas', recorteCard: [1.2, 50, 20],
+    id: 'top-costas-abertas', nome: 'Top Costas Abertas', categoria: 'Tops', preco: 89, enquadramento: 'superior', novo: true, hoverLegenda: 'Costas', recorteCard: [1.25, 50, 75],
     descricao: 'Frente limpa e costas abertas com alças finas que desenham as costas. Sustenta com conforto, deixa o movimento livre e forma um conjunto perfeito com os shorts da coleção.',
     cores: [
       { corId: 'coral', estoque: estoque(), fotos: [
@@ -1402,14 +1402,14 @@ var PRODUTOS = [
     ]
   },
   {
-    id: 'top-ombro', nome: 'Top Ombro', categoria: 'Tops', preco: 89, enquadramento: 'superior', recorteCard: [1.4, 50, 27, .61],
+    id: 'top-ombro', nome: 'Top Ombro', categoria: 'Tops', preco: 89, enquadramento: 'superior', recorteCard: [1.5, 50, 30, .49],
     descricao: 'Top assimétrico de um ombro só, com acabamento em viés contrastante que desenha o colo e as costas. Forma conjunto com a Calça Cós Cruzado.',
     cores: [
       { corId: 'navy', estoque: estoque(TAMANHOS), fotos: FOTOS_CONJUNTO_NAVY }
     ]
   },
   {
-    id: 'calca-cos-cruzado', nome: 'Calça Cós Cruzado', categoria: 'Leggings', preco: 139, enquadramento: 'inferior', recorteCard: [1.42, 50, 66],
+    id: 'calca-cos-cruzado', nome: 'Calça Cós Cruzado', categoria: 'Leggings', preco: 139, enquadramento: 'inferior', recorteCard: [1.6, 50, 87, .52],
     descricao: 'Legging de cós alto cruzado na frente, que abraça a cintura e valoriza a silhueta. Forma conjunto com o Top Ombro.',
     cores: [
       { corId: 'navy', estoque: estoque(TAMANHOS), fotos: FOTOS_CONJUNTO_NAVY }
@@ -1592,7 +1592,7 @@ class Component extends DCLogic {
     var idx = 0;
     for (var i = 0; i < p.cores.length; i++) { if (!corEsgotada(p.cores[i]) && p.cores[i].fotos.length) { idx = i; break; } }
     if (corId) idx = Math.max(0, p.cores.findIndex(function (c) { return c.corId === corId; }));
-    this.setState({ aberto: id, corIdx: idx, tam: null, fotoIdx: 0, full: false, guia: false, avisoTam: false, menu: false, sacola: false, adicionado: false });
+    this.setState({ aberto: id, corIdx: idx, tam: null, fotoIdx: 0, full: true, guia: false, avisoTam: false, menu: false, sacola: false, adicionado: false });
   }
 
   card(p, emDestaque) {
@@ -1603,7 +1603,7 @@ class Component extends DCLogic {
     // segunda foto (aparece ao passar o mouse): próxima foto que não seja detalhe
     var vv = varianteComFotos(p, 0).v.fotos.filter(function (f) { return !f.detalhe && f.src !== capa.src; });
     var capa2 = (p.hoverLegenda && vv.find(function (f) { return f.legenda === p.hoverLegenda; })) || vv[0] || capa;
-    var e2 = moldura(regiao(capa2, p, true), 3 / 4);
+    var e2 = (p.recorteHover && !emDestaque) ? recorteManual(capa2, p.recorteHover, p) : moldura(regiao(capa2, p, true), 3 / 4);
     var esgotadas = p.cores.filter(corEsgotada);
     var parciais = p.cores.filter(corParcial);
     var nota = '';

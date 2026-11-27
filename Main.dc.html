@@ -375,8 +375,8 @@ html,body{overflow-x:clip}
   /* first screen on phones: photo, slogan and button together */
   .hero-media{aspect-ratio:auto;height:min(46svh,420px)}
   .hero > :first-child{display:flex;flex-direction:column}
-  .hero-ctas{order:1;margin-bottom:24px}
-  .hero p.lead{order:2;margin-bottom:0}
+  .hero p.lead{order:1;margin-bottom:24px}
+  .hero-ctas{order:2;margin-bottom:0}
 }
 /* header: the whole top strip is frosted, so text never scrolls sharp behind or around the pill */
 .header::before{content:'';position:absolute;left:0;right:0;top:0;bottom:-18px;z-index:-1;pointer-events:none;
@@ -585,6 +585,24 @@ html[data-bag-closing] .bag{animation:bagOutSide .3s cubic-bezier(.32,.72,0,1) f
 html[data-bag-closing] .overlay--bag{animation:fadeOut .3s ease forwards}
 @media (max-width:600px){ html[data-bag-closing] .bag{animation-name:bagOutDown} }
 @media (prefers-reduced-motion: reduce){ html[data-bag-closing] .bag{animation:fadeOut .16s ease forwards} }
+/* ===== V3.6: mobile touches ===== */
+.size-cta .t-short{display:none}
+@media (max-width:600px){
+  /* Nariah Lovers: the join button centred under the list */
+  .lovers-card a.btn--primary{display:flex;width:fit-content;margin-left:auto;margin-right:auto}
+  /* size help: a compact pill instead of a full-width bar */
+  .catalog-foot .size-cta{width:auto;gap:10px;padding:6px 8px 6px 6px}
+  .catalog-foot .size-cta .ico{width:36px;height:36px}
+  .catalog-foot .size-cta .ico svg{width:16px;height:16px}
+  .catalog-foot .size-cta small{font-size:8.5px;margin-bottom:2px}
+  .catalog-foot .size-cta b{font-size:13.5px}
+  .catalog-foot .size-cta .go{width:32px;height:32px;margin-left:2px}
+  .catalog-foot .size-cta small,.catalog-foot .size-cta .go{display:none}
+  .catalog-foot .size-cta{padding:5px 18px 5px 5px;min-height:44px}
+  .catalog-foot .size-cta b{white-space:nowrap;font-size:13px}
+  .catalog-foot .size-cta .t-long{display:none}
+  .catalog-foot .size-cta .t-short{display:inline}
+}
 /* reduced motion: fewer and gentler, not zero */
 @media (prefers-reduced-motion: reduce){
   .header,.hero .eyebrow,.hero h1 .ln > *,.hero p.lead,.hero-ctas,.hero-chip,.hero-photo{animation-name:fade !important}
@@ -849,7 +867,7 @@ html[data-bag-closing] .overlay--bag{animation:fadeOut .3s ease forwards}
       <div class="catalog-foot">
         <a class="size-cta" href="https://wa.me/5521968653459?text=Ol%C3%A1%2C%20fiquei%20em%20d%C3%BAvida%20entre%20dois%20tamanhos.%20Pode%20me%20ajudar%3F" target="_blank" rel="noopener noreferrer">
           <span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 15.5 15.5 3l5.5 5.5L8.5 21z"></path><path d="M7 12l2 2M10 9l2 2M13 6l2 2"></path></svg></span>
-          <span class="txt"><small>Ajuda com tamanhos</small><b>Em dúvida entre dois tamanhos? A gente ajuda</b></span>
+          <span class="txt"><small>Ajuda com tamanhos</small><b><span class="t-long">Em dúvida entre dois tamanhos? A gente ajuda</span><span class="t-short">Dúvida no tamanho? A gente ajuda</span></b></span>
           <span class="go"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
         </a>
       </div>

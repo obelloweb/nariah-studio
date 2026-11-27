@@ -170,7 +170,7 @@ button{font-family:inherit;color:inherit}
 .footer-base{margin-top:72px;font-size:12px;color:#8a817c;letter-spacing:.04em}
 
 /* overlays */
-.overlay{position:fixed;inset:0;background:rgba(24,22,21,.36);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);z-index:80;animation:fade .4s ease}
+.overlay{position:fixed;inset:0;background:rgba(24,22,21,.4);z-index:80;animation:fade .4s ease}
 .drawer{position:fixed;top:16px;right:16px;bottom:16px;width:min(1100px,calc(100% - 32px));background:#FAF8F5;z-index:90;overflow-y:auto;border-radius:28px;animation:slideIn .5s var(--ease-drawer);box-shadow:0 30px 80px rgba(24,22,21,.18)}
 .drawer-top{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;padding:16px 20px 16px 32px;background:rgba(250,248,245,.8);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 .grab{display:none}
@@ -465,11 +465,9 @@ html{scrollbar-gutter:stable}
 html[data-zoom] .stage{cursor:zoom-out}
 .stage img.main{transform-origin:var(--zx,50%) var(--zy,50%);transition:left .9s var(--ease-out),top .9s var(--ease-out),width .9s var(--ease-out),height .9s var(--ease-out),transform .45s var(--ease-out),opacity .35s ease}
 html[data-zoom] .stage img.main{transform:scale(2.1);transition:transform .45s var(--ease-out),transform-origin .12s linear}
-@media (pointer:coarse){ html[data-zoom] .stage img.main{transform:scale(1.9)} .stage{touch-action:pan-y} html[data-zoom] .stage{touch-action:none} }
 html[data-zoom] .stage .stage-toggle,html[data-zoom] .stage .stage-hint{opacity:0;pointer-events:none}
 .stage-hint{position:absolute;right:14px;top:14px;z-index:3;padding:7px 12px;border-radius:999px;font-size:11px;letter-spacing:.06em;color:#4A332D;pointer-events:none;transition:opacity .3s ease}
-.stage-hint .h-touch{display:none}
-@media (pointer:coarse){ .stage-hint .h-touch{display:inline} .stage-hint .h-desk{display:none} }
+@media (pointer:coarse){ .stage-hint{display:none} .stage{cursor:auto} }
 .preload{position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none}
 .preload img{width:1px;height:1px}
 /* stable text while switching colors */
@@ -896,7 +894,7 @@ img:not(.fill)[src*="-cacau.jpg"][src*="macaquinho-icon"],img:not(.fill)[src*="t
           <div class="stage">
             <img class="fill" src="{{ m.foto }}" alt="" aria-hidden="true">
             <img class="main" src="{{ m.foto }}" alt="{{ m.fotoAlt }}" style="left: {{ m.l }}; top: {{ m.t }}; width: {{ m.w }}; height: {{ m.h }}">
-            <span class="stage-hint glass" aria-hidden="true"><span class="h-desk">2x clique para zoom</span><span class="h-touch">Toque para zoom</span></span>
+            <span class="stage-hint glass" aria-hidden="true">Clique para zoom</span>
             <div class="preload" aria-hidden="true"><template data-for="{{ m.preload }}" data-as="pl"><img src="{{ pl.src }}" alt=""></template></div>
             <template data-if="{{ m.ilustrativa }}">
               <span class="stage-note glass">{{ m.ilustrativaTxt }}</span>
@@ -1365,7 +1363,7 @@ var PRODUTOS = [
     ]
   },
   {
-    id: 'top-regulavel', nome: 'Top Regulável', categoria: 'Tops', preco: 89, enquadramento: 'superior', recorteCard: [1.42, 50, 28],
+    id: 'top-regulavel', nome: 'Top Regulável', categoria: 'Tops', preco: 89, enquadramento: 'superior', recorteCard: [1.6, 50, 77],
     descricao: 'Alças finas reguláveis para ajustar o top ao seu corpo e ao seu treino. Costas delicadas, caimento preciso e um toque feminino que combina com shorts, leggings e flares da coleção.',
     cores: [
       { corId: 'coral', estoque: estoque(['P', 'M']), fotos: [
@@ -1392,7 +1390,7 @@ var PRODUTOS = [
     ]
   },
   {
-    id: 'top-costas-abertas', nome: 'Top Costas Abertas', categoria: 'Tops', preco: 89, enquadramento: 'superior', novo: true, hoverLegenda: 'Costas',
+    id: 'top-costas-abertas', nome: 'Top Costas Abertas', categoria: 'Tops', preco: 89, enquadramento: 'superior', novo: true, hoverLegenda: 'Costas', recorteCard: [1.2, 50, 20],
     descricao: 'Frente limpa e costas abertas com alças finas que desenham as costas. Sustenta com conforto, deixa o movimento livre e forma um conjunto perfeito com os shorts da coleção.',
     cores: [
       { corId: 'coral', estoque: estoque(), fotos: [
@@ -1404,7 +1402,7 @@ var PRODUTOS = [
     ]
   },
   {
-    id: 'top-ombro', nome: 'Top Ombro', categoria: 'Tops', preco: 89, enquadramento: 'superior', recorteCard: [1.4, 50, 27],
+    id: 'top-ombro', nome: 'Top Ombro', categoria: 'Tops', preco: 89, enquadramento: 'superior', recorteCard: [1.4, 50, 27, .61],
     descricao: 'Top assimétrico de um ombro só, com acabamento em viés contrastante que desenha o colo e as costas. Forma conjunto com a Calça Cós Cruzado.',
     cores: [
       { corId: 'navy', estoque: estoque(TAMANHOS), fotos: FOTOS_CONJUNTO_NAVY }
@@ -1469,7 +1467,7 @@ function moldura(rg, ca) {
   var top = Math.min(0, Math.max(1 - Hd, .5 - ((rg.y0 + rg.y1) / 2) * Hd));
   // Horizontal: the subject always sits in the exact center. If that leaves room
   // on one side, a blurred copy of the same photo fills it (see .fill in the CSS).
-  var left = ca / 2 - rg.cx * Wd;
+  var left = Math.min(0, Math.max(ca - Wd, ca / 2 - rg.cx * Wd));
   return {
     l: (left / ca * 100).toFixed(2) + '%',
     t: (top * 100).toFixed(2) + '%',
@@ -1484,7 +1482,7 @@ function recorteManual(f, r, p) {
   var a = (q && q.a) || 2 / 3, ca = 3 / 4;
   var w0 = 100, h0 = 100 * ca / a;
   if (h0 < 100) { h0 = 100; w0 = 100 * a / ca; }
-  var reg = q && (q[ENQUADRAMENTOS[p.enquadramento]] || q.inteiro);
+  var reg = r[3] != null ? [r[3]] : q && (q[ENQUADRAMENTOS[p.enquadramento]] || q.inteiro);
   var l0 = (100 - w0) / 2, t0 = (100 - h0) / 2, k = r[0], ox = reg ? reg[0] * 100 : r[1], oy = r[2]; // horizontal: centered on her body
   var w = w0 * k, h = h0 * k;
   var l = Math.min(0, Math.max(100 - w, reg ? 50 - reg[0] * w : ox - (ox - l0) * k));
@@ -1911,6 +1909,9 @@ class Component extends DCLogic {
   function fit() {
     if (busy) return; busy = true;
     document.querySelectorAll(SEL).forEach(function (el) {
+      var key = el.clientWidth + '|' + (document.fonts ? document.fonts.status : '') + '|' + el.textContent;
+      if (el.__fitKey === key) return; // unchanged: leave it alone (no reflow while a drawer opens)
+      el.__fitKey = key;
       el.style.textAlign = '';
       if (getComputedStyle(el).textAlign !== 'justify') return;
       var best = null, tries = [[0, 0], [-0.01, 0], [0.01, 0], [-0.02, -0.04], [0.02, 0], [-0.015, 0.02], [0.015, -0.04], [-0.025, 0], [0.025, 0], [-0.03, -0.05], [0.03, 0]];
@@ -1936,44 +1937,27 @@ class Component extends DCLogic {
 })();
 </script>
 <script>
-// Zoom on the product photo: double-click on desktop, single tap on touch. The state lives on <html>,
-// which the renderer never rewrites, so re-renders don't reset it.
+// Zoom on the product photo (desktop only): one click zooms in and follows the mouse, another click returns.
+// State lives on <html>, which the renderer never rewrites, so re-renders don't reset it.
 (function () {
-  var H = document.documentElement, touch = matchMedia('(pointer: coarse)').matches;
-  function stageOf(e) {
-    var st = e.target.closest && e.target.closest('.stage');
-    if (!st || e.target.closest('button, a, .thumbs')) return null; // floating buttons never trigger zoom
-    return st;
-  }
+  var H = document.documentElement;
+  if (matchMedia('(pointer: coarse)').matches) return;
   function aim(st, x, y) {
     var r = st.getBoundingClientRect();
     H.style.setProperty('--zx', Math.max(0, Math.min(100, (x - r.left) / r.width * 100)) + '%');
     H.style.setProperty('--zy', Math.max(0, Math.min(100, (y - r.top) / r.height * 100)) + '%');
   }
-  function toggle(st, e) {
-    if (H.hasAttribute('data-zoom')) { H.removeAttribute('data-zoom'); return; }
-    aim(st, e.clientX, e.clientY); H.setAttribute('data-zoom', '');
-  }
-  document.addEventListener('dblclick', function (e) { var st = stageOf(e); if (st && !touch) { e.preventDefault(); toggle(st, e); } });
   document.addEventListener('click', function (e) {
-    var st = stageOf(e);
-    if (st && touch) toggle(st, e);
-    else if (e.target.closest && e.target.closest('.stage button, .thumbs, .swatches, .overlay, .drawer-top button')) H.removeAttribute('data-zoom');
+    var t = e.target, st = t.closest && t.closest('.stage');
+    if (st && !t.closest('button, a, .thumbs')) {
+      if (H.hasAttribute('data-zoom')) H.removeAttribute('data-zoom');
+      else { aim(st, e.clientX, e.clientY); H.setAttribute('data-zoom', ''); }
+    } else if (t.closest && t.closest('.stage button, .thumbs, .swatches, .overlay, .drawer-top button')) H.removeAttribute('data-zoom');
   });
-  document.addEventListener('mousemove', function (e) { if (!H.hasAttribute('data-zoom') || touch) return; var st = e.target.closest && e.target.closest('.stage'); if (st) aim(st, e.clientX, e.clientY); });
-  // touch: drag to explore, the image follows the finger the opposite way
-  var start = null;
-  document.addEventListener('touchstart', function (e) { if (H.hasAttribute('data-zoom') && stageOf(e)) start = { x: e.touches[0].clientX, y: e.touches[0].clientY, zx: parseFloat(H.style.getPropertyValue('--zx')) || 50, zy: parseFloat(H.style.getPropertyValue('--zy')) || 50, moved: false }; }, { passive: true });
-  document.addEventListener('touchmove', function (e) {
-    if (!start) return; var st = document.querySelector('.stage'); if (!st) return;
-    var r = st.getBoundingClientRect(), dx = (e.touches[0].clientX - start.x) / r.width * 100, dy = (e.touches[0].clientY - start.y) / r.height * 100;
-    if (Math.abs(dx) + Math.abs(dy) > 2) start.moved = true;
-    H.style.setProperty('--zx', Math.max(0, Math.min(100, start.zx - dx * 1.1)) + '%');
-    H.style.setProperty('--zy', Math.max(0, Math.min(100, start.zy - dy * 1.1)) + '%');
-    e.preventDefault();
-  }, { passive: false });
-  document.addEventListener('touchend', function (e) { if (start && start.moved) { e.preventDefault(); } start = null; });
-  // closing the piece (or switching photo/color) leaves zoom
+  document.addEventListener('mousemove', function (e) {
+    if (!H.hasAttribute('data-zoom')) return;
+    var st = e.target.closest && e.target.closest('.stage'); if (st) aim(st, e.clientX, e.clientY);
+  });
   var prev = window.__afterRender, lastSrc = '';
   window.__afterRender = function () {
     if (prev) prev();

@@ -480,7 +480,8 @@ html[data-zoom] .stage .stage-toggle,html[data-zoom] .stage .stage-hint{opacity:
 /* photos of the new pieces: same studio finish as the rest */
 img:not(.fill)[src*="-cacau.jpg"][src*="macaquinho-icon"],img:not(.fill)[src*="top-regulavel--"][src*="-coral"],img:not(.fill)[src*="blusa-frente-unica"],img:not(.fill)[src*="top-costas-abertas"],img:not(.fill)[src*="conjunto-navy"]{filter:contrast(1.04) brightness(1.02) saturate(1.03);image-rendering:-webkit-optimize-contrast}
 /* founder photo */
-.about-img img{object-position:20% 0;transform:scale(1.5);transform-origin:4% 30%}
+.about-img{position:relative}
+.about-img img{position:absolute;left:-34.7%;top:-20.8%;width:240%;height:128%;max-width:none;object-fit:cover;transform:none}
 
 
 
@@ -1485,13 +1486,53 @@ var FOCO_AJUSTE = {
   'blusa-frente-unica:e48c571678355f4d6e116043ec145061': { y1: .72 }
 };
 
+// Enquadramento padrão de toda a vitrine: pessoa centralizada no corpo e a cabeça sempre
+// na mesma altura, com respiro acima. Tops mostram da cabeça ao quadril; o resto, o corpo inteiro.
+var CARD_RESPIRO = .09;
+function regiaoCard(f, p) {
+  var id = String(f.src).replace('/_blob/', ''), q = QUADROS[id];
+  var a = (q && q.a) || 2 / 3;
+  if (!q || f.detalhe) return { cx: .5, y0: 0, y1: 1, a: a };
+  var c = q.inteiro || [.5, 0, 1], o = CARD_AJUSTE[id] || {};
+  var cx = o.cx != null ? o.cx : c[0], topo = o.topo != null ? o.topo : c[1], base = o.base != null ? o.base : c[2];
+  var corpo = (base - topo) * (p.enquadramento === 'superior' ? .74 : 1.02);
+  var H = corpo / (1 - CARD_RESPIRO), y0 = topo - CARD_RESPIRO * H;
+  return { cx: cx, y0: y0, y1: y0 + H, a: a, max: 3, livre: true };
+}
+// medido nos pixels de cada foto: topo da cabeça e centro do corpo (fração da foto)
+var CARD_AJUSTE = {
+  'f94a619a566a6793b57346b7897ad7be': { topo: 0.193, cx: 0.476 },
+  '987f389d95fb754322e092686db4ca95': { topo: 0.207, cx: 0.499 },
+  '5d73faaa7df108f464a4da0da98ff08a': { topo: 0.19, cx: 0.525 },
+  'dda4649c83c6aa08b80dc237310e771b': { topo: 0.177, cx: 0.505 },
+  'e834c72b596765f7754017136e7d7452': { topo: 0.253, cx: 0.429 },
+  'db3cf95ca38deb9698c4a90e1bc1bc12': { topo: 0.117, cx: 0.558 },
+  '46ed8e6b6f47edd680a051b08f7930fc': { topo: 0.137, cx: 0.497 },
+  'cef9a94cfce863f2e48ba568d908c118': { topo: 0.143, cx: 0.454 },
+  'f766567129214d455796dcc5e2f65824': { topo: 0.15, cx: 0.459 },
+  '6d5cc7dca8e08eff831c55a765bd5ab6': { topo: 0.097, cx: 0.463 },
+  'e8900b887b901086bee16bd41fc4620c': { topo: 0.104, cx: 0.534 },
+  '0f15f4900ea4cff35730e3965337a781': { topo: 0.073, cx: 0.468 },
+  'db682321c5ed307809e54c7b316809f6': { topo: 0.193, cx: 0.483 },
+  '55d676eb6b208d61049b46c25521a26e': { topo: 0.237, cx: 0.55 },
+  'c3b90d6293097ad7bafa6a59db642cda': { topo: 0.347, cx: 0.29 },
+  '50338239844770652f22becc931c8b9f': { topo: 0.33, cx: 0.329 },
+  '2e9a2bccefbdbdcb6928161198807bc1': { topo: 0.13, cx: 0.444 },
+  'b4a553e05468d36d338ca16e842acf8a': { topo: 0.213, cx: 0.446 },
+  '051459a2d9268b8316a445a8cc4beedc': { topo: 0.273, cx: 0.511 },
+  '0ee61b0780ebd3c3971993c47f04031e': { topo: 0.15, cx: 0.501 },
+  'caf250d1bfa26ae31527434feeae4beb': { topo: 0.17, cx: 0.5 },
+  'e48c571678355f4d6e116043ec145061': { topo: 0, cx: 0.52 },
+  '31bc0ac7a86b4c73f94e9c80c5ae1bbf': { topo: 0.12, cx: 0.5 }
+};
+
 // Converte a região numa posição absoluta da imagem dentro de um container de
 // proporção ca (largura/altura), sem nunca deixar sobras vazias.
 function moldura(rg, ca) {
   var Hd = Math.min(rg.max || 2.7, 1 / (rg.y1 - rg.y0));
   Hd = Math.max(Hd, 1, ca / rg.a);
   var Wd = Hd * rg.a;
-  var top = Math.min(0, Math.max(1 - Hd, .5 - ((rg.y0 + rg.y1) / 2) * Hd));
+  var top = Math.min(0, Math.max(1 - Hd, rg.livre ? -rg.y0 * Hd : .5 - ((rg.y0 + rg.y1) / 2) * Hd));
   // Horizontal: the subject always sits in the exact center. If that leaves room
   // on one side, a blurred copy of the same photo fills it (see .fill in the CSS).
   var left = Math.min(0, Math.max(ca - Wd, ca / 2 - rg.cx * Wd));
@@ -1626,11 +1667,11 @@ class Component extends DCLogic {
     var self = this;
     var capa = capaDe(p);
     if (emDestaque && p.capaDestaque) capa = { src: p.capaDestaque, detalhe: false };
-    var e = (p.recorteCard && !emDestaque) ? recorteManual(capa, p.recorteCard, p) : moldura(regiao(capa, p, true), 3 / 4);
+    var e = moldura(regiaoCard(capa, p), 3 / 4);
     // segunda foto (aparece ao passar o mouse): próxima foto que não seja detalhe
     var vv = varianteComFotos(p, 0).v.fotos.filter(function (f) { return !f.detalhe && f.src !== capa.src; });
     var capa2 = (p.hoverLegenda && vv.find(function (f) { return f.legenda === p.hoverLegenda; })) || vv[0] || capa;
-    var e2 = (p.recorteHover && !emDestaque) ? recorteManual(capa2, p.recorteHover, p) : moldura(regiao(capa2, p, true), 3 / 4);
+    var e2 = moldura(regiaoCard(capa2, p), 3 / 4);
     var esgotadas = p.cores.filter(corEsgotada);
     var parciais = p.cores.filter(corParcial);
     var nota = '';

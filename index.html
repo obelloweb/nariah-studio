@@ -524,6 +524,12 @@ html.rv :is(.sec-head h2,.lovers-card h2):not([data-in]) em{opacity:0;transform:
 .filters::-webkit-scrollbar{display:none}
 @media (max-width:380px){ .header-pill{padding-right:4px;padding-left:12px} }
 
+/* ===== V3.2: stable header while a drawer is open =====
+   The masked backdrop blur behind the header can repaint as a dark band while a large photo animates
+   in the drawer; the header sits under the backdrop then anyway, so it rests on a plain fill instead. */
+html:has(.overlay) .header::before{backdrop-filter:none;-webkit-backdrop-filter:none;background:linear-gradient(to bottom,rgba(250,248,245,.9),rgba(250,248,245,.6) 70%,rgba(250,248,245,0))}
+html:has(.overlay) .header-pill{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(250,248,245,.94)}
+.stage{contain:paint;isolation:isolate}
 /* reduced motion: fewer and gentler, not zero */
 @media (prefers-reduced-motion: reduce){
   .header,.hero .eyebrow,.hero h1 .ln > *,.hero p.lead,.hero-ctas,.hero-chip,.hero-photo{animation-name:fade !important}
@@ -1995,6 +2001,7 @@ class Component extends DCLogic {
   DCLogic.prototype.forceUpdate = function () { render(); };
   var tpl = document.getElementById('tpl'), root = document.getElementById('root');
   function render() {
+    if (window.__beforeRender) window.__beforeRender();
     var nodes = [], frag = document.createElement('div');
     build(tpl.content, comp.renderVals(), nodes);
     nodes.forEach(function (n) { frag.appendChild(n); });
@@ -2161,27 +2168,49 @@ document.addEventListener('keydown', function (e) {
   var o = document.querySelector('.overlay'); if (o) o.click();
 });
 // "Ver look completo" / "Focar na peça": the frame change animates with transform only (FLIP).
+// The photo's on-screen box is read right before each render (transform included), so a click that
+// interrupts a running change starts exactly where the photo is: repeated clicks glide, never jump.
 (function () {
-  var last = null;
+  var pre = null, timer = 0;
+  function rel(img) {
+    var s = img.parentElement.getBoundingClientRect(), r = img.getBoundingClientRect();
+    return { x: r.left - s.left, y: r.top - s.top, w: r.width, h: r.height };
+  }
+  var before = window.__beforeRender;
+  window.__beforeRender = function () {
+    if (before) before();
+    var img = document.querySelector('.stage img.main');
+    pre = img ? { img: img, src: img.getAttribute('src'), v: rel(img) } : null;
+  };
   var prev = window.__afterRender;
   window.__afterRender = function () {
     if (prev) prev();
     var img = document.querySelector('.stage img.main');
-    if (!img) { last = null; return; }
-    var st = img.parentElement.getBoundingClientRect(), r = img.getBoundingClientRect();
-    var now = { src: img.getAttribute('src'), x: r.left - st.left, y: r.top - st.top, w: r.width, h: r.height };
-    if (last && last.src === now.src && now.w && (Math.abs(last.w - now.w) > 1 || Math.abs(last.x - now.x) > 1 || Math.abs(last.y - now.y) > 1)
-        && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      var sx = last.w / now.w, sy = last.h / now.h;
-      img.style.transformOrigin = '0 0';
-      img.style.transition = 'none';
-      img.style.transform = 'translate(' + (last.x - now.x) + 'px,' + (last.y - now.y) + 'px) scale(' + sx + ',' + sy + ')';
-      img.getBoundingClientRect();
-      img.style.transition = 'transform .8s cubic-bezier(.23,1,.32,1)';
-      img.style.transform = '';
-      setTimeout(function () { img.style.transition = ''; img.style.transformOrigin = ''; }, 850);
+    if (img && pre && pre.img === img && pre.src !== img.getAttribute('src')) {
+      // another photo or color mid-change: settle at once, no stale transform carried over
+      clearTimeout(timer);
+      img.getAnimations().forEach(function (an) { if (an.transitionProperty === 'transform') an.cancel(); });
+      img.style.transition = ''; img.style.transformOrigin = ''; img.style.willChange = ''; img.style.transform = '';
     }
-    last = now;
+    if (!img || !pre || pre.img !== img || pre.src !== img.getAttribute('src')) { pre = null; return; }
+    var now = { x: img.offsetLeft, y: img.offsetTop, w: img.offsetWidth, h: img.offsetHeight }, from = pre.v;
+    pre = null;
+    // a transform transition still in flight belongs to the old frame: drop it before anything else
+    clearTimeout(timer);
+    img.getAnimations().forEach(function (an) { if (an.transitionProperty === 'transform') an.cancel(); });
+    img.style.transition = ''; img.style.transformOrigin = ''; img.style.willChange = ''; img.style.transform = '';
+    if (!now.w || (Math.abs(from.x - now.x) < 1 && Math.abs(from.y - now.y) < 1 && Math.abs(from.w - now.w) < 1)) return;
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    img.style.transition = 'none';
+    img.style.transformOrigin = '0 0';
+    img.style.willChange = 'transform';
+    img.style.transform = 'translate(' + (from.x - now.x) + 'px,' + (from.y - now.y) + 'px) scale(' + (from.w / now.w) + ',' + (from.h / now.h) + ')';
+    img.offsetWidth; // commit the start frame
+    img.style.transition = 'transform .7s cubic-bezier(.23,1,.32,1)';
+    img.style.transform = 'none';
+    timer = setTimeout(function () {
+      img.style.transition = ''; img.style.transformOrigin = ''; img.style.willChange = ''; img.style.transform = '';
+    }, 760);
   };
 })();
 </script>

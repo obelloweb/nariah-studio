@@ -501,11 +501,11 @@ html.rv :is(.sec-head h2,.lovers-card h2):not([data-in]) em{opacity:0;transform:
   html.rv [data-rv]{transform:none !important;filter:none !important;clip-path:none !important;transition:opacity .4s ease !important}
   html.rv :is(.sec-head h2,.lovers-card h2) em{transform:none !important}
 }
-/* reading guide in Sobre a Nariah: a cacao marker sweeps through the paragraph being read
-   (the two inline layers paint across the line fragments as one strip, so the fill follows the text) */
-.about-body .rd{background-image:linear-gradient(#4A332D,#4A332D);background-repeat:no-repeat;background-size:var(--rd,0%) 100%;padding:.14em 0}
-.about-body .rd-t{background-image:linear-gradient(90deg,#FAF8F5 var(--rd,0%),#2e2826 var(--rd,0%));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
-@supports not ((-webkit-background-clip:text) or (background-clip:text)){ .about-body .rd{background:none} .about-body .rd-t{color:inherit;-webkit-text-fill-color:currentColor;background:none} }
+/* reading guide in Sobre a Nariah: a thin cacao rule beside the paragraph being read */
+.about-body > p{position:relative}
+.about-body > p::before{content:'';position:absolute;left:-22px;top:.55em;bottom:.55em;width:2px;border-radius:2px;background:#4A332D;transform:scaleY(0);transform-origin:top;transition:transform .6s cubic-bezier(.23,1,.32,1)}
+.about-body > p[data-in-read]::before{transform:scaleY(1)}
+@media (max-width:700px){ .about-body > p::before{left:-12px} }
 
 
 /* ===== V3.1: final pass (performance, touch, safe area) ===== */
@@ -818,15 +818,15 @@ html:has(.overlay) .header-pill{backdrop-filter:none;-webkit-backdrop-filter:non
         <div class="about-body">
           <div class="eyebrow"><span class="idx">03</span>Sobre a Nariah</div>
           <h2 id="sobre-title">A Nariah nasceu de uma transformação que começou em mim.</h2>
-          <p><span class="rd"><span class="rd-t">Sou Nathalia Lagoia, fundadora da Nariah Studio, paraense de Belém, mãe do Leon e do Noah e hoje moradora do Rio de Janeiro. Durante 12 anos, minha vida profissional foi no mar, onde construí minha trajetória como oficial da Marinha Mercante e cheguei ao posto de imediata.</span></span></p>
-          <p><span class="rd"><span class="rd-t">Com a maternidade e as mudanças da vida, também fui descobrindo novas versões de mim. Em uma dessas fases, transformei meus hábitos, emagreci 30 quilos e encontrei na musculação e na corrida um espaço de cuidado, disciplina e superação. Nesse processo, recuperei a confiança e descobri o prazer de me sentir forte.</span></span></p>
-          <p><span class="rd"><span class="rd-t">A Nariah nasceu dessa vivência e de uma vontade muito pessoal de vestir peças que acompanhassem meu movimento, valorizassem meu corpo e combinassem com meu estilo. Roupas que eu amasse usar no treino e quisesse continuar vestindo depois dele.</span></span></p>
-          <p><span class="rd"><span class="rd-t">Hoje, essa intenção orienta cada escolha da marca. Busco unir conforto, cortes que valorizam e uma estética elegante em peças que façam parte da vida de mulheres com diferentes rotinas e histórias.</span></span></p>
-          <p><span class="rd"><span class="rd-t">Uma das minhas maiores alegrias é ver a Nariah em vocês. Nos treinos, nas corridas, nos encontros e nas pequenas conquistas do dia a dia. Ver uma mulher vestir uma peça e se sentir bonita e confiante dá sentido ao que estou construindo.</span></span></p>
+          <p>Sou Nathalia Lagoia, fundadora da Nariah Studio, paraense de Belém, mãe do Leon e do Noah e hoje moradora do Rio de Janeiro. Durante 12 anos, minha vida profissional foi no mar, onde construí minha trajetória como oficial da Marinha Mercante e cheguei ao posto de imediata.</p>
+          <p>Com a maternidade e as mudanças da vida, também fui descobrindo novas versões de mim. Em uma dessas fases, transformei meus hábitos, emagreci 30 quilos e encontrei na musculação e na corrida um espaço de cuidado, disciplina e superação. Nesse processo, recuperei a confiança e descobri o prazer de me sentir forte.</p>
+          <p>A Nariah nasceu dessa vivência e de uma vontade muito pessoal de vestir peças que acompanhassem meu movimento, valorizassem meu corpo e combinassem com meu estilo. Roupas que eu amasse usar no treino e quisesse continuar vestindo depois dele.</p>
+          <p>Hoje, essa intenção orienta cada escolha da marca. Busco unir conforto, cortes que valorizam e uma estética elegante em peças que façam parte da vida de mulheres com diferentes rotinas e histórias.</p>
+          <p>Uma das minhas maiores alegrias é ver a Nariah em vocês. Nos treinos, nas corridas, nos encontros e nas pequenas conquistas do dia a dia. Ver uma mulher vestir uma peça e se sentir bonita e confiante dá sentido ao que estou construindo.</p>
           <blockquote class="pull" style="margin-left: 0; margin-right: 0">
             <p>“Elevated Power for Modern Women” traduz aquilo em que acredito. Cada mulher carrega sua própria potência, e a roupa também pode ajudá-la a expressar essa força.</span></span></p>
           </blockquote>
-          <p><span class="rd"><span class="rd-t">A Nariah é a forma que encontrei de compartilhar um pouco dessa transformação.</span></span></p>
+          <p>A Nariah é a forma que encontrei de compartilhar um pouco dessa transformação.</p>
           <div class="sign">
             <div class="serif">Nathalia Lagoia</div>
             <small>Fundadora da Nariah Studio</small>

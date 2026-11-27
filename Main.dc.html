@@ -463,7 +463,8 @@ html[data-zoom] .stage{cursor:zoom-out}
 html[data-zoom] .stage img.main{transform:scale(2.1);transition:transform .45s var(--ease-out),transform-origin .12s linear}
 html[data-zoom] .stage .stage-toggle,html[data-zoom] .stage .stage-hint{opacity:0;pointer-events:none}
 .stage-hint{position:absolute;right:14px;top:14px;z-index:3;padding:7px 12px;border-radius:999px;font-size:11px;letter-spacing:.06em;color:#4A332D;pointer-events:none;transition:opacity .3s ease}
-@media (pointer:coarse){ .stage-hint{display:none} .stage{cursor:auto} }
+.stage-hint .h-touch{display:none}
+@media (pointer:coarse){ .stage-hint .h-touch{display:inline} .stage-hint .h-desk{display:none} html[data-zoom] .stage img.main{transform:scale(1.9)} .stage{touch-action:pan-y} html[data-zoom] .stage{touch-action:none} }
 .preload{position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none}
 .preload img{width:1px;height:1px}
 /* stable text while switching colors */
@@ -944,16 +945,10 @@ html:has(.overlay) .header-pill{backdrop-filter:none;-webkit-backdrop-filter:non
           <div class="stage">
             <img loading="lazy" decoding="async" class="fill" src="{{ m.foto }}" alt="" aria-hidden="true">
             <img class="main" decoding="async" src="{{ m.foto }}" alt="{{ m.fotoAlt }}" style="left: {{ m.l }}; top: {{ m.t }}; width: {{ m.w }}; height: {{ m.h }}">
-            <span class="stage-hint glass" aria-hidden="true">Clique para zoom</span>
+            <span class="stage-hint glass" aria-hidden="true"><span class="h-desk">Clique para zoom</span><span class="h-touch">Toque para zoom</span></span>
             <div class="preload" aria-hidden="true"><sc-for list="{{ m.preload }}" as="pl" hint-placeholder-count="4"><img src="{{ pl.src }}" alt=""></sc-for></div>
             <sc-if value="{{ m.ilustrativa }}" hint-placeholder-val="{{ false }}">
               <span class="stage-note glass">{{ m.ilustrativaTxt }}</span>
-            </sc-if>
-            <sc-if value="{{ m.podeAlternar }}" hint-placeholder-val="{{ true }}">
-              <button class="stage-toggle glass" type="button" aria-pressed="{{ m.full }}" onClick="{{ m.toggleFull }}">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"></path></svg>
-                {{ m.toggleLabel }}
-              </button>
             </sc-if>
             <div class="stage-nav">
               <button class="glass" type="button" aria-label="Foto anterior" onClick="{{ m.prev }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg></button>
@@ -1763,7 +1758,7 @@ class Component extends DCLogic {
     var fi = Math.min(s.fotoIdx, fotos.length - 1);
     var f = fotos[fi];
     var podeAlternar = p.enquadramento !== 'inteiro' && !f.detalhe;
-    var e = moldura(podeAlternar && !s.full ? regiaoFoco(f, p) : regiao(f, p, podeAlternar ? false : true), 2 / 3);
+    var e = moldura(regiao(f, p, !podeAlternar), 2 / 3); // always the full look; zoom by click or tap
     var esg = corEsgotada(v);
     var tamOk = s.tam && v.estoque[s.tam];
     var msg = 'Olá! Gostaria de comprar a peça ' + p.nome + ', na cor ' + cor.nome + ', tamanho ' + (s.tam || '') + '.';

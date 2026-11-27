@@ -48,3 +48,16 @@ Princípios de design engineering e motion de Emil Kowalski (github.com/emilkowa
 - **Animação só onde importa:** uma entrada orquestrada só na primeira dobra, em vez de uma animação em cada seção.
 - **Performance:** só `transform`, `opacity` e `clip-path` são animados.
 - **Hover:** os efeitos de hover só valem onde há mouse.
+
+## Ajustes de 27/11/2026 (sacola e novas peças)
+
+- **Catálogo com 13 peças:**
+  - Blusa Frente Única e Top Costas Abertas entram com o selo "Novo".
+  - Top Ombro e Calça Cós Cruzado (Azul Navy) entram como mostruário, com o selo "Esgotado". Ao abrir, todos os tamanhos ficam riscados, o botão vira "Peça esgotada" e aparece "Consultar reposição pelo WhatsApp".
+- **Fotos novas:** Icon na cor Cacao (agora a cor da capa) e Top Regulável na cor Coral.
+- **Sacola:**
+  - ícone no cabeçalho com contador;
+  - "Adicionar à sacola" na página da peça, mantendo a compra direta de uma peça pelo WhatsApp;
+  - a sacola fica salva no navegador;
+  - nome e observação opcionais;
+  - o pedido completo vai numa única mensagem para o WhatsApp.

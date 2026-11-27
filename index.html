@@ -388,6 +388,73 @@ html,body{overflow-x:clip}
   backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);
   -webkit-mask-image:linear-gradient(to bottom,#000 70%,transparent);mask-image:linear-gradient(to bottom,#000 70%,transparent)}
 .header-pill{position:relative}
+
+/* ===== V2.6: badges, sold out, bag ===== */
+.pcard-badge{position:absolute;top:12px;left:12px;z-index:3;padding:6px 12px;border-radius:999px;font-size:10.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#4A332D;background:rgba(250,248,245,.78);backdrop-filter:blur(12px) saturate(160%);-webkit-backdrop-filter:blur(12px) saturate(160%);box-shadow:0 1px 0 rgba(255,255,255,.6) inset}
+.pcard-badge--off{color:#6b615c}
+.grid > :last-child:nth-child(3n+1){grid-column:2}
+.btn--done{background:#55624B}
+.btn--soldout{background:#EFE9E1;color:#8a807a;cursor:not-allowed}
+.btn--restock{margin-top:10px;border-color:#4A332D;color:#4A332D;gap:10px}
+.buy-alt{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:44px;margin-top:6px;background:none;border:0;font:inherit;font-size:13px;color:#4A332D;text-decoration:underline;text-underline-offset:5px;cursor:pointer}
+.bag-btn{position:relative}
+.hpill{white-space:nowrap}
+.bag-count{position:absolute;top:3px;right:1px;min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:#4A332D;color:#FAF8F5;font-size:10.5px;font-weight:600;line-height:18px;text-align:center;font-variant-numeric:tabular-nums;animation-duration:.5s;animation-timing-function:var(--ease-out);pointer-events:none}
+@keyframes bagBumpA{0%{transform:scale(.4)}55%{transform:scale(1.25)}100%{transform:scale(1)}}
+@keyframes bagBumpB{0%{transform:scale(.4)}55%{transform:scale(1.25)}100%{transform:scale(1)}}
+.overlay--bag{backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.bag{position:fixed;top:0;right:0;bottom:0;width:min(460px,100%);background:#FAF8F5;z-index:90;border-radius:28px 0 0 28px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 30px 80px rgba(24,22,21,.2);animation:slideIn .5s var(--ease-drawer)}
+.bag .grab{display:none}
+.bag-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:22px 20px 14px 28px;border-bottom:1px solid #EFE8DD}
+.bag-head h2{font-family:'Lora',Georgia,serif;font-weight:400;font-size:28px;margin:0;line-height:1.1}
+.bag-sub{display:block;margin-top:4px;font-size:12px;letter-spacing:.08em;color:#6b615c}
+.bag-body{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:0 28px 20px}
+.bag-list{list-style:none;margin:0;padding:0}
+.bag-item{display:grid;grid-template-columns:84px minmax(0,1fr);gap:16px;padding:18px 0;border-bottom:1px solid #EFE8DD}
+.bag-thumb{position:relative;aspect-ratio:3/4;border-radius:12px;overflow:hidden;background:#EFE9E1}
+.bag-thumb img{position:absolute;max-width:none}
+.bag-thumb img.fill{left:-8%;top:-8%;width:116%;height:116%;object-fit:cover;filter:blur(20px)}
+.bag-info{display:flex;flex-direction:column;justify-content:space-between;gap:10px;min-width:0}
+.bag-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.bag-name{font-family:'Lora',Georgia,serif;font-size:18px;line-height:1.2}
+.bag-price{font-size:14px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.bag-meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;font-size:12.5px;color:#6b615c}
+.bag-color{display:inline-flex;align-items:center;gap:6px}
+.bag-size{padding:3px 10px;border-radius:999px;border:1px solid #E6DFD5;color:#181615;font-weight:500;font-size:11.5px}
+.qty{display:inline-flex;align-items:center;border:1px solid #E6DFD5;border-radius:999px;background:#fff}
+.qty button{width:40px;height:40px;border:0;background:none;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:#181615;transition:background .3s var(--ease-out)}
+.qty button:active{transform:scale(.92)}
+.qty span{min-width:22px;text-align:center;font-size:14px;font-variant-numeric:tabular-nums}
+.bag-remove{font-size:12px;color:#6b615c;min-height:40px}
+.bag-form{display:grid;gap:14px;margin-top:22px}
+.bag-form label{display:grid;gap:8px}
+.bag-form label span{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#4A332D}
+.bag-form input,.bag-form textarea{width:100%;box-sizing:border-box;border:1px solid #E6DFD5;border-radius:16px;background:#fff;padding:14px 16px;font:inherit;font-size:16px;color:#181615;resize:none;transition:border-color .3s var(--ease-out),box-shadow .3s var(--ease-out)}
+.bag-form input:focus,.bag-form textarea:focus{outline:none;border-color:#4A332D;box-shadow:0 0 0 3px rgba(74,51,45,.12)}
+.bag-form ::placeholder{color:#A39A92}
+.bag-foot{padding:16px 28px calc(18px + env(safe-area-inset-bottom));border-top:1px solid #EFE8DD;background:rgba(250,248,245,.92)}
+.bag-total{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px;font-size:13px;letter-spacing:.04em;color:#6b615c}
+.bag-total b{font-family:'Lora',Georgia,serif;font-weight:400;font-size:24px;color:#181615;font-variant-numeric:tabular-nums}
+.bag-foot .btn{gap:10px}
+.bag-empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 32px 64px}
+.bag-empty-ico{width:72px;height:72px;border-radius:999px;background:#F3E9D2;color:#4A332D;display:inline-flex;align-items:center;justify-content:center;margin-bottom:22px}
+.bag-empty h3{font-family:'Lora',Georgia,serif;font-weight:400;font-size:24px;margin:0 0 10px}
+.bag-empty p{margin:0 0 26px;color:#6b615c;font-size:15px}
+html:has(.bag){overflow:hidden}
+@media (hover:hover) and (pointer:fine){ .qty button:hover{background:#F3EEE7} .buy-alt:hover{color:#181615} }
+@media (max-width:900px){ .grid > :last-child:nth-child(3n+1){grid-column:auto} }
+@media (max-width:600px){
+  .bag{top:auto;left:0;width:100%;max-height:92svh;border-radius:28px 28px 0 0;animation:slideUp .5s var(--ease-drawer)}
+  .bag .grab{display:block;position:absolute;top:8px;left:50%;transform:translateX(-50%);width:40px;height:4px;border-radius:9px;background:#E6DFD5}
+  .bag-head{position:relative;padding:24px 16px 12px 20px}
+  .bag-head h2{font-size:24px}
+  .bag-body{padding:0 20px 16px}
+  .bag-foot{padding:14px 20px calc(14px + env(safe-area-inset-bottom))}
+  .bag-item{grid-template-columns:72px minmax(0,1fr);gap:14px}
+  .header-pill .head-actions{gap:0}
+  .header-pill .head-actions .icon-btn{width:40px;height:40px}
+}
+
 /* reduced motion: fewer and gentler, not zero */
 @media (prefers-reduced-motion: reduce){
   .header,.hero .eyebrow,.hero h1 .ln > *,.hero p.lead,.hero-ctas,.hero-chip,.hero-photo{animation-name:fade !important}
@@ -520,7 +587,10 @@ html,body{overflow-x:clip}
         <a class="icon-btn only-mobile" href="https://wa.me/5521968653459" target="_blank" rel="noopener noreferrer" aria-label="Falar no WhatsApp" style="background: #4A332D; color: #FAF8F5">
           <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8a9.2 9.2 0 0 0-7.9 13.9L2.8 21.2l4.6-1.2A9.2 9.2 0 1 0 12 2.8z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"></path><path transform="translate(6.9 6.9) scale(.44)" fill="currentColor" d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"></path></svg>
         </a>
-
+        <button class="icon-btn bag-btn" type="button" aria-label="{{ sc.aria }}" onClick="{{ openBag }}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 8h13l-1 12.5h-11z"></path><path d="M9 10.5V7a3 3 0 0 1 6 0v3.5"></path></svg>
+          <template data-if="{{ sc.temQtd }}"><span class="bag-count" style="animation-name: {{ sc.anim }}">{{ sc.qtd }}</span></template>
+        </button>
           <button class="icon-btn only-mobile" type="button" aria-label="Abrir menu" onClick="{{ openMenu }}">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 8h16M4 16h10"></path></svg>
           </button>
@@ -631,6 +701,7 @@ html,body{overflow-x:clip}
         <template data-for="{{ catalogo }}" data-as="c">
           <button class="pcard" type="button" onClick="{{ c.open }}" aria-label="{{ c.aria }}">
             <div class="pcard-media">
+              <template data-if="{{ c.temBadge }}"><span class="{{ c.badgeCls }}">{{ c.badge }}</span></template>
               <div class="pcard-zoom">
                 <img class="fill" src="{{ c.capa }}" alt="" aria-hidden="true">
                 <img src="{{ c.capa }}" alt="{{ c.alt }}" style="left: {{ c.l }}; top: {{ c.t }}; width: {{ c.w }}; height: {{ c.h }}">
@@ -869,17 +940,21 @@ html,body{overflow-x:clip}
           </template>
 
           <div>
-            <template data-if="{{ m.prontoParaComprar }}">
-              <a class="btn btn--primary btn--block" href="{{ m.waHref }}" target="_blank" rel="noopener noreferrer">
-                <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8a9.2 9.2 0 0 0-7.9 13.9L2.8 21.2l4.6-1.2A9.2 9.2 0 1 0 12 2.8z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"></path><path transform="translate(6.9 6.9) scale(.44)" fill="currentColor" d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"></path></svg>
-                Comprar pelo WhatsApp
-              </a>
-            </template>
-            <template data-if="{{ m.naoPronto }}">
-              <button class="btn btn--primary btn--block" type="button" onClick="{{ m.pedirTamanho }}" style="opacity: .92">
-                <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8a9.2 9.2 0 0 0-7.9 13.9L2.8 21.2l4.6-1.2A9.2 9.2 0 1 0 12 2.8z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"></path><path transform="translate(6.9 6.9) scale(.44)" fill="currentColor" d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"></path></svg>
-                Comprar pelo WhatsApp
+            <template data-if="{{ m.podeComprar }}">
+              <button class="{{ m.addCls }}" type="button" onClick="{{ m.adicionar }}">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 8h13l-1 12.5h-11z"></path><path d="M9 10.5V7a3 3 0 0 1 6 0v3.5"></path></svg>
+                {{ m.addLabel }}
               </button>
+              <template data-if="{{ m.prontoParaComprar }}">
+                <a class="buy-alt" href="{{ m.waHref }}" target="_blank" rel="noopener noreferrer"><svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8a9.2 9.2 0 0 0-7.9 13.9L2.8 21.2l4.6-1.2A9.2 9.2 0 1 0 12 2.8z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"></path><path transform="translate(6.9 6.9) scale(.44)" fill="currentColor" d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"></path></svg>Comprar só esta peça direto no WhatsApp</a>
+              </template>
+              <template data-if="{{ m.naoPronto }}">
+                <button class="buy-alt" type="button" onClick="{{ m.pedirTamanho }}"><svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8a9.2 9.2 0 0 0-7.9 13.9L2.8 21.2l4.6-1.2A9.2 9.2 0 1 0 12 2.8z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"></path><path transform="translate(6.9 6.9) scale(.44)" fill="currentColor" d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"></path></svg>Comprar só esta peça direto no WhatsApp</button>
+              </template>
+            </template>
+            <template data-if="{{ m.corEsgotada }}">
+              <button class="btn btn--block btn--soldout" type="button" disabled>Peça esgotada</button>
+              <a class="btn btn--ghost btn--block btn--restock" href="{{ m.reposicaoHref }}" target="_blank" rel="noopener noreferrer"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8a9.2 9.2 0 0 0-7.9 13.9L2.8 21.2l4.6-1.2A9.2 9.2 0 1 0 12 2.8z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"></path><path transform="translate(6.9 6.9) scale(.44)" fill="currentColor" d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"></path></svg>Consultar reposição pelo WhatsApp</a>
             </template>
             <p class="buy-note">{{ m.resumo }}</p>
           </div>
@@ -893,13 +968,68 @@ html,body{overflow-x:clip}
     </section>
   </template>
 
+  <template data-if="{{ sacolaAberta }}">
+    <div class="overlay overlay--bag" onClick="{{ sc.fechar }}"></div>
+    <section class="bag" role="dialog" aria-modal="true" aria-labelledby="bag-title">
+      <div class="bag-head">
+        <span class="grab" aria-hidden="true"></span>
+        <div><h2 id="bag-title">Sua sacola</h2><template data-if="{{ sc.cheia }}"><span class="bag-sub">{{ sc.qtdTxt }}</span></template></div>
+        <button class="icon-btn" type="button" aria-label="Fechar sacola" onClick="{{ sc.fechar }}" style="background: #F3E9D2">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+        </button>
+      </div>
+
+      <template data-if="{{ sc.vazia }}">
+        <div class="bag-empty">
+          <span class="bag-empty-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 8h13l-1 12.5h-11z"></path><path d="M9 10.5V7a3 3 0 0 1 6 0v3.5"></path></svg></span>
+          <h3>Sua sacola está vazia</h3>
+          <p>Explore as peças da coleção e monte seu look.</p>
+          <button class="btn btn--primary" type="button" onClick="{{ sc.explorar }}">Explorar coleção</button>
+        </div>
+      </template>
+
+      <template data-if="{{ sc.cheia }}">
+        <div class="bag-body">
+          <ul class="bag-list">
+            <template data-for="{{ sc.itens }}" data-as="it">
+              <li class="bag-item">
+                <div class="bag-thumb"><img class="fill" src="{{ it.foto }}" alt="" aria-hidden="true"><img src="{{ it.foto }}" alt="{{ it.alt }}" style="left: {{ it.l }}; top: {{ it.t }}; width: {{ it.w }}; height: {{ it.h }}"></div>
+                <div class="bag-info">
+                  <div class="bag-row"><span class="bag-name">{{ it.nome }}</span><span class="bag-price">{{ it.sub }}</span></div>
+                  <div class="bag-meta"><span class="bag-color"><span class="dot" style="background: {{ it.hex }}"></span>{{ it.corNome }}</span><span class="bag-size">{{ it.tam }}</span><template data-if="{{ it.multi }}"><span class="bag-unit">{{ it.unit }} cada</span></template></div>
+                  <div class="bag-row">
+                    <div class="qty">
+                      <button type="button" aria-label="{{ it.menosAria }}" onClick="{{ it.menos }}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button>
+                      <span aria-live="polite">{{ it.qtd }}</span>
+                      <button type="button" aria-label="{{ it.maisAria }}" onClick="{{ it.mais }}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+                    </div>
+                    <button class="link-btn bag-remove" type="button" aria-label="{{ it.removerAria }}" onClick="{{ it.remover }}">Remover</button>
+                  </div>
+                </div>
+              </li>
+            </template>
+          </ul>
+          <div class="bag-form">
+            <label><span>Seu nome</span><input type="text" name="nome" autocomplete="given-name" placeholder="Como podemos te chamar?" value="{{ sc.nome }}" onInput="{{ sc.setNome }}"></label>
+            <label><span>Observação ou entrega</span><textarea name="obs" rows="2" placeholder="Ex: Entrega no RJ, retirada ou dúvida sobre tamanho" onInput="{{ sc.setObs }}">{{ sc.obs }}</textarea></label>
+          </div>
+        </div>
+        <div class="bag-foot">
+          <div class="bag-total"><span>Subtotal estimado</span><b>{{ sc.total }}</b></div>
+          <a class="btn btn--primary btn--block" href="{{ sc.enviarHref }}" target="_blank" rel="noopener noreferrer" onClick="{{ sc.enviar }}"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8a9.2 9.2 0 0 0-7.9 13.9L2.8 21.2l4.6-1.2A9.2 9.2 0 1 0 12 2.8z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"></path><path transform="translate(6.9 6.9) scale(.44)" fill="currentColor" d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"></path></svg>Enviar pedido pelo WhatsApp</a>
+          <p class="buy-note">Confirmamos disponibilidade, frete e pagamento pelo WhatsApp.</p>
+        </div>
+      </template>
+    </section>
+  </template>
+
 </div>
 </template>
 <script>
 class DCLogic { constructor() { this.props = {}; this.state = {}; } }
 </script>
 <script>
-var FILE2ID = {"fotos/calca-com-bolso--bolso-uva.jpg": "695e7aa2cc58d0500f671d37f10c6a86", "fotos/calca-com-bolso--costas-uva.jpg": "a062ec6a9436e369154d953efac93108", "fotos/calca-com-bolso--frente-uva.jpg": "f4d3a41537e0bdaacccf479f4046116c", "fotos/calca-com-bolso--romulosilvafotografias0530.jpg": "f766567129214d455796dcc5e2f65824", "fotos/calca-flare--costas-cacau.jpg": "c34f8194be831fa919a76a3246a00e4e", "fotos/calca-flare--costas-manteiga.jpg": "68066e2d4f194a4d94ce93f5cc0d491a", "fotos/calca-flare--costas-onyx.jpg": "3b561d2cb3f773d773589034a63b4315", "fotos/calca-flare--frente-2-onyx.jpg": "a9daa301a6a7607a5483778c906b1b96", "fotos/calca-flare--frente-cacau.jpg": "4745144b97c384d69943ac237ef580de", "fotos/calca-flare--frente-manteiga.jpg": "c436a5468b3fdcf738cb1493bcc05ae7", "fotos/calca-flare--frente-onyx.jpg": "a0275f26eaf56fe363997aeb9078b058", "fotos/calca-flare--lado-2-manteiga.jpg": "cef9a94cfce863f2e48ba568d908c118", "fotos/calca-flare--lado-cacau.jpg": "f4b194a58509e4b73cafda67c551fa5c", "fotos/calca-flare--lado-manteiga.jpg": "86663aa0b9fab5fabda103a75fc50a1d", "fotos/calca-flare--monograma-n-cacau.jpg": "e12d13f6e0ce9daec4ef8dd9c652fe69", "fotos/calca-flare--monograma-n-onyx.jpg": "73a963bbe3ccffd77c7b3ae9b24aba89", "fotos/cropped-manga-longa--costas-manteiga.jpg": "7047b8c5eed21ff894a19a9885813f93", "fotos/cropped-manga-longa--costas-onyx.jpg": "7dfc581b39ca2bab9e42462471d9fcc8", "fotos/cropped-manga-longa--frente-2-onyx.jpg": "3f8972bff41c132b49189606b1245a96", "fotos/cropped-manga-longa--frente-manteiga.jpg": "caf250d1bfa26ae31527434feeae4beb", "fotos/cropped-manga-longa--frente-onyx.jpg": "cf57c7ca44e1aea80dd1c44553dd1a55", "fotos/cropped-manga-longa--lado-2-manteiga.jpg": "e3bda0153fff9cd3244bbacff10f5533", "fotos/cropped-manga-longa--lado-manteiga.jpg": "0f15f4900ea4cff35730e3965337a781", "fotos/cropped-manga-longa--marca-onyx.jpg": "8b93a88bcb92c8097bf51fe514654a5f", "fotos/macacao-ret--costas-azul-bebe.jpg": "a736573cb04c8da313a740cdb658c867", "fotos/macacao-ret--costas-cacau.jpg": "3e92b68feafea33054feb19cbdddb39d", "fotos/macacao-ret--costas-coral.jpg": "b0de1cfb1ff5753d74a1ec4829859301", "fotos/macacao-ret--costas-oliva.jpg": "8e622722380f08da5b56883bc1e0c8b2", "fotos/macacao-ret--frente-azul-bebe.jpg": "3ae3138303112d44b696c03f9b7d4e8c", "fotos/macacao-ret--frente-cacau.jpg": "db3cf95ca38deb9698c4a90e1bc1bc12", "fotos/macacao-ret--frente-coral.jpg": "78aa0b964535437dbf0d771c5e7c11cc", "fotos/macacao-ret--frente-oliva.jpg": "4bebf94cc62331730e9b2c890d70819d", "fotos/macacao-ret--lado-azul-bebe.jpg": "d8cb64420a0504c0b0d21b83c91814e0", "fotos/macacao-ret--lado-cacau.jpg": "46ed8e6b6f47edd680a051b08f7930fc", "fotos/macacao-ret--lado-coral.jpg": "24811f6249d6f6c8569222a2cbfc161b", "fotos/macacao-ret--lado-oliva.jpg": "091f14d3c7f1202e99d93baffe726bf3", "fotos/macacao-ret--monograma-n-azul-bebe.jpg": "1835a6ef92261c49ee0ce2c1037956dd", "fotos/macacao-ret--monograma-n-cacau.jpg": "3129096828e8d94e73df653867e471d1", "fotos/macacao-ret--monograma-n-coral.jpg": "3bbab163f861cc28cca07d7c64a44175", "fotos/macacao-ret--monograma-n-oliva.jpg": "37cd7643ed2ffb45fcbd7735e6e14cbf", "fotos/macaquinho-icon--cadeira-coral.jpg": "0033e2c18a92fca17eb9c316ee5d0a74", "fotos/macaquinho-icon--costas-coral.jpg": "5023c866cb4c30db80173c2b6a9770a2", "fotos/macaquinho-icon--costas-onyx.jpg": "dbdaffc36872c0b5f260ca13b2df7e42", "fotos/macaquinho-icon--frente-coral.jpg": "be8c412ccecd136fd52e1793d8d6b6b8", "fotos/macaquinho-icon--frente-onyx.jpg": "f94a619a566a6793b57346b7897ad7be", "fotos/macaquinho-icon--lado-coral.jpg": "f4c1212059bf789d61cc6571e39654a9", "fotos/macaquinho-icon--lado-onyx.jpg": "987f389d95fb754322e092686db4ca95", "fotos/macaquinho-icon--monograma-n-coral.jpg": "02bd5e7500af2ad7ac25124ebf3651f8", "fotos/macaquinho-icon--monograma-n-onyx.jpg": "a4c968eb45428fb2fdf657e587a0eba5", "fotos/macaquinho-tube--costas-onyx.jpg": "b789db2680c74cdf99a8eb4c72ea7fe1", "fotos/macaquinho-tube--frente-2-onyx.jpg": "e834c72b596765f7754017136e7d7452", "fotos/macaquinho-tube--frente-onys.jpg": "5d73faaa7df108f464a4da0da98ff08a", "fotos/macaquinho-tube--lado-onyx.jpg": "dda4649c83c6aa08b80dc237310e771b", "fotos/nariah-lovers--nariah-lovers-frente.jpg": "48d90f3cf7544c88e0d7d2de27622461", "fotos/short-basic--costas-cacau.jpg": "a8caef4dc6c66baa9bb4bc8c2cfb5c78", "fotos/short-basic--costas-coral.jpg": "32cf19cc1215a710ffca44c00da8d3cd", "fotos/short-basic--costas-onyx.jpg": "085f9d7a3870ff756235f36dc534370c", "fotos/short-basic--frente-2-onyx.jpg": "1fb0838f522b045fdfcdf332d504da0a", "fotos/short-basic--frente-cacau.jpg": "6d5cc7dca8e08eff831c55a765bd5ab6", "fotos/short-basic--frente-coral.jpg": "c9b09c4beded203060d348982f44156e", "fotos/short-basic--frente-onyx.jpg": "59a0237a824589b5316e4073fc08006d", "fotos/short-basic--lado-2-cacau.jpg": "92ac8915653e1282e986c9f9a8d5fd1d", "fotos/short-basic--lado-cacau.jpg": "e8900b887b901086bee16bd41fc4620c", "fotos/short-basic--lado-coral.jpg": "08271b788c8e9bb4a4168d61025efeec", "fotos/short-basic--monograma-n-coral.jpg": "e1f753a2285ab7ce42777cd28b9b2ee2", "fotos/short-basic--monograma-n-onyx.jpg": "b54cc285069064a3b6e1a23bbcf06dcf", "fotos/top-basic--costas-onyx.jpg": "1033de36acb58bab0f96f36a3ad70e3d", "fotos/top-basic--frente-onyx.jpg": "55d676eb6b208d61049b46c25521a26e", "fotos/top-basic--lado-onyx.jpg": "db682321c5ed307809e54c7b316809f6", "fotos/top-basic--monograma-n-onyx.jpg": "afd3cfc408be60f6accc88f67a633115", "fotos/top-regulavel--costas-cacau.jpg": "87b27740d1b226f04ac05d20cdbec57b", "fotos/top-regulavel--frente-cacau.jpg": "73571d1c928a22db9bb596ff76495a29", "fotos/top-regulavel--lado-2-cacau.jpg": "be5b11742ea97677ec433867ffd57563", "fotos/top-regulavel--lado-cacau.jpg": "6bcce201d2c3f34488b78d6ae912f4cd", "fotos/sobre--nathalia-lagoia-hd.jpg": "ef39ef9fd69926cf61f4a8a94f55aa64", "fotos/logo--monograma-n-transparente.png": "9f47bab444d967709d3109f26146a313"};
+var FILE2ID = {"fotos/calca-com-bolso--bolso-uva.jpg": "695e7aa2cc58d0500f671d37f10c6a86", "fotos/calca-com-bolso--costas-uva.jpg": "a062ec6a9436e369154d953efac93108", "fotos/calca-com-bolso--frente-uva.jpg": "f4d3a41537e0bdaacccf479f4046116c", "fotos/calca-com-bolso--romulosilvafotografias0530.jpg": "f766567129214d455796dcc5e2f65824", "fotos/calca-flare--costas-cacau.jpg": "c34f8194be831fa919a76a3246a00e4e", "fotos/calca-flare--costas-manteiga.jpg": "68066e2d4f194a4d94ce93f5cc0d491a", "fotos/calca-flare--costas-onyx.jpg": "3b561d2cb3f773d773589034a63b4315", "fotos/calca-flare--frente-2-onyx.jpg": "a9daa301a6a7607a5483778c906b1b96", "fotos/calca-flare--frente-cacau.jpg": "4745144b97c384d69943ac237ef580de", "fotos/calca-flare--frente-manteiga.jpg": "c436a5468b3fdcf738cb1493bcc05ae7", "fotos/calca-flare--frente-onyx.jpg": "a0275f26eaf56fe363997aeb9078b058", "fotos/calca-flare--lado-2-manteiga.jpg": "cef9a94cfce863f2e48ba568d908c118", "fotos/calca-flare--lado-cacau.jpg": "f4b194a58509e4b73cafda67c551fa5c", "fotos/calca-flare--lado-manteiga.jpg": "86663aa0b9fab5fabda103a75fc50a1d", "fotos/calca-flare--monograma-n-cacau.jpg": "e12d13f6e0ce9daec4ef8dd9c652fe69", "fotos/calca-flare--monograma-n-onyx.jpg": "73a963bbe3ccffd77c7b3ae9b24aba89", "fotos/cropped-manga-longa--costas-manteiga.jpg": "7047b8c5eed21ff894a19a9885813f93", "fotos/cropped-manga-longa--costas-onyx.jpg": "7dfc581b39ca2bab9e42462471d9fcc8", "fotos/cropped-manga-longa--frente-2-onyx.jpg": "3f8972bff41c132b49189606b1245a96", "fotos/cropped-manga-longa--frente-manteiga.jpg": "caf250d1bfa26ae31527434feeae4beb", "fotos/cropped-manga-longa--frente-onyx.jpg": "cf57c7ca44e1aea80dd1c44553dd1a55", "fotos/cropped-manga-longa--lado-2-manteiga.jpg": "e3bda0153fff9cd3244bbacff10f5533", "fotos/cropped-manga-longa--lado-manteiga.jpg": "0f15f4900ea4cff35730e3965337a781", "fotos/cropped-manga-longa--marca-onyx.jpg": "8b93a88bcb92c8097bf51fe514654a5f", "fotos/macacao-ret--costas-azul-bebe.jpg": "a736573cb04c8da313a740cdb658c867", "fotos/macacao-ret--costas-cacau.jpg": "3e92b68feafea33054feb19cbdddb39d", "fotos/macacao-ret--costas-coral.jpg": "b0de1cfb1ff5753d74a1ec4829859301", "fotos/macacao-ret--costas-oliva.jpg": "8e622722380f08da5b56883bc1e0c8b2", "fotos/macacao-ret--frente-azul-bebe.jpg": "3ae3138303112d44b696c03f9b7d4e8c", "fotos/macacao-ret--frente-cacau.jpg": "db3cf95ca38deb9698c4a90e1bc1bc12", "fotos/macacao-ret--frente-coral.jpg": "78aa0b964535437dbf0d771c5e7c11cc", "fotos/macacao-ret--frente-oliva.jpg": "4bebf94cc62331730e9b2c890d70819d", "fotos/macacao-ret--lado-azul-bebe.jpg": "d8cb64420a0504c0b0d21b83c91814e0", "fotos/macacao-ret--lado-cacau.jpg": "46ed8e6b6f47edd680a051b08f7930fc", "fotos/macacao-ret--lado-coral.jpg": "24811f6249d6f6c8569222a2cbfc161b", "fotos/macacao-ret--lado-oliva.jpg": "091f14d3c7f1202e99d93baffe726bf3", "fotos/macacao-ret--monograma-n-azul-bebe.jpg": "1835a6ef92261c49ee0ce2c1037956dd", "fotos/macacao-ret--monograma-n-cacau.jpg": "3129096828e8d94e73df653867e471d1", "fotos/macacao-ret--monograma-n-coral.jpg": "3bbab163f861cc28cca07d7c64a44175", "fotos/macacao-ret--monograma-n-oliva.jpg": "37cd7643ed2ffb45fcbd7735e6e14cbf", "fotos/macaquinho-icon--cadeira-coral.jpg": "0033e2c18a92fca17eb9c316ee5d0a74", "fotos/macaquinho-icon--costas-coral.jpg": "5023c866cb4c30db80173c2b6a9770a2", "fotos/macaquinho-icon--costas-onyx.jpg": "dbdaffc36872c0b5f260ca13b2df7e42", "fotos/macaquinho-icon--frente-coral.jpg": "be8c412ccecd136fd52e1793d8d6b6b8", "fotos/macaquinho-icon--frente-onyx.jpg": "f94a619a566a6793b57346b7897ad7be", "fotos/macaquinho-icon--lado-coral.jpg": "f4c1212059bf789d61cc6571e39654a9", "fotos/macaquinho-icon--lado-onyx.jpg": "987f389d95fb754322e092686db4ca95", "fotos/macaquinho-icon--monograma-n-coral.jpg": "02bd5e7500af2ad7ac25124ebf3651f8", "fotos/macaquinho-icon--monograma-n-onyx.jpg": "a4c968eb45428fb2fdf657e587a0eba5", "fotos/macaquinho-tube--costas-onyx.jpg": "b789db2680c74cdf99a8eb4c72ea7fe1", "fotos/macaquinho-tube--frente-2-onyx.jpg": "e834c72b596765f7754017136e7d7452", "fotos/macaquinho-tube--frente-onys.jpg": "5d73faaa7df108f464a4da0da98ff08a", "fotos/macaquinho-tube--lado-onyx.jpg": "dda4649c83c6aa08b80dc237310e771b", "fotos/nariah-lovers--nariah-lovers-frente.jpg": "48d90f3cf7544c88e0d7d2de27622461", "fotos/short-basic--costas-cacau.jpg": "a8caef4dc6c66baa9bb4bc8c2cfb5c78", "fotos/short-basic--costas-coral.jpg": "32cf19cc1215a710ffca44c00da8d3cd", "fotos/short-basic--costas-onyx.jpg": "085f9d7a3870ff756235f36dc534370c", "fotos/short-basic--frente-2-onyx.jpg": "1fb0838f522b045fdfcdf332d504da0a", "fotos/short-basic--frente-cacau.jpg": "6d5cc7dca8e08eff831c55a765bd5ab6", "fotos/short-basic--frente-coral.jpg": "c9b09c4beded203060d348982f44156e", "fotos/short-basic--frente-onyx.jpg": "59a0237a824589b5316e4073fc08006d", "fotos/short-basic--lado-2-cacau.jpg": "92ac8915653e1282e986c9f9a8d5fd1d", "fotos/short-basic--lado-cacau.jpg": "e8900b887b901086bee16bd41fc4620c", "fotos/short-basic--lado-coral.jpg": "08271b788c8e9bb4a4168d61025efeec", "fotos/short-basic--monograma-n-coral.jpg": "e1f753a2285ab7ce42777cd28b9b2ee2", "fotos/short-basic--monograma-n-onyx.jpg": "b54cc285069064a3b6e1a23bbcf06dcf", "fotos/top-basic--costas-onyx.jpg": "1033de36acb58bab0f96f36a3ad70e3d", "fotos/top-basic--frente-onyx.jpg": "55d676eb6b208d61049b46c25521a26e", "fotos/top-basic--lado-onyx.jpg": "db682321c5ed307809e54c7b316809f6", "fotos/top-basic--monograma-n-onyx.jpg": "afd3cfc408be60f6accc88f67a633115", "fotos/top-regulavel--costas-cacau.jpg": "87b27740d1b226f04ac05d20cdbec57b", "fotos/top-regulavel--frente-cacau.jpg": "73571d1c928a22db9bb596ff76495a29", "fotos/top-regulavel--lado-2-cacau.jpg": "be5b11742ea97677ec433867ffd57563", "fotos/top-regulavel--lado-cacau.jpg": "6bcce201d2c3f34488b78d6ae912f4cd", "fotos/sobre--nathalia-lagoia-hd.jpg": "ef39ef9fd69926cf61f4a8a94f55aa64", "fotos/logo--monograma-n-transparente.png": "9f47bab444d967709d3109f26146a313", "fotos/macaquinho-icon--frente-cacau.jpg": "181ae73b397c2e06293e3c68bd2d779a", "fotos/macaquinho-icon--lado-cacau.jpg": "88c5df3987c534c89d7b88b375e524c7", "fotos/macaquinho-icon--lado-2-cacau.jpg": "7dbc059610a86f6eb9c5244b9ce67b4a", "fotos/macaquinho-icon--costas-cacau.jpg": "91b8be20f8d8ab8118e226c2bc36921b", "fotos/top-regulavel--frente-coral.jpg": "c3b90d6293097ad7bafa6a59db642cda", "fotos/top-regulavel--lado-coral.jpg": "50338239844770652f22becc931c8b9f", "fotos/top-regulavel--monograma-n-coral.jpg": "5398461533a2dafd164df05c9316dcf7", "fotos/top-costas-abertas--frente-coral.jpg": "b4a553e05468d36d338ca16e842acf8a", "fotos/top-costas-abertas--lado-coral.jpg": "e242280e431dee7ab85f54b18fea7be2", "fotos/top-costas-abertas--costas-coral.jpg": "051459a2d9268b8316a445a8cc4beedc", "fotos/top-costas-abertas--monograma-n-coral.jpg": "885ccee7947cbcd47f465bf86ef22ba8", "fotos/blusa-frente-unica--lado-onyx.jpg": "2e9a2bccefbdbdcb6928161198807bc1", "fotos/blusa-frente-unica--lado-2-onyx.jpg": "e48c571678355f4d6e116043ec145061", "fotos/conjunto-navy--frente.jpg": "0ee61b0780ebd3c3971993c47f04031e", "fotos/conjunto-navy--lado.jpg": "31bc0ac7a86b4c73f94e9c80c5ae1bbf", "fotos/conjunto-navy--costas.jpg": "db5972fb8ffccc731580b2d0a552cbac"};
 
 // ─────────────────────────────────────────────────────────────
 // Dados da vitrine. Estrutura relacional pronta para o banco:
@@ -921,7 +1051,8 @@ var CORES = {
   coral:    { nome: 'Coral',     hex: '#E05A47' },
   azulBebe: { nome: 'Azul bebê', hex: '#B8D4E3' },
   oliva:    { nome: 'Oliva',     hex: '#55624B' },
-  uva:      { nome: 'Uva',       hex: '#5A334B' }
+  uva:      { nome: 'Uva',       hex: '#5A334B' },
+  navy:     { nome: 'Azul Navy', hex: '#1B2A4A' }
 };
 
 // Enquadramento do produto -> qual região calibrada de cada foto usar.
@@ -993,6 +1124,21 @@ var QUADROS = {
   'f94a619a566a6793b57346b7897ad7be': { inteiro: [0.51, .16, .92] },
   'f4c1212059bf789d61cc6571e39654a9': { inteiro: [0.47, .15, .92] },
   '987f389d95fb754322e092686db4ca95': { inteiro: [0.52, .17, .93] },
+  // Fotos novas (Icon Cacao, Top Regulável Coral, peças novas, conjunto Navy)
+  '181ae73b397c2e06293e3c68bd2d779a': { a: .746, inteiro: [0.47, .08, .95] },
+  '88c5df3987c534c89d7b88b375e524c7': { a: .746, inteiro: [0.48, .08, .94] },
+  '7dbc059610a86f6eb9c5244b9ce67b4a': { a: .746, inteiro: [0.52, .09, .96] },
+  '91b8be20f8d8ab8118e226c2bc36921b': { a: .746, inteiro: [0.50, .05, .96] },
+  'c3b90d6293097ad7bafa6a59db642cda': { sup: [0.44, .31, .50], inteiro: [0.48, .17, .96] },
+  '50338239844770652f22becc931c8b9f': { sup: [0.52, .33, .51], inteiro: [0.54, .17, .94] },
+  'b4a553e05468d36d338ca16e842acf8a': { sup: [0.47, .17, .50], inteiro: [0.50, .10, 1] },
+  'e242280e431dee7ab85f54b18fea7be2': { sup: [0.47, .29, .53], inteiro: [0.48, .17, .95] },
+  '051459a2d9268b8316a445a8cc4beedc': { sup: [0.50, .32, .54], inteiro: [0.50, .18, .95] },
+  '2e9a2bccefbdbdcb6928161198807bc1': { sup: [0.43, .15, .48], inteiro: [0.45, .11, .96] },
+  'e48c571678355f4d6e116043ec145061': { sup: [0.48, .14, .56], inteiro: [0.50, .08, 1] },
+  '0ee61b0780ebd3c3971993c47f04031e': { sup: [0.42, .17, .46], inf: [0.47, .38, .97], inteiro: [0.45, .08, .97] },
+  '31bc0ac7a86b4c73f94e9c80c5ae1bbf': { sup: [0.50, .17, .46], inf: [0.50, .40, .97], inteiro: [0.50, .08, .97] },
+  'db5972fb8ffccc731580b2d0a552cbac': { sup: [0.55, .12, .52], inf: [0.55, .50, 1], inteiro: [0.55, .05, 1] },
   // Tube
   'b789db2680c74cdf99a8eb4c72ea7fe1': { inteiro: [0.53, .16, .96] },
   'e834c72b596765f7754017136e7d7452': { inteiro: [0.45, .24, 1] },
@@ -1029,11 +1175,24 @@ var FOTOS_CONJUNTO_UVA = [
   foto('fotos/calca-com-bolso--bolso-uva.jpg', 'Detalhe do bolso', true)
 ];
 
+// Fotos do conjunto Azul Navy (Top Ombro + Calça Cós Cruzado): cada peça usa seu enquadramento
+var FOTOS_CONJUNTO_NAVY = [
+  foto('fotos/conjunto-navy--frente.jpg', 'Frente'),
+  foto('fotos/conjunto-navy--lado.jpg', 'Lado'),
+  foto('fotos/conjunto-navy--costas.jpg', 'Costas')
+];
+
 var PRODUTOS = [
   {
     id: 'icon', nome: 'Icon', categoria: 'Macaquinhos', preco: 179, enquadramento: 'inteiro',
     descricao: 'Tecido de compressão suave que modela sem apertar, alças finas e costas abertas que deixam o movimento leve. Do agachamento ao café depois do treino, ele segue com você com o mesmo caimento impecável.',
     cores: [
+      { corId: 'cacao', estoque: estoque(['PP']), fotos: [
+        foto('fotos/macaquinho-icon--frente-cacau.jpg', 'Frente'),
+        foto('fotos/macaquinho-icon--lado-cacau.jpg', 'Lado'),
+        foto('fotos/macaquinho-icon--lado-2-cacau.jpg', 'Lado'),
+        foto('fotos/macaquinho-icon--costas-cacau.jpg', 'Costas')
+      ] },
       { corId: 'onyx', estoque: estoque(), fotos: [
         foto('fotos/macaquinho-icon--frente-onyx.jpg', 'Frente'),
         foto('fotos/macaquinho-icon--lado-onyx.jpg', 'Lado'),
@@ -1046,8 +1205,7 @@ var PRODUTOS = [
         foto('fotos/macaquinho-icon--costas-coral.jpg', 'Costas'),
         foto('fotos/macaquinho-icon--cadeira-coral.jpg', 'Editorial'),
         foto('fotos/macaquinho-icon--monograma-n-coral.jpg', 'Detalhe do monograma', true)
-      ] },
-      { corId: 'cacao', estoque: estoque(['PP']), fotos: [] }
+      ] }
     ]
   },
   {
@@ -1182,13 +1340,53 @@ var PRODUTOS = [
     id: 'top-regulavel', nome: 'Top Regulável', categoria: 'Tops', preco: 89, enquadramento: 'superior',
     descricao: 'Alças finas reguláveis para ajustar o top ao seu corpo e ao seu treino. Costas delicadas, caimento preciso e um toque feminino que combina com shorts, leggings e flares da coleção.',
     cores: [
-      { corId: 'coral', estoque: estoque(['P', 'M']), fotos: [] },
+      { corId: 'coral', estoque: estoque(['P', 'M']), fotos: [
+        foto('fotos/top-regulavel--frente-coral.jpg', 'Frente'),
+        foto('fotos/top-regulavel--lado-coral.jpg', 'Lado'),
+        foto('fotos/top-regulavel--monograma-n-coral.jpg', 'Detalhe do monograma', true)
+      ] },
       { corId: 'cacao', estoque: estoque(), fotos: [
         foto('fotos/top-regulavel--frente-cacau.jpg', 'Frente'),
         foto('fotos/top-regulavel--lado-cacau.jpg', 'Lado'),
         foto('fotos/top-regulavel--lado-2-cacau.jpg', 'Lado'),
         foto('fotos/top-regulavel--costas-cacau.jpg', 'Costas')
       ] }
+    ]
+  },
+  {
+    id: 'blusa-frente-unica', nome: 'Blusa Frente Única', categoria: 'Tops', preco: 109, enquadramento: 'superior', novo: true,
+    descricao: 'Frente única de decote americano que valoriza ombros e braços, com comprimento cropped na medida. Combina com leggings, flares e shorts da coleção e vai do treino ao dia a dia sem perder a elegância.',
+    cores: [
+      { corId: 'onyx', estoque: estoque(), fotos: [
+        foto('fotos/blusa-frente-unica--lado-onyx.jpg', 'Lado'),
+        foto('fotos/blusa-frente-unica--lado-2-onyx.jpg', 'Lado')
+      ] }
+    ]
+  },
+  {
+    id: 'top-costas-abertas', nome: 'Top Costas Abertas', categoria: 'Tops', preco: 89, enquadramento: 'superior', novo: true,
+    descricao: 'Frente limpa e costas abertas com alças finas que desenham as costas. Sustenta com conforto, deixa o movimento livre e forma um conjunto perfeito com os shorts da coleção.',
+    cores: [
+      { corId: 'coral', estoque: estoque(), fotos: [
+        foto('fotos/top-costas-abertas--frente-coral.jpg', 'Frente'),
+        foto('fotos/top-costas-abertas--lado-coral.jpg', 'Lado'),
+        foto('fotos/top-costas-abertas--costas-coral.jpg', 'Costas'),
+        foto('fotos/top-costas-abertas--monograma-n-coral.jpg', 'Detalhe do monograma', true)
+      ] }
+    ]
+  },
+  {
+    id: 'top-ombro', nome: 'Top Ombro', categoria: 'Tops', preco: 89, enquadramento: 'superior',
+    descricao: 'Top assimétrico de um ombro só, com acabamento em viés contrastante que desenha o colo e as costas. Forma conjunto com a Calça Cós Cruzado.',
+    cores: [
+      { corId: 'navy', estoque: estoque(TAMANHOS), fotos: FOTOS_CONJUNTO_NAVY }
+    ]
+  },
+  {
+    id: 'calca-cos-cruzado', nome: 'Calça Cós Cruzado', categoria: 'Leggings', preco: 139, enquadramento: 'inferior',
+    descricao: 'Legging de cós alto cruzado na frente, que abraça a cintura e valoriza a silhueta. Forma conjunto com o Top Ombro.',
+    cores: [
+      { corId: 'navy', estoque: estoque(TAMANHOS), fotos: FOTOS_CONJUNTO_NAVY }
     ]
   }
 ];
@@ -1202,6 +1400,13 @@ var CONJUNTO_UVA = ['calca-com-bolso'];
 // ─── utilidades ───
 function brl(v) { return 'R$ ' + v.toFixed(2).replace('.', ','); }
 function corEsgotada(c) { return TAMANHOS.every(function (t) { return !c.estoque[t]; }); }
+function pecaEsgotada(p) { return p.cores.every(corEsgotada); }
+var SACOLA_KEY = 'nariah-sacola';
+function lerSacola() {
+  try { var v = JSON.parse(localStorage.getItem(SACOLA_KEY) || 'null'); if (v && v.itens) return v; } catch (e) {}
+  return { itens: [], nome: '', obs: '' };
+}
+function salvarSacola(b) { try { localStorage.setItem(SACOLA_KEY, JSON.stringify(b)); } catch (e) {} }
 function corParcial(c) { return !corEsgotada(c) && TAMANHOS.some(function (t) { return !c.estoque[t]; }); }
 function varianteComFotos(p, idx) {
   var v = p.cores[idx];
@@ -1257,15 +1462,97 @@ class Component extends DCLogic {
       full: !!st.full,
       guia: !!st.guia,
       avisoTam: !!st.avisoTam,
-      menu: !!st.menu
+      menu: !!st.menu,
+      sacola: !!st.sacola,
+      adicionado: !!st.adicionado,
+      bump: st.bump || 0
     };
   }
 
-  abrir(id) {
+  bag() {
+    if (!this._bag) this._bag = lerSacola();
+    return this._bag;
+  }
+
+  mudarSacola(fn, extra) {
+    var b = this.bag();
+    fn(b);
+    b.itens = b.itens.filter(function (it) { return it.qtd > 0 && PRODUTOS.some(function (x) { return x.id === it.id; }); });
+    salvarSacola(b);
+    this.setState(Object.assign({ rev: (this.state.rev || 0) + 1 }, extra || {}));
+  }
+
+  adicionar(p, corId, tam) {
+    var self = this;
+    this.mudarSacola(function (b) {
+      var it = b.itens.find(function (x) { return x.id === p.id && x.corId === corId && x.tam === tam; });
+      if (it) it.qtd += 1; else b.itens.push({ id: p.id, corId: corId, tam: tam, qtd: 1 });
+    }, { adicionado: true, bump: (this.state.bump || 0) + 1 });
+    clearTimeout(this._addT);
+    this._addT = setTimeout(function () { self.setState({ adicionado: false, aberto: null, sacola: true, menu: false }); }, 750);
+  }
+
+  pedidoTexto() {
+    var b = this.bag(), total = 0;
+    var linhas = b.itens.map(function (it) {
+      var p = PRODUTOS.find(function (x) { return x.id === it.id; });
+      total += p.preco * it.qtd;
+      return '• ' + it.qtd + 'x ' + p.nome + ' | Cor: ' + CORES[it.corId].nome + ' | Tam: ' + it.tam + ' - ' + brl(p.preco * it.qtd);
+    });
+    var nome = (b.nome || '').trim(), obs = (b.obs || '').trim();
+    return 'Olá, Nariah Studio! Gostaria de finalizar meu pedido:\n\n*Itens selecionados:*\n' + linhas.join('\n') +
+      '\n\n*Total estimado:* ' + brl(total) +
+      '\n*Nome:* ' + (nome || 'Não informado') +
+      (obs ? '\n*Observação:* ' + obs : '') +
+      '\n\nAguardo confirmação de disponibilidade e envio!';
+  }
+
+  sacolaVals(s) {
+    var self = this, b = this.bag(), total = 0, qtd = 0;
+    var itens = b.itens.map(function (it, i) {
+      var p = PRODUTOS.find(function (x) { return x.id === it.id; });
+      var ci = p.cores.findIndex(function (c) { return c.corId === it.corId; });
+      var fs = varianteComFotos(p, Math.max(0, ci)).v.fotos.filter(function (f) { return !f.detalhe; });
+      var f = fs[0] || capaDe(p);
+      var e = moldura(regiao(f, p, true), 3 / 4);
+      total += p.preco * it.qtd; qtd += it.qtd;
+      return {
+        nome: p.nome, foto: f.src, l: e.l, t: e.t, w: e.w, h: e.h,
+        corNome: CORES[it.corId].nome, hex: CORES[it.corId].hex, tam: it.tam, qtd: it.qtd,
+        unit: brl(p.preco), sub: brl(p.preco * it.qtd), multi: it.qtd > 1,
+        alt: p.nome + ' na cor ' + CORES[it.corId].nome,
+        menosAria: 'Diminuir quantidade de ' + p.nome, maisAria: 'Aumentar quantidade de ' + p.nome,
+        removerAria: 'Remover ' + p.nome + ' da sacola',
+        menos: function () { self.mudarSacola(function (bb) { bb.itens[i].qtd -= 1; }); },
+        mais: function () { self.mudarSacola(function (bb) { bb.itens[i].qtd = Math.min(20, bb.itens[i].qtd + 1); }); },
+        remover: function () { self.mudarSacola(function (bb) { bb.itens.splice(i, 1); }); }
+      };
+    });
+    return {
+      itens: itens, vazia: !itens.length, cheia: !!itens.length,
+      qtd: qtd, temQtd: qtd > 0, total: brl(total),
+      qtdTxt: qtd + (qtd === 1 ? ' peça' : ' peças'),
+      aria: qtd ? 'Abrir sacola, ' + qtd + (qtd === 1 ? ' peça' : ' peças') : 'Abrir sacola, vazia',
+      anim: s.bump ? (s.bump % 2 ? 'bagBumpA' : 'bagBumpB') : 'none',
+      nome: b.nome || '', obs: b.obs || '',
+      setNome: function (ev) { b.nome = ev.target.value; salvarSacola(b); },
+      setObs: function (ev) { b.obs = ev.target.value; salvarSacola(b); },
+      enviarHref: LINKS.whatsapp + '?text=' + encodeURIComponent(self.pedidoTexto()),
+      enviar: function (ev) { ev.currentTarget.href = LINKS.whatsapp + '?text=' + encodeURIComponent(self.pedidoTexto()); },
+      fechar: function () { self.setState({ sacola: false }); },
+      explorar: function () {
+        self.setState({ sacola: false });
+        setTimeout(function () { var el = document.getElementById('catalogo'); if (el) el.scrollIntoView({ behavior: 'smooth' }); }, 80);
+      }
+    };
+  }
+
+  abrir(id, corId) {
     var p = PRODUTOS.find(function (x) { return x.id === id; });
     var idx = 0;
     for (var i = 0; i < p.cores.length; i++) { if (!corEsgotada(p.cores[i]) && p.cores[i].fotos.length) { idx = i; break; } }
-    this.setState({ aberto: id, corIdx: idx, tam: null, fotoIdx: 0, full: false, guia: false, avisoTam: false, menu: false });
+    if (corId) idx = Math.max(0, p.cores.findIndex(function (c) { return c.corId === corId; }));
+    this.setState({ aberto: id, corIdx: idx, tam: null, fotoIdx: 0, full: false, guia: false, avisoTam: false, menu: false, sacola: false, adicionado: false });
   }
 
   card(p, emDestaque) {
@@ -1292,10 +1579,13 @@ class Component extends DCLogic {
       precoFmt: brl(p.preco),
       capa: capa.src,
       alt: p.nome + ', foto da peça',
-      aria: 'Ver detalhes de ' + p.nome + ', ' + brl(p.preco),
+      aria: 'Ver detalhes de ' + p.nome + ', ' + brl(p.preco) + (pecaEsgotada(p) ? ', esgotado' : (p.novo ? ', novo' : '')),
       l: e.l, t: e.t, w: e.w, h: e.h,
       capa2: capa2.src, l2: e2.l, t2: e2.t, w2: e2.w, h2: e2.h,
       estoqueNota: nota, temEstoqueNota: !!nota,
+      badge: pecaEsgotada(p) ? 'Esgotado' : (p.novo ? 'Novo' : ''),
+      badgeCls: pecaEsgotada(p) ? 'pcard-badge pcard-badge--off' : 'pcard-badge',
+      temBadge: pecaEsgotada(p) || !!p.novo,
       dots: p.cores.map(function (c) {
         var cor = CORES[c.corId];
         var off = corEsgotada(c);
@@ -1383,8 +1673,16 @@ class Component extends DCLogic {
       prontoParaComprar: !!tamOk,
       naoPronto: !tamOk,
       pedirTamanho: function () { self.setState({ avisoTam: true }); },
+      podeComprar: !esg,
+      addLabel: s.adicionado ? 'Adicionado à sacola ✓' : 'Adicionar à sacola',
+      addCls: 'btn btn--primary btn--block' + (s.adicionado ? ' btn--done' : ''),
+      adicionar: function () {
+        if (s.adicionado) return;
+        if (tamOk) self.adicionar(p, v.corId, s.tam); else self.setState({ avisoTam: true });
+      },
+      reposicaoHref: LINKS.whatsapp + '?text=' + encodeURIComponent('Olá! Vi a peça ' + p.nome + ' na cor ' + cor.nome + ' no site e gostaria de saber quando terá reposição.'),
       waHref: LINKS.whatsapp + '?text=' + encodeURIComponent(msg),
-      resumo: tamOk ? (p.nome + ' na cor ' + cor.nome + ', tamanho ' + s.tam + '. A mensagem já vai pronta.') : 'Escolha cor e tamanho. A mensagem para o WhatsApp já vai pronta.',
+      resumo: esg ? 'Avisamos você assim que ela voltar.' : (tamOk ? (p.nome + ' na cor ' + cor.nome + ', tamanho ' + s.tam + '.') : 'Escolha cor e tamanho para adicionar à sacola.'),
       close: close
     };
   }
@@ -1419,7 +1717,10 @@ class Component extends DCLogic {
       }),
       hlGrande: self.card(PRODUTOS.find(function (p) { return p.id === DESTAQUE_GRANDE; })),
       hlCuradas: DESTAQUES_CURADOS.map(function (id) { return self.card(PRODUTOS.find(function (p) { return p.id === id; })); }),
-      openIcon: function () { self.abrir('icon'); },
+      openIcon: function () { self.abrir('icon', 'coral'); },
+      sacolaAberta: s.sacola,
+      sc: self.sacolaVals(s),
+      openBag: function () { self.setState({ sacola: true, aberto: null, menu: false }); },
       menuAberto: s.menu,
       openMenu: function () { self.setState({ menu: true }); },
       closeMenu: function () { self.setState({ menu: false }); },
